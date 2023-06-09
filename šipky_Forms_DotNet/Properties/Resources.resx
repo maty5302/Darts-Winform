@@ -211,4 +211,13 @@
   <data name="success" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IcoFile\success.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CupNoWin_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IcoFile\CupNoWin).ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CupWin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IcoFile\CupWin.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="update_progress1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IcoFile\update_progress.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

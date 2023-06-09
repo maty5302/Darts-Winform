@@ -181,6 +181,26 @@ namespace šipky_Forms.Properties {
         }
         
         /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Icon podobný (Ikona).
+        /// </summary>
+        internal static System.Drawing.Icon CupNoWin_ {
+            get {
+                object obj = ResourceManager.GetObject("CupNoWin_", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Icon podobný (Ikona).
+        /// </summary>
+        internal static System.Drawing.Icon CupWin {
+            get {
+                object obj = ResourceManager.GetObject("CupWin", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap darts_3 {
@@ -356,6 +376,16 @@ namespace šipky_Forms.Properties {
         internal static System.Drawing.Icon update_progress {
             get {
                 object obj = ResourceManager.GetObject("update_progress", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Icon podobný (Ikona).
+        /// </summary>
+        internal static System.Drawing.Icon update_progress1 {
+            get {
+                object obj = ResourceManager.GetObject("update_progress1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
