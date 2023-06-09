@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SetupProject/SetupProject.wixproj
+/SetupProject/SetupProject.wixproj
+/SetupProject/Product.wxs
+/SetupProject/dotnet-runtime-6.0.16-win-x64.exe
+/SetupProject
