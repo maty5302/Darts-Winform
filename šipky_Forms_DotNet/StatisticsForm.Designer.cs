@@ -103,12 +103,12 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
-			label1.Location = new Point(7, 24);
+			label1.Font = new Font("Showcard Gothic", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+			label1.Location = new Point(25, 27);
 			label1.Name = "label1";
-			label1.Size = new Size(253, 47);
+			label1.Size = new Size(220, 44);
 			label1.TabIndex = 0;
-			label1.Text = "Statistiky hráčů";
+			label1.Text = "Statistiky";
 			// 
 			// gb_createplayer
 			// 
@@ -156,7 +156,7 @@
 			groupBox1.Size = new Size(253, 343);
 			groupBox1.TabIndex = 2;
 			groupBox1.TabStop = false;
-			groupBox1.Text = "Statistiky";
+			groupBox1.Text = "Statistiky hráčů";
 			// 
 			// tabControl1
 			// 

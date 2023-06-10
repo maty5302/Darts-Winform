@@ -1,6 +1,4 @@
-
 using Domain;
-using Domain.Settings;
 using Domain.Tournament;
 using šipky_Forms;
 using šipky_Forms.Database;
@@ -15,14 +13,10 @@ namespace šipky_Forms_DotNet
 	{
 		private DuelGame d = new DuelGame();
 		private Training train = new Training();
-		private SettingsPlayers settings1 = new SettingsPlayers();
-		private Size formOriginalSize; //work in progress
 
-		private List<PlayerPanels> panelsSettings = new List<PlayerPanels>();
 		private List<Player> playerList = new List<Player>();
 		private Panel[] players = new Panel[10];
 
-		private string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Players.xml");
 		private int place = 1;
 		public bool mute = false;
 		public int player = -1;
@@ -30,21 +24,18 @@ namespace šipky_Forms_DotNet
 
 		private async Task CheckUpdatesAsync()
 		{
-			var fileUrl = "https://onedrive.live.com/download?cid=033D38AA67032599&resid=33D38AA67032599%21247228&authkey=AHj_qnigSIpPGMA";
-
-			var cloudVersion = await OnedriveDownload.GetTextFromOneDriveFile(fileUrl);
+			var gitVersion = await GithubIntegration.GetVersion();
 			var appVersion = Application.ProductVersion.ToString();
 
-			cloudVersion = cloudVersion.Replace(".", "");
+			gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
 			appVersion = appVersion.Replace(".", "");
 
-
-			if (Convert.ToInt32(cloudVersion) > Convert.ToInt32(appVersion))
+			if (string.Compare(gitVersion, appVersion) > 0)
 			{
-				ToolStripMenuItem newItem = new ToolStripMenuItem("Aktualizovat", null, DownloadNewVersion_Click);
+				ToolStripMenuItem newItem = new ToolStripMenuItem("Aktualizovat", new Bitmap(Resources.import), DownloadNewVersion_Click);
 				this.notifyIcon1.ContextMenuStrip.Items.Insert(0, newItem);
 				DownloadNewVersion.Visible = true;
-				if (Convert.ToInt32(cloudVersion[1] + "" + cloudVersion[2]) > Convert.ToInt32(appVersion[1] + "" + appVersion[2]))
+				if (Convert.ToInt32(gitVersion[1] + "" + gitVersion[2]) > Convert.ToInt32(appVersion[1] + "" + appVersion[2]))
 				{
 					DownloadNewVersion.BackColor = Color.FromArgb(255, 128, 128);
 					var result = MessageBox.Show("Je k dispozici důležitá aktualizace s novými funkcemi a opravami.\n Chcete jí stáhnout nyní?", "Důležítá aktualizace..", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -53,8 +44,6 @@ namespace šipky_Forms_DotNet
 				}
 			}
 		}
-
-
 
 		private void PanelsNamesBoldReset()
 		{
@@ -68,47 +57,11 @@ namespace šipky_Forms_DotNet
 				item.Hide();
 		}
 
-		private void LoadSettings()
-		{
-			if (settings1.PicturePath == null)
-				settings1.PicturePath = "";
-			if (settings1.PicturePath != "" && File.Exists(settings1.PicturePath))
-				this.BackgroundImage = new Bitmap(settings1.PicturePath);
-			else
-			{
-				this.BackgroundImage = Resources.darts_3;
-				MessageBox.Show("Tapeta nenalezena");
-			}
-
-
-			mute = ztlumitToolStripMenuItem.Checked = settings1.muteSounds;
-
-			if (panelsSettings.Count > 0)
-			{
-				for (int i = 0; i < players.Count(); i++)
-				{
-					players[i].Controls[2].Text = panelsSettings[i].Name;
-					players[i].BackColor = panelsSettings[i].BackColor;
-				}
-			}
-		}
-
-		private void SaveSettings()
-		{
-			panelsSettings.Clear();
-			for (int i = 0; i < players.Count(); i++)
-			{
-				panelsSettings.Add(new PlayerPanels() { Name = players[i].Controls[2].Text, BackColor = players[i].BackColor });
-			}
-			settings1.panels = panelsSettings;
-		}
-
 		private void LoadPlayers()
 		{
 			var db = new DbSipky.MyDatabase();
-			playerList = db.PlayerSettings.ToList();
+			playerList = db.PlayerSettings.ToList(); //before compiling make sure u have mydb.db in bin/debug or bin/release
 		}
-
 
 		private void setNotifyIconText(int score, int players)
 		{
@@ -263,18 +216,14 @@ namespace šipky_Forms_DotNet
 			}
 		}
 
-
 		public MainWindow()
 		{
 			InitializeComponent();
 			MakePanels();
 			LoadPlayers();
 			TrayMenuContext();
-			//SoundEffects.SoundEffects.music.Play();
-			formOriginalSize = this.Size;
+			SoundEffects.SoundEffects.music.Play();
 		}
-
-		//Click Events
 
 		private void B_Click(object sender, EventArgs e)
 		{
@@ -330,7 +279,6 @@ namespace šipky_Forms_DotNet
 			}
 
 		}
-
 
 		private void redoItem_Click(object sender, EventArgs e)
 		{
@@ -390,7 +338,6 @@ namespace šipky_Forms_DotNet
 		{
 			mute = !mute;
 			ztlumitToolStripMenuItem.Checked = mute;
-			settings1.muteSounds = mute;
 		}
 
 		private void oProgramuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -401,14 +348,11 @@ namespace šipky_Forms_DotNet
 
 		private void nastaveníToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Settings settings = new Settings(players, this.BackgroundImage, path);
+			Settings settings = new Settings(players, this.BackgroundImage);
 			settings.OnCloseEvent += () =>
 			{
 				if (settings.BackroundImage1 != null)
 					this.BackgroundImage = settings.BackroundImage1;
-				if (settings.path != "")
-					settings1.PicturePath = settings.path;
-				SaveSettings();
 			};
 			settings.ShowDialog();
 			GC.Collect();
@@ -418,7 +362,6 @@ namespace šipky_Forms_DotNet
 		{
 			StatisticsForm stats = new StatisticsForm(playerList);
 			stats.ShowDialog();
-			GC.Collect();
 		}
 
 		private void StartDuel_Click(object sender, EventArgs e)
@@ -473,8 +416,6 @@ namespace šipky_Forms_DotNet
 			this.WindowState = FormWindowState.Normal;
 		}
 
-		//MainWindow Events
-
 		private async void MainWindow_Load(object sender, EventArgs e)
 		{
 			try
@@ -502,43 +443,6 @@ namespace šipky_Forms_DotNet
 		void MenuMinimize_Click(object sender, EventArgs e)
 		{
 			this.Hide();
-		}
-
-
-		//tohle je hodne snipe
-		private void MainWindow_Resize(object sender, EventArgs e)
-		{
-			//need to resize panels first
-
-
-			resize_Control(labelDarts, panelStart);
-
-
-			ResizeControl r = new ResizeControl();
-			if (WindowState == FormWindowState.Maximized)
-			{
-				r.ScaleFontSize(labelDarts, 2f);
-			}
-			else if (WindowState == FormWindowState.Normal)
-			{
-				r.ScaleFontSize(labelDarts, 0.5f);
-			}
-		}
-
-		//resizne control
-		private void resize_Control(Control c, Panel r)
-		{
-			float xRatio = (float)(this.Width) / (float)(formOriginalSize.Width);
-			float yRatio = (float)(this.Height) / (float)(formOriginalSize.Height);
-			//int newX = (int)(r.Left * xRatio);
-			//int newY = (int)(r.Top * yRatio);
-
-			int newWidth = (int)(r.Width * xRatio);
-			int newHeight = (int)(r.Height * yRatio);
-
-			//c.Location = new Point(newX, newY);
-			c.Size = new Size(newWidth, newHeight);
-
 		}
 
 		//Tournament section
@@ -583,7 +487,9 @@ namespace šipky_Forms_DotNet
 						Application.DoEvents(); // Allow the application to process events and remain responsive
 					}
 					if (!mute)
+					{
 						Task.Run(() => { SoundEffects.SoundEffects.win.PlaySync(); });
+					}
 					match.winnerId = d.WinnerId;
 					// Check if there are more matches to play
 					if (matches.Find(x => x.winnerId == 0) == null)
@@ -628,7 +534,7 @@ namespace šipky_Forms_DotNet
 
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			stopLoops = true;
+			stopLoops = true; //For end while loops in tournament if it still running
 		}
 	}
 }

@@ -160,5 +160,10 @@ namespace šipky_Forms
 				errorProvider1.SetError(x, null);
 			}
 		}
+
+		private void TournamentDialog_Deactivate(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

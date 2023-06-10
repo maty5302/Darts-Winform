@@ -85,9 +85,8 @@ namespace šipky_Forms
 			}
 		}
 
-		public Settings(Panel[] p, Image background, string path)
+		public Settings(Panel[] p, Image background)
 		{
-			this.path = path;
 			BackroundImage1 = background;
 			panels = p;
 			InitializeComponent();
@@ -127,7 +126,8 @@ namespace šipky_Forms
 
 		private void CustomWallpaper_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+			openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+			openFileDialog1.FileName = "";
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
 				path = openFileDialog1.FileName;

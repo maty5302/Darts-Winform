@@ -118,9 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>BETA1.16.0.0
+    <value>1.16.0.0
 +Možnost vytvářet turnaje do 16 hráčů
 +Zobrazování detailu turnaje v průběhu
++Změna serveru na vyhledávání aktualizací do budoucích verzí
 +Změna ukládání dat do interní databáze ve složce, kde je aplikace nainstalována
 +Pro načtení hráčů z předchozí verze je nutno použít Import hráčů v Statistikách
 +Načtení a uložení nastavení přesunuto do databáze (předchozí verze nekompatibilní)

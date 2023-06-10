@@ -54,7 +54,7 @@ namespace šipky_Forms
 			int x = 10;
 			int y = 10;
 			int nasobek = 1;
-			int width = 60;
+			int width = 80;
 			int height = 10;
 			int defaulty = y;
 
@@ -90,7 +90,7 @@ namespace šipky_Forms
 			int y = 10;
 			int defaulty = y;
 			int nasobek = 1;
-			int width = 60;
+			int width = 80;
 			int height = 10;
 
 			int round = 0;
@@ -112,6 +112,7 @@ namespace šipky_Forms
 					TextBox text1 = new TextBox();
 					text1.Size = new Size(width, height);
 					text1.Font = new Font("Segoe UI", 9);
+					text1.TextAlign = HorizontalAlignment.Center;
 					text1.Location = new Point(x, y);
 					if (count < matches.Count || matches.Count != 0)
 					{
@@ -120,31 +121,18 @@ namespace šipky_Forms
 						else
 							text1.Text = allPlayers.Find(p => p.Id == matches[count].player2Id).Name;
 					}
-					else if (matches.Count == 0 && numberOfPlayers == 1)
+					else if (matches.Count == 0 && (round == allMatches.Count || numberOfPlayers == 1))
 					{
-						List<Match>? match = allMatches.FindLast(m => m.Count == 1);
-						if (match != null)
+						List<Match>? match;
+						if (numberOfPlayers == 1)
+							match = allMatches.FindLast(m => m.Count == 1);
+						else
+							match = allMatches.Last();
+
+						if (match != null && match.Count != 0)
 						{
-							if (match[0].player1Id != 0)
-								text1.Text = allPlayers.Find(p => p.Id == match[0].winnerId).Name;
-						}
-					}
-					else if(matches.Count==0)
-					{
-						List<Match>? match = allMatches.Last();
-						if (match != null)
-						{
-							if (match[i].winnerId!=0)
-							{
+							if (match[i].winnerId != 0)
 								text1.Text = allPlayers.Find(p => p.Id == match[i].winnerId).Name;
-							}
-							//foreach (Match a in match)
-							//{
-							//	if(a.winnerId!=0)
-							//	{
-							//		text1.Text = allPlayers.Find(p => p.Id == a.winnerId).Name;
-							//	}
-							//}
 						}
 					}
 					y += 25 * nasobek;

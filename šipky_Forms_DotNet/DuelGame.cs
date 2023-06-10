@@ -92,9 +92,9 @@ namespace šipky_Forms
                 check = int.TryParse(t.Text, out check) ? check : -1;
                 if (check > -1)
                 {
-                                B_Click(sender, e);
+                    B_Click(sender, e);
                     e.Handled = e.SuppressKeyPress = true;
-                        SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
                 }
                 else
                 {
@@ -190,7 +190,7 @@ namespace šipky_Forms
 
 							WriteWinStats(score, i);
 
-
+                            if(muteSounds == false)
                                 SoundEffects.SoundEffects.win.Play();
                         }
                         else if (int.Parse(panel3.Controls[playerLegs].Text) == 3 && sets)
@@ -204,7 +204,8 @@ namespace šipky_Forms
                                 WriteWinStats(score, i);
                                 thrownPlayer1.Enabled = false;
                                 thrownPlayer2.Enabled = false;
-                                SoundEffects.SoundEffects.win.Play();
+                                if (muteSounds == false)
+                                    SoundEffects.SoundEffects.win.Play();
                             }
                             else
                             {
@@ -297,6 +298,7 @@ namespace šipky_Forms
         public void Reset()
         {
 			AverageScore.ClearAverage();
+			HistoryScore.ClearHistory();
 			LegPlayer1.Text = LegPlayer2.Text = "0";
 			AvgPlayer1.Text = AvgPlayer2.Text = "0.00";
 			CheckoutPlayer1.Text = CheckoutPlayer2.Text = ".";

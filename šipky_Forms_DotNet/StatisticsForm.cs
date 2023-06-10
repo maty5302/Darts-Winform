@@ -86,7 +86,10 @@ namespace šipky_Forms
 				errorProvider2.SetError(createplayer, "Vytvořen");
 			}
 			else
+			{
 				errorProvider1.SetError(createplayer, "Zadej platné jméno");
+				return;
+			}
 
 			tb_namenewplayer.Text = "";
 			rename_tb.Text = "";
@@ -244,6 +247,7 @@ namespace šipky_Forms
 						Statistics.CheckDateStatistics(temp);
 						UpdateList();
 						for (int i = 0; i < temp.Count; i++)
+						{
 							if (CheckIfExists(temp[i].Name))
 							{
 								db.PlayerSettings.Update(temp[i]);
@@ -255,7 +259,7 @@ namespace šipky_Forms
 								db.PlayerSettings.Add(temp[i]);
 								playerss.Add(temp[i]);
 							}
-
+						}
 						db.SaveChanges();
 					}
 				}

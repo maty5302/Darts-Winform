@@ -245,16 +245,17 @@
 			// 
 			resources.ApplyResources(this, "$this");
 			AutoScaleMode = AutoScaleMode.Font;
+			BackgroundImage = šipky_Forms.Properties.Resources.darts_3;
 			Controls.Add(label1);
 			Controls.Add(panelStart);
 			Controls.Add(menuStrip1);
 			DoubleBuffered = true;
 			FormBorderStyle = FormBorderStyle.FixedSingle;
 			MainMenuStrip = menuStrip1;
+			MaximizeBox = false;
 			Name = "MainWindow";
 			FormClosing += MainWindow_FormClosing;
 			Load += MainWindow_Load;
-			Resize += MainWindow_Resize;
 			menuStrip1.ResumeLayout(false);
 			menuStrip1.PerformLayout();
 			panelStart.ResumeLayout(false);

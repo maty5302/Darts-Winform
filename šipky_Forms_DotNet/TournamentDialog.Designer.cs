@@ -191,7 +191,9 @@
 			MaximizeBox = false;
 			MinimizeBox = false;
 			Name = "TournamentDialog";
+			StartPosition = FormStartPosition.CenterParent;
 			Text = "Příprava turnaje";
+			Deactivate += TournamentDialog_Deactivate;
 			((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
 			((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
 			ResumeLayout(false);

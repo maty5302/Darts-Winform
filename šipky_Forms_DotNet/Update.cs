@@ -9,6 +9,7 @@ namespace šipky_Forms
     {
         private const int CP_NOCLOSE_BUTTON = 0x200;
         public event OnClose OnClose;
+        private bool _isDownloading = false;
 
         protected override CreateParams CreateParams
         {
@@ -27,12 +28,9 @@ namespace šipky_Forms
 
         private async void Update_Load(object sender, EventArgs e)
         {
-            var fileUrl = "https://onedrive.live.com/download?cid=033D38AA67032599&resid=33D38AA67032599%21247250&authkey=ADAE3PTz1OGlq4I";
-            var cloudVersion = await OnedriveDownload.GetTextFromOneDriveFile(fileUrl);
-            if (cloudVersion != null)
-            {
-                changelog.Text = cloudVersion;
-            }
+            var desc = await GithubIntegration.GetLatestRelease();
+            if (desc != null)
+                changelog.Text = desc;
         }
 
         private void C_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -46,6 +44,7 @@ namespace šipky_Forms
             changelog.Visible = false;
             b_download.Enabled = false;
             b_later.Enabled = false;
+            _isDownloading = true;
             this.Icon = Properties.Resources.update_progress;
 
             var c = new WebClient();
@@ -54,7 +53,7 @@ namespace šipky_Forms
             var filePath = Path.Combine(Path.GetTempPath(), "šipky.msi");
             try
             {
-                await c.DownloadFileTaskAsync("https://onedrive.live.com/download?cid=033D38AA67032599&resid=33D38AA67032599%21247232&authkey=APULObFCyMQ-1hY", filePath);
+                await c.DownloadFileTaskAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/sipky.msi",filePath);
 
                 var processInfo = new ProcessStartInfo()
                 {
@@ -80,12 +79,18 @@ namespace šipky_Forms
 
         private void onmyown_Click(object sender, EventArgs e)
         {
+            if (_isDownloading)
+            {
+				if (MessageBox.Show("Opravdu chcete aktualizaci stáhnout ručně? Zrušíte tímto již spuštěnou aktualizaci.", "Aktualizovat ručně?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+					return;
+			}
             var psi = new ProcessStartInfo
             {
-                FileName = "https://1drv.ms/u/s!ApklA2eqOD0Dj4s-WMQVrBPwqkSrAQ",
+                FileName = "https://github.com/maty5302/Darts-Winform/releases/",
                 UseShellExecute = true
             };
             Process.Start(psi);
+            this.Close();
         }
     }
 }

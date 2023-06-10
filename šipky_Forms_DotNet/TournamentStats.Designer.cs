@@ -42,7 +42,8 @@
 			MaximizeBox = false;
 			MinimizeBox = false;
 			Name = "TournamentStats";
-			Text = "TournamentStats";
+			StartPosition = FormStartPosition.CenterParent;
+			Text = "Turnajová soupiska";
 			ResumeLayout(false);
 		}
 
