@@ -1,5 +1,6 @@
 using Domain;
 using Domain.Tournament;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using šipky_Forms;
 using šipky_Forms.Database;
 using šipky_Forms.Properties;
@@ -15,6 +16,7 @@ namespace šipky_Forms_DotNet
         private List<Player> playerList = new List<Player>();
         private Panel[] players = new Panel[10];
 
+        private Stopwatch stopwatch;
         private string selectedPanel = "";
         private bool isZero = false;
         private int place = 1;
@@ -26,7 +28,7 @@ namespace šipky_Forms_DotNet
             var gitVersion = await GithubIntegration.GetVersion();
             var appVersion = Application.ProductVersion.ToString();
             //var oldapp = appVersion;
-            
+
             gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
             appVersion = appVersion.Replace(".", "");
 
@@ -56,7 +58,8 @@ namespace šipky_Forms_DotNet
 
         private void PanelsNamesBoldReset()
         {
-            foreach (Control c in this.Controls) { 
+            foreach (Control c in this.Controls)
+            {
                 if (c is Panel)
                 {
                     if (c.Name == "panelStart")
@@ -217,9 +220,9 @@ namespace šipky_Forms_DotNet
                 {
                     e.IsInputKey = true;
                 }
-                else if(e.KeyData == Keys.Tab)
+                else if (e.KeyData == Keys.Tab)
                 {
-                    if(isZero && !mute)
+                    if (isZero && !mute)
                         SoundEffects.SoundEffects.player[0].Play();
                     isZero = true;
                 }
@@ -228,7 +231,13 @@ namespace šipky_Forms_DotNet
 
         private void T_KeyDown(object sender, KeyEventArgs e)
         {
-            var t = sender as TextBox;            
+            var t = sender as TextBox;
+
+            if (timer1.Enabled == false)
+            {
+                stopwatch.Start();
+                timer1.Enabled = true;
+            }
 
             if (e.KeyCode == Keys.Enter && t != null && t is TextBox)
             {
@@ -238,7 +247,7 @@ namespace šipky_Forms_DotNet
                 B_Click(sender, e);
 
                 if (!isZero)
-                   SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
             }
         }
 
@@ -322,6 +331,9 @@ namespace šipky_Forms_DotNet
                 if (!mute)
                     SoundEffects.SoundEffects.win.Play();
 
+                timer1.Enabled = false;
+                stopwatch.Stop();
+
                 var db = new DbSipky.MyDatabase();
 
                 foreach (var item in playerList)
@@ -376,6 +388,12 @@ namespace šipky_Forms_DotNet
             d.Hide();
             train.Hide();
             setNotifyIconText((int)ScoreDarts.Value, count);
+            
+            //rename
+            timer1.Enabled = true;
+            timer.Visible = true;
+            stopwatch = Stopwatch.StartNew();
+
         }
 
         private void zastavitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -440,6 +458,18 @@ namespace šipky_Forms_DotNet
                 HidePanels();
                 train.Hide();
                 d.Show();
+
+                d.Winner += (r) =>
+                {
+                    stopwatch.Stop();
+                };
+
+                timer1.Enabled = true;
+                timer.Visible = true;
+                stopwatch = Stopwatch.StartNew();
+
+                
+
             }
         }
 
@@ -514,6 +544,7 @@ namespace šipky_Forms_DotNet
                 played = true;
             };
 
+           
             MainWindow.ActiveForm.Text = notifyIcon1.Text = "Šipky - Turnaj mezi: " + playerList.Find(x => x.Id == m.player1Id).Name + " a " + playerList.Find(x => x.Id == m.player2Id).Name + " - " + m.round + ". kolo";
             d.SetDuel(501, 3 * m.round, playerList.Find(x => x.Id == m.player1Id), playerList.Find(x => x.Id == m.player2Id), false);
             d.Location = (Point)new Size(40, 220);
@@ -521,6 +552,11 @@ namespace šipky_Forms_DotNet
             HidePanels();
             train.Hide();
             d.Show();
+
+            timer1.Enabled = true;
+            timer.Visible = true;
+            stopwatch = Stopwatch.StartNew();
+
         }
 
         private void PlayMatches(List<Match> matches)
@@ -553,6 +589,7 @@ namespace šipky_Forms_DotNet
                         {
                             // Play the matches of the next round
                             matches = tournament1.matches;
+
                         }
                         else
                         {
@@ -561,6 +598,16 @@ namespace šipky_Forms_DotNet
                                 SoundEffects.SoundEffects.win.Play();
                             return;
                         }
+                    }
+
+                    //show messagebox about winning
+                    stopwatch.Stop();
+                    var next = matches.Where(x => x.winnerId == 0).First();
+                    var nextRound = "Další kolo: " + playerList.Find(x => x.Id == next.player1Id).Name + " vs " + playerList.Find(x => x.Id == next.player2Id).Name;
+                    var res = MessageBox.Show("Hráč " + playerList.Find(x => x.Id == match.winnerId).Name + " vyhrál v čase: " + stopwatch.Elapsed.ToString("hh\\:mm\\:ss") + "\n" + nextRound, "Výhra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (res == DialogResult.OK)
+                    {
+                        continue;
                     }
                 }
             }
@@ -591,5 +638,12 @@ namespace šipky_Forms_DotNet
             stopLoops = true; //For end while loops in tournament if it still running
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(stopwatch != null)
+            {
+                timer.Text = stopwatch.Elapsed.ToString("hh\\:mm\\:ss");
+            }
+        }
     }
 }

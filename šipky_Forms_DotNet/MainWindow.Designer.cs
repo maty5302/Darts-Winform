@@ -54,6 +54,8 @@
             notifyIcon1 = new NotifyIcon(components);
             label1 = new Label();
             openFileDialog2 = new OpenFileDialog();
+            timer = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ScoreDarts).BeginInit();
@@ -241,11 +243,21 @@
             // 
             resources.ApplyResources(openFileDialog2, "openFileDialog2");
             // 
+            // timer
+            // 
+            resources.ApplyResources(timer, "timer");
+            timer.Name = "timer";
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = šipky_Forms.Properties.Resources.darts_3;
+            Controls.Add(timer);
             Controls.Add(label1);
             Controls.Add(panelStart);
             Controls.Add(menuStrip1);
@@ -292,5 +304,7 @@
 		private Button b_turnaj;
 		private OpenFileDialog openFileDialog2;
 		private Button b_detailTournament;
-	}
+        private Label timer;
+        private System.Windows.Forms.Timer timer1;
+    }
 }
