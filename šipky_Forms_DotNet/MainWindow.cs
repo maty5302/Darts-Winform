@@ -230,7 +230,7 @@ namespace šipky_Forms_DotNet
         {
             var t = sender as TextBox;            
 
-            if (e.KeyCode == Keys.Enter && t != null && t is Tex)
+            if (e.KeyCode == Keys.Enter && t != null && t is TextBox)
             {
                 e.Handled = e.SuppressKeyPress = true;
                 isZero = false;
