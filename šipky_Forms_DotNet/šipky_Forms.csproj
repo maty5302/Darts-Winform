@@ -14,7 +14,9 @@
     <ApplicationIcon>Resources\IcoFile\Icon2.ico</ApplicationIcon>
     <UseWPF>False</UseWPF>
     <AnalysisLevel>latest</AnalysisLevel>
-    <Version>1.16.0.1</Version>
+    <Version>1.16.1.0</Version>
+    <FileVersion>1.16.1.0</FileVersion>
+    <AssemblyVersion>1.16.1.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>full</DebugType>

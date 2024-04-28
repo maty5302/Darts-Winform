@@ -1,6 +1,7 @@
 ﻿using Domain;
 using šipky_Forms.Database;
 using šipky_Forms_DotNet;
+using System.Threading;
 
 namespace šipky_Forms
 {
@@ -16,6 +17,7 @@ namespace šipky_Forms
         private int numberOfSets = 1;
         private bool muteSounds = false;
         private int scoreDuel = 501;
+        private bool isZero = true;
         private Player[] playersDuel = new Player[2];
         private Player[] playersDuel2 = new Player[2];
 
@@ -81,26 +83,36 @@ namespace šipky_Forms
             ChangeFocus(index);
         }
 
+        private void T_PreKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            var t = sender as TextBox;
+            if (t != null)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.IsInputKey = true;
+                }
+                else if (e.KeyData == Keys.Tab)
+                {
+                    if (isZero && !muteSounds)
+                        SoundEffects.SoundEffects.player[0].Play();
+                    isZero = true;
+                }
+            }
+        }
+
         private void T_KeyDown(object sender, KeyEventArgs e)
         {
             var t = sender as TextBox;
             if (t == null) return;
 
-            int check = -1;
             if (e.KeyCode == Keys.Enter)
             {
-                check = int.TryParse(t.Text, out check) ? check : -1;
-                if (check > -1)
-                {
-                    B_Click(sender, e);
-                    e.Handled = e.SuppressKeyPress = true;
-                    SendKeys.Send("{TAB}");
-                }
-                else
-                {
-                    e.Handled = e.SuppressKeyPress = true;
-                    t.Clear();
-                }
+                isZero  = false;
+                B_Click(sender, e);
+                e.Handled = e.SuppressKeyPress = true;
+                SendKeys.Send("{TAB}");
+
             }
 
         }
@@ -234,7 +246,7 @@ namespace šipky_Forms
             else
             {
                 if(!muteSounds)
-				    System.Media.SystemSounds.Hand.Play();
+                    SoundEffects.SoundEffects.player[0].Play();
 			}
 
             panel3.Controls[playerThrows].Text = "";

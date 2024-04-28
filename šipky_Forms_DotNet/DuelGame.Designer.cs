@@ -82,7 +82,7 @@
             // l_sets
             // 
             l_sets.AutoSize = true;
-            l_sets.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            l_sets.Font = new Font("Segoe UI", 26.25F);
             l_sets.ForeColor = SystemColors.ControlLightLight;
             l_sets.Location = new Point(325, 0);
             l_sets.Name = "l_sets";
@@ -93,7 +93,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 26.25F);
             label3.ForeColor = SystemColors.ControlLightLight;
             label3.Location = new Point(415, 0);
             label3.Name = "label3";
@@ -104,7 +104,7 @@
             // firstTo
             // 
             firstTo.AutoSize = true;
-            firstTo.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            firstTo.Font = new Font("Segoe UI", 26.25F);
             firstTo.ForeColor = SystemColors.ControlLightLight;
             firstTo.Location = new Point(40, 0);
             firstTo.Name = "firstTo";
@@ -125,7 +125,7 @@
             // WinnerLabel
             // 
             WinnerLabel.AutoSize = true;
-            WinnerLabel.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            WinnerLabel.Font = new Font("Segoe UI", 26.25F);
             WinnerLabel.ForeColor = SystemColors.ControlLightLight;
             WinnerLabel.Location = new Point(214, 0);
             WinnerLabel.Name = "WinnerLabel";
@@ -135,7 +135,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 26.25F);
             label1.ForeColor = SystemColors.ControlLightLight;
             label1.Location = new Point(40, 0);
             label1.Name = "label1";
@@ -161,7 +161,7 @@
             // 
             // SetPlayer2
             // 
-            SetPlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            SetPlayer2.Font = new Font("Segoe UI", 36F);
             SetPlayer2.ForeColor = SystemColors.ControlLightLight;
             SetPlayer2.Location = new Point(-83, 87);
             SetPlayer2.Name = "SetPlayer2";
@@ -172,7 +172,7 @@
             // 
             // SetPlayer1
             // 
-            SetPlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            SetPlayer1.Font = new Font("Segoe UI", 36F);
             SetPlayer1.ForeColor = SystemColors.ControlLightLight;
             SetPlayer1.Location = new Point(-83, 15);
             SetPlayer1.Name = "SetPlayer1";
@@ -184,7 +184,7 @@
             // thrownPlayer2
             // 
             thrownPlayer2.BackColor = Color.ForestGreen;
-            thrownPlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            thrownPlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             thrownPlayer2.ForeColor = SystemColors.Window;
             thrownPlayer2.Location = new Point(197, 87);
             thrownPlayer2.Name = "thrownPlayer2";
@@ -193,11 +193,12 @@
             thrownPlayer2.Tag = "2";
             thrownPlayer2.Enter += T_Enter;
             thrownPlayer2.KeyDown += T_KeyDown;
+            thrownPlayer2.PreviewKeyDown += T_PreKeyDown;
             // 
             // thrownPlayer1
             // 
             thrownPlayer1.BackColor = Color.ForestGreen;
-            thrownPlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            thrownPlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             thrownPlayer1.ForeColor = SystemColors.Window;
             thrownPlayer1.Location = new Point(197, 12);
             thrownPlayer1.Name = "thrownPlayer1";
@@ -206,10 +207,11 @@
             thrownPlayer1.Tag = "1";
             thrownPlayer1.Enter += T_Enter;
             thrownPlayer1.KeyDown += T_KeyDown;
+            thrownPlayer1.PreviewKeyDown += T_PreKeyDown;
             // 
             // ScorePlayer2
             // 
-            ScorePlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            ScorePlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             ScorePlayer2.ForeColor = SystemColors.ControlLightLight;
             ScorePlayer2.Location = new Point(92, 87);
             ScorePlayer2.Name = "ScorePlayer2";
@@ -220,7 +222,7 @@
             // 
             // ScorePlayer1
             // 
-            ScorePlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            ScorePlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Bold);
             ScorePlayer1.ForeColor = SystemColors.ControlLightLight;
             ScorePlayer1.Location = new Point(92, 15);
             ScorePlayer1.Name = "ScorePlayer1";
@@ -231,7 +233,7 @@
             // 
             // LegPlayer2
             // 
-            LegPlayer2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            LegPlayer2.Font = new Font("Segoe UI", 36F);
             LegPlayer2.ForeColor = SystemColors.ControlLightLight;
             LegPlayer2.Location = new Point(6, 87);
             LegPlayer2.Name = "LegPlayer2";
@@ -242,7 +244,7 @@
             // 
             // LegPlayer1
             // 
-            LegPlayer1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            LegPlayer1.Font = new Font("Segoe UI", 36F);
             LegPlayer1.ForeColor = SystemColors.ControlLightLight;
             LegPlayer1.Location = new Point(6, 15);
             LegPlayer1.Name = "LegPlayer1";
@@ -254,7 +256,7 @@
             // PlayerOne
             // 
             PlayerOne.BackColor = Color.Transparent;
-            PlayerOne.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayerOne.Font = new Font("Segoe UI", 36F);
             PlayerOne.Location = new Point(36, 11);
             PlayerOne.Name = "PlayerOne";
             PlayerOne.Size = new Size(358, 65);
@@ -263,7 +265,7 @@
             // 
             // PlayerTwo
             // 
-            PlayerTwo.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayerTwo.Font = new Font("Segoe UI", 36F);
             PlayerTwo.Location = new Point(36, 86);
             PlayerTwo.Name = "PlayerTwo";
             PlayerTwo.Size = new Size(358, 65);
@@ -333,7 +335,7 @@
             // CheckoutPlayer1
             // 
             CheckoutPlayer1.AutoSize = true;
-            CheckoutPlayer1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CheckoutPlayer1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             CheckoutPlayer1.Location = new Point(132, 76);
             CheckoutPlayer1.Name = "CheckoutPlayer1";
             CheckoutPlayer1.Size = new Size(10, 15);
@@ -343,7 +345,7 @@
             // CheckoutPlayer2
             // 
             CheckoutPlayer2.AutoSize = true;
-            CheckoutPlayer2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CheckoutPlayer2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             CheckoutPlayer2.Location = new Point(132, 150);
             CheckoutPlayer2.Name = "CheckoutPlayer2";
             CheckoutPlayer2.Size = new Size(10, 15);
@@ -353,7 +355,7 @@
             // PlayerThree
             // 
             PlayerThree.BackColor = Color.Transparent;
-            PlayerThree.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayerThree.Font = new Font("Segoe UI", 36F);
             PlayerThree.Location = new Point(216, 11);
             PlayerThree.Name = "PlayerThree";
             PlayerThree.Size = new Size(182, 65);
@@ -364,7 +366,7 @@
             // PlayerFour
             // 
             PlayerFour.BackColor = SystemColors.Control;
-            PlayerFour.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayerFour.Font = new Font("Segoe UI", 36F);
             PlayerFour.Location = new Point(218, 86);
             PlayerFour.Name = "PlayerFour";
             PlayerFour.Size = new Size(182, 65);
@@ -375,7 +377,7 @@
             // p2
             // 
             p2.BackColor = Color.Transparent;
-            p2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            p2.Font = new Font("Segoe UI", 36F);
             p2.Location = new Point(190, 11);
             p2.Name = "p2";
             p2.Size = new Size(38, 63);
@@ -386,7 +388,7 @@
             // p1
             // 
             p1.BackColor = Color.Transparent;
-            p1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            p1.Font = new Font("Segoe UI", 36F);
             p1.Location = new Point(190, 85);
             p1.Name = "p1";
             p1.Size = new Size(38, 63);
@@ -427,7 +429,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold);
             label5.ForeColor = SystemColors.ControlLight;
             label5.Location = new Point(0, -1);
             label5.Name = "label5";

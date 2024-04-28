@@ -66,7 +66,7 @@
             label2.Name = "label2";
             label2.Size = new Size(155, 16);
             label2.TabIndex = 2;
-            label2.Text = "Verze: 1.16.0.1";
+            label2.Text = "Verze: 1.16.1.0";
             label2.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label3
