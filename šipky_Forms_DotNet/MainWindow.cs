@@ -147,6 +147,7 @@ namespace šipky_Forms_DotNet
                 t.Parent = panel;
                 t.Enter += T_Enter;
                 t.KeyDown += T_KeyDown;
+                t.PreviewKeyDown += T_PreKeyDown;
                 t.TabIndex = i;
 
                 Label name = new Label();//2
@@ -207,30 +208,37 @@ namespace šipky_Forms_DotNet
             return p;
         }
 
-        private void T_KeyDown(object sender, KeyEventArgs e)
+        private void T_PreKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             var t = sender as TextBox;
-            int check = -1;
-            
+            if (t != null)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.IsInputKey = true;
+                }
+                else if(e.KeyData == Keys.Tab)
+                {
+                    if(isZero && !mute)
+                        SoundEffects.SoundEffects.player[0].Play();
+                    isZero = true;
+                }
+            }
+        }
 
-            if (e.KeyCode == Keys.Enter && t != null)
+        private void T_KeyDown(object sender, KeyEventArgs e)
+        {
+            var t = sender as TextBox;            
+
+            if (e.KeyCode == Keys.Enter && t != null && t is Tex)
             {
                 e.Handled = e.SuppressKeyPress = true;
-                check = int.TryParse(t.Text, out check) ? check : -1;
-                
-                if (check > -1){
-                    B_Click(sender, e);                    
-                }
-                else
-                {
-                    SoundEffects.SoundEffects.player[0].Play(); 
-                    t.Clear();
-                }
+                isZero = false;
+
+                B_Click(sender, e);
 
                 if (!isZero)
-                    SendKeys.Send("{TAB}");
-                else
-                    isZero = false;
+                   SendKeys.Send("{TAB}");
             }
         }
 
