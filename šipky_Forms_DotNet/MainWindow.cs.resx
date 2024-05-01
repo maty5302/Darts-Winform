@@ -163,7 +163,7 @@
     <value>False</value>
   </data>
   <data name="b_detailTournament.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 132</value>
+    <value>83, 142</value>
   </data>
   <data name="b_detailTournament.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 23</value>
@@ -172,7 +172,7 @@
     <value>Detail turnaje</value>
   </data>
   <data name="b_turnaj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 132</value>
+    <value>3, 142</value>
   </data>
   <data name="b_turnaj.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
@@ -183,6 +183,9 @@
   <data name="StartTraining.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="StartTraining.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 116</value>
+  </data>
   <data name="StartTraining.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 24</value>
   </data>
@@ -192,17 +195,50 @@
   <data name="StartDuel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="StartDuel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 116</value>
+  </data>
   <data name="StartDuel.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 24</value>
   </data>
   <data name="StartDuel.Text" xml:space="preserve">
     <value>Duel</value>
   </data>
+  <data name="labelScore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 56</value>
+  </data>
+  <data name="ScoreDarts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 72</value>
+  </data>
+  <data name="labelPlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 56</value>
+  </data>
+  <data name="StartGame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 116</value>
+  </data>
+  <data name="playerCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 72</value>
+  </data>
+  <data name="labelDarts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="checkTimer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkTimer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>49, 97</value>
+  </data>
+  <data name="checkTimer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 19</value>
+  </data>
+  <data name="checkTimer.Text" xml:space="preserve">
+    <value>Časovač</value>
+  </data>
   <data name="panelStart.Location" type="System.Drawing.Point, System.Drawing">
     <value>40, 40</value>
   </data>
   <data name="panelStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 166</value>
+    <value>180, 170</value>
   </data>
   <data name="notifyIcon1.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3709,20 +3745,17 @@
   <data name="openFileDialog2.Filter" xml:space="preserve">
     <value>Statistiky hráčů|*.xml;*.csv</value>
   </data>
-  <data name="timer.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="panelTimer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Stencil, 24pt</value>
   </data>
-  <data name="timer.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="panelTimer.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 40</value>
   </data>
-  <data name="timer.Text" xml:space="preserve">
+  <data name="panelTimer.Text" xml:space="preserve">
     <value>00:00:00</value>
   </data>
-  <data name="timer.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="panelTimer.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
-  </data>
-  <data name="timer.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>

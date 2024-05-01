@@ -27,7 +27,6 @@ namespace šipky_Forms_DotNet
         {
             var gitVersion = await GithubIntegration.GetVersion();
             var appVersion = Application.ProductVersion.ToString();
-            //var oldapp = appVersion;
 
             gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
             appVersion = appVersion.Replace(".", "");
@@ -39,12 +38,11 @@ namespace šipky_Forms_DotNet
                 appVersion = appVersion.Remove(indexof);
 
 
-            //MessageBox.Show(oldapp +'\n' + appVersion);
-
             if (string.Compare(gitVersion, appVersion) > 0)
             {
                 ToolStripMenuItem newItem = new ToolStripMenuItem("Aktualizovat", new Bitmap(Resources.import), DownloadNewVersion_Click);
-                this.notifyIcon1.ContextMenuStrip.Items.Insert(0, newItem);
+                if (this.notifyIcon1.ContextMenuStrip != null)
+                    this.notifyIcon1.ContextMenuStrip.Items.Insert(0, newItem);
                 DownloadNewVersion.Visible = true;
                 if (Convert.ToInt32(gitVersion[1] + "" + gitVersion[2]) > Convert.ToInt32(appVersion[1] + "" + appVersion[2]))
                 {
@@ -195,9 +193,9 @@ namespace šipky_Forms_DotNet
                 idk.Parent = panel;
 
                 players[i] = panel;
-
-                panelStart.BackColor = Color.FromArgb(200, Color.Transparent);
             }
+            panelStart.BackColor = Color.FromArgb(200, Color.Transparent);
+            panelTimer.BackColor = Color.FromArgb(200, Color.Transparent);
         }
 
         public Player? GetPlayer(string playerName)
@@ -388,12 +386,9 @@ namespace šipky_Forms_DotNet
             d.Hide();
             train.Hide();
             setNotifyIconText((int)ScoreDarts.Value, count);
+            b_detailTournament.Enabled = false;
             
-            //rename
-            timer1.Enabled = true;
-            timer.Visible = true;
             stopwatch = Stopwatch.StartNew();
-
         }
 
         private void zastavitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -464,11 +459,10 @@ namespace šipky_Forms_DotNet
                     stopwatch.Stop();
                 };
 
-                timer1.Enabled = true;
-                timer.Visible = true;
-                stopwatch = Stopwatch.StartNew();
+                b_detailTournament.Enabled = false;
 
                 
+                stopwatch = Stopwatch.StartNew();
 
             }
         }
@@ -481,6 +475,9 @@ namespace šipky_Forms_DotNet
             train.Parent = this;
             train.Initializate();
             train.Show();
+            b_detailTournament.Enabled = false;
+            stopwatch = Stopwatch.StartNew();
+
             this.Text = notifyIcon1.Text = "Šipky - Trénink";
         }
 
@@ -544,7 +541,7 @@ namespace šipky_Forms_DotNet
                 played = true;
             };
 
-           
+
             MainWindow.ActiveForm.Text = notifyIcon1.Text = "Šipky - Turnaj mezi: " + playerList.Find(x => x.Id == m.player1Id).Name + " a " + playerList.Find(x => x.Id == m.player2Id).Name + " - " + m.round + ". kolo";
             d.SetDuel(501, 3 * m.round, playerList.Find(x => x.Id == m.player1Id), playerList.Find(x => x.Id == m.player2Id), false);
             d.Location = (Point)new Size(40, 220);
@@ -553,8 +550,6 @@ namespace šipky_Forms_DotNet
             train.Hide();
             d.Show();
 
-            timer1.Enabled = true;
-            timer.Visible = true;
             stopwatch = Stopwatch.StartNew();
 
         }
@@ -640,9 +635,23 @@ namespace šipky_Forms_DotNet
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(stopwatch != null)
+            if (stopwatch != null)
             {
-                timer.Text = stopwatch.Elapsed.ToString("hh\\:mm\\:ss");
+                panelTimer.Text = stopwatch.Elapsed.ToString("hh\\:mm\\:ss");
+            }
+        }
+
+        private void checkTimer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTimer.Checked)
+            {
+                timer1.Enabled = true;
+                panelTimer.Visible = true;
+            }
+            else
+            {
+                timer1.Enabled = false;
+                panelTimer.Visible = false;
             }
         }
     }

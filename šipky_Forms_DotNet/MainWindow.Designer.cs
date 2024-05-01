@@ -51,10 +51,11 @@
             StartGame = new Button();
             playerCount = new NumericUpDown();
             labelDarts = new Label();
+            checkTimer = new CheckBox();
             notifyIcon1 = new NotifyIcon(components);
             label1 = new Label();
             openFileDialog2 = new OpenFileDialog();
-            timer = new Label();
+            panelTimer = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             panelStart.SuspendLayout();
@@ -147,6 +148,7 @@
             panelStart.Controls.Add(StartGame);
             panelStart.Controls.Add(playerCount);
             panelStart.Controls.Add(labelDarts);
+            panelStart.Controls.Add(checkTimer);
             panelStart.Name = "panelStart";
             // 
             // b_detailTournament
@@ -228,6 +230,16 @@
             labelDarts.BackColor = Color.Transparent;
             labelDarts.Name = "labelDarts";
             // 
+            // checkTimer
+            // 
+            resources.ApplyResources(checkTimer, "checkTimer");
+            checkTimer.BackColor = Color.Transparent;
+            checkTimer.Checked = true;
+            checkTimer.CheckState = CheckState.Checked;
+            checkTimer.Name = "checkTimer";
+            checkTimer.UseVisualStyleBackColor = false;
+            checkTimer.CheckedChanged += checkTimer_CheckedChanged;
+            // 
             // notifyIcon1
             // 
             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
@@ -243,13 +255,14 @@
             // 
             resources.ApplyResources(openFileDialog2, "openFileDialog2");
             // 
-            // timer
+            // panelTimer
             // 
-            resources.ApplyResources(timer, "timer");
-            timer.Name = "timer";
+            resources.ApplyResources(panelTimer, "panelTimer");
+            panelTimer.Name = "panelTimer";
             // 
             // timer1
             // 
+            timer1.Enabled = true;
             timer1.Tick += timer1_Tick;
             // 
             // MainWindow
@@ -257,7 +270,7 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = šipky_Forms.Properties.Resources.darts_3;
-            Controls.Add(timer);
+            Controls.Add(panelTimer);
             Controls.Add(label1);
             Controls.Add(panelStart);
             Controls.Add(menuStrip1);
@@ -304,7 +317,8 @@
 		private Button b_turnaj;
 		private OpenFileDialog openFileDialog2;
 		private Button b_detailTournament;
-        private Label timer;
+        private Label panelTimer;
         private System.Windows.Forms.Timer timer1;
+        private CheckBox checkTimer;
     }
 }
