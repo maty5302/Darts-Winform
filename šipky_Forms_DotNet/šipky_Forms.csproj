@@ -14,9 +14,10 @@
     <ApplicationIcon>Resources\IcoFile\Icon2.ico</ApplicationIcon>
     <UseWPF>False</UseWPF>
     <AnalysisLevel>latest</AnalysisLevel>
-    <Version>1.16.1.0</Version>
-    <FileVersion>1.16.1.0</FileVersion>
-    <AssemblyVersion>1.16.1.0</AssemblyVersion>
+    <Version>1.16.1.1</Version>
+    <FileVersion>1.16.1.1</FileVersion>
+    <AssemblyVersion>1.16.1.1</AssemblyVersion>
+    <RepositoryUrl>https://github.com/maty5302/Darts-Winform/</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>full</DebugType>
