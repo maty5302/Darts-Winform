@@ -16,7 +16,7 @@ namespace šipky_Forms_DotNet
         private List<Player> playerList = new List<Player>();
         private Panel[] players = new Panel[10];
 
-        private Stopwatch stopwatch;
+        public Stopwatch stopwatch { get; private set; }
         private string selectedPanel = "";
         private bool isZero = false;
         private int place = 1;
@@ -235,6 +235,7 @@ namespace šipky_Forms_DotNet
             {
                 stopwatch.Start();
                 timer1.Enabled = true;
+                timerToolStripMenuItem.Text = "Pozastavit časovač";
             }
 
             if (e.KeyCode == Keys.Enter && t != null && t is TextBox)
@@ -387,8 +388,9 @@ namespace šipky_Forms_DotNet
             train.Hide();
             setNotifyIconText((int)ScoreDarts.Value, count);
             b_detailTournament.Enabled = false;
-            
+
             stopwatch = Stopwatch.StartNew();
+            timerToolStripMenuItem.Text = "Pozastavit časovač";
         }
 
         private void zastavitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -457,12 +459,14 @@ namespace šipky_Forms_DotNet
                 d.Winner += (r) =>
                 {
                     stopwatch.Stop();
+
                 };
 
                 b_detailTournament.Enabled = false;
 
-                
+
                 stopwatch = Stopwatch.StartNew();
+                timerToolStripMenuItem.Text = "Pozastavit časovač";
 
             }
         }
@@ -477,6 +481,7 @@ namespace šipky_Forms_DotNet
             train.Show();
             b_detailTournament.Enabled = false;
             stopwatch = Stopwatch.StartNew();
+            timerToolStripMenuItem.Text = "Pozastavit časovač";
 
             this.Text = notifyIcon1.Text = "Šipky - Trénink";
         }
@@ -551,6 +556,7 @@ namespace šipky_Forms_DotNet
             d.Show();
 
             stopwatch = Stopwatch.StartNew();
+            timerToolStripMenuItem.Text = "Pozastavit časovač";
 
         }
 
@@ -645,13 +651,37 @@ namespace šipky_Forms_DotNet
         {
             if (checkTimer.Checked)
             {
+                timerToolStripMenuItem.Visible = true;
                 timer1.Enabled = true;
                 panelTimer.Visible = true;
             }
             else
             {
+                timerToolStripMenuItem.Visible = false;
                 timer1.Enabled = false;
                 panelTimer.Visible = false;
+            }
+        }
+
+        public void timerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(stopwatch == null)
+            {
+                MessageBox.Show("Nemáte spuštěnou žádnou z her, proto nelze pozastavit časovač", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if(stopwatch.IsRunning)
+            {
+                timerToolStripMenuItem.Text = "Spustit časovač";
+                timerToolStripMenuItem.Image = Resources.play;
+                stopwatch.Stop();
+                timer1.Enabled = false;
+            }
+            else
+            {
+                timerToolStripMenuItem.Text = "Pozastavit časovač";
+                timerToolStripMenuItem.Image = Resources.pause;
+                stopwatch.Start();
+                timer1.Enabled = true;
             }
         }
     }

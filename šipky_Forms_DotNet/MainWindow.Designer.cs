@@ -37,6 +37,7 @@
             zastavitToolStripMenuItem = new ToolStripMenuItem();
             ztlumitToolStripMenuItem = new ToolStripMenuItem();
             statistikyToolStripMenuItem = new ToolStripMenuItem();
+            timerToolStripMenuItem = new ToolStripMenuItem();
             nastaveníToolStripMenuItem = new ToolStripMenuItem();
             oProgramuToolStripMenuItem = new ToolStripMenuItem();
             DownloadNewVersion = new ToolStripMenuItem();
@@ -66,7 +67,7 @@
             // menuStrip1
             // 
             resources.ApplyResources(menuStrip1, "menuStrip1");
-            menuStrip1.Items.AddRange(new ToolStripItem[] { redoItem, hudbaToolStripMenuItem, statistikyToolStripMenuItem, nastaveníToolStripMenuItem, oProgramuToolStripMenuItem, DownloadNewVersion });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { redoItem, hudbaToolStripMenuItem, statistikyToolStripMenuItem, timerToolStripMenuItem, nastaveníToolStripMenuItem, oProgramuToolStripMenuItem, DownloadNewVersion });
             menuStrip1.Name = "menuStrip1";
             // 
             // redoItem
@@ -110,6 +111,13 @@
             statistikyToolStripMenuItem.Image = šipky_Forms.Properties.Resources.stats;
             statistikyToolStripMenuItem.Name = "statistikyToolStripMenuItem";
             statistikyToolStripMenuItem.Click += statistikyToolStripMenuItem_Click;
+            // 
+            // timerToolStripMenuItem
+            // 
+            resources.ApplyResources(timerToolStripMenuItem, "timerToolStripMenuItem");
+            timerToolStripMenuItem.Image = šipky_Forms.Properties.Resources.pause;
+            timerToolStripMenuItem.Name = "timerToolStripMenuItem";
+            timerToolStripMenuItem.Click += timerToolStripMenuItem_Click;
             // 
             // nastaveníToolStripMenuItem
             // 
@@ -237,6 +245,7 @@
             checkTimer.Checked = true;
             checkTimer.CheckState = CheckState.Checked;
             checkTimer.Name = "checkTimer";
+            checkTimer.TabStop = false;
             checkTimer.UseVisualStyleBackColor = false;
             checkTimer.CheckedChanged += checkTimer_CheckedChanged;
             // 
@@ -320,5 +329,6 @@
         private Label panelTimer;
         private System.Windows.Forms.Timer timer1;
         private CheckBox checkTimer;
+        private ToolStripMenuItem timerToolStripMenuItem;
     }
 }
