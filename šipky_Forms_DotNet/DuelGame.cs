@@ -215,29 +215,35 @@ namespace šipky_Forms
                                 WinnerLabel.Text = "Výhra hráče " + playersDuel[i - 1].Name;
                                 WriteWinStats(score, i);
                                 thrownPlayer1.Enabled = false;
-                                thrownPlayer2.Enabled = false;
-                                if (muteSounds == false)
-                                    SoundEffects.SoundEffects.win.Play();
+                                thrownPlayer2.Enabled = false;                                
                             }
-                            else
+                            if (muteSounds == false)
+                                SoundEffects.SoundEffects.win.Play();
+                            panel3.Controls["LegPlayer1"].Text = "0";
+                            panel3.Controls["LegPlayer2"].Text = "0";
+                            var res = MessageBox.Show("Chcete pauzu před odehráním dalšího setu?", "Konec setu", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                            if(res==DialogResult.Yes)
                             {
-                                panel3.Controls["ScorePlayer1"].Text = scoreDuel.ToString();
-                                panel3.Controls["ScorePlayer2"].Text = scoreDuel.ToString();
-                                panel3.Controls["LegPlayer1"].Text = "0";
-                                panel3.Controls["LegPlayer2"].Text = "0";
+                                MainWindow form = (MainWindow)MainWindow.ActiveForm;
+                                if (form != null && form.stopwatch.IsRunning)
+                                {
+                                    form.timerToolStripMenuItem_Click(sender, e);
+                                    MessageBox.Show("Pauza byla zahájena. Byl zastaven časovač. Pro obnovení časovače klikni na spustit časovač", "Pauza zahájena", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                                }
                             }
+
                         }
-                        else
-                        {
-                            panel3.Controls["ScorePlayer1"].Text = scoreDuel.ToString();
-                            panel3.Controls["ScorePlayer2"].Text = scoreDuel.ToString();
-                        }
+                        panel3.Controls["ScorePlayer1"].Text = scoreDuel.ToString();
+                        panel3.Controls["ScorePlayer2"].Text = scoreDuel.ToString();
+                        panel4.Controls["CheckoutPlayer1"].Text = ".";
+                        panel4.Controls["CheckoutPlayer2"].Text = ".";
+
                     }
                     panel4.Controls[playerCheckout].Text = Checkout.checkout(int.Parse(resultScore));
                 }
 
                 count++;
-                    if (count == 2)
+                if (count == 2)
                 {
                     count = 0;
                     change = !change;
