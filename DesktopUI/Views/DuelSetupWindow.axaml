@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DesktopUI.ViewModels"
+        x:Class="DesktopUI.Views.DuelSetupWindow"
+        x:DataType="vm:DuelSetupViewModel"
+        Title="Příprava duelu" 
+        Width="400" Height="450"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Background>
+        <SolidColorBrush Color="#EEEEEE" /> </Window.Background>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+        
+        <TextBlock Text="DUEL" 
+                   FontSize="56" 
+                   FontWeight="Black" 
+                   FontFamily="Impact" 
+                   Foreground="Black" 
+                   HorizontalAlignment="Center" />
+
+        <Border Background="#CCF5DEB3" Padding="20,15" CornerRadius="5">
+            <StackPanel Spacing="10">
+                
+                <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Skore" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Score}" Minimum="301" Increment="100"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Počet legů" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Legs}" Minimum="1"/>
+                </Grid>
+
+                <TextBlock Text="První tým" 
+                           HorizontalAlignment="Center" 
+                           FontWeight="Bold" 
+                           Foreground="Black" 
+                           Margin="0,5,0,0"
+                           IsVisible="{Binding Is2v2}"/>
+
+                <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Hráč první" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player1}" HorizontalAlignment="Stretch"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Hráč druhý" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player2}" HorizontalAlignment="Stretch"/>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
+                    <CheckBox Content="2V2" IsChecked="{Binding Is2v2, Mode=TwoWay}" Margin="0,0,15,0" Foreground="Black" FontWeight="Bold"/>
+                    <CheckBox Content="Sety" IsChecked="{Binding IsSets}" Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel IsVisible="{Binding Is2v2}" Spacing="8">
+                    <TextBlock Text="Druhý tým" 
+                               HorizontalAlignment="Center" 
+                               FontWeight="Bold" 
+                               Foreground="Black"
+                               Margin="0,5,0,0"/>
+
+                    <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Hráč třetí" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player3}" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Hráč čtvrtý" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player4}" HorizontalAlignment="Stretch"/>
+                    </Grid>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+        <Button Content="Hra" 
+                Command="{Binding StartGameCommand}" 
+                Width="120" 
+                HorizontalContentAlignment="Center" 
+                Background="#E0E0E0" 
+                BorderBrush="#0078D7" 
+                BorderThickness="2"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="DesktopUI/DuelSetupWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
+        <entry key="DesktopUI/PlayerCardView.axaml" value="DesktopUI/DesktopUI.csproj" />
+        <entry key="DesktopUI/Views/AboutApp.axaml" value="DesktopUI/DesktopUI.csproj" />
+        <entry key="DesktopUI/Views/DuelSetupWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
+        <entry key="DesktopUI/Views/PlayerCardView.axaml" value="DesktopUI/DesktopUI.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
