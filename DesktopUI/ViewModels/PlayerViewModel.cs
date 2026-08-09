@@ -1,12 +1,19 @@
 using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Domain;
 
 namespace DesktopUI.ViewModels
 {
     public partial class PlayerViewModel : ViewModelBase
     {
+        [ObservableProperty]
+        private bool _isActive;
+        private int _legsWon = 0;
         private int _playerId;
-
+        
+        public Action<PlayerViewModel>? OnThrowSubmitted { get; set; }
+        
         public int PlayerId
         {
             get => _playerId;
@@ -24,8 +31,16 @@ namespace DesktopUI.ViewModels
         public int Score
         {
             get => _score;
-            set => SetProperty(ref _score, value);
+            set 
+            {
+                if (SetProperty(ref _score, value))
+                {
+                    OnPropertyChanged(nameof(ScoreText)); 
+                }
+            }
         }
+        
+        public string ScoreText => $"{Score}";
 
         private double _average;
         public double Average
@@ -58,16 +73,44 @@ namespace DesktopUI.ViewModels
         [RelayCommand]
         public void SubmitThrow()
         {
-            if (int.TryParse(CurrentThrow, out int value))
+            if (!int.TryParse(CurrentThrow, out int value))
             {
-                if (value > 0 && (Score - value) >= 0 && value <= 180)
-                {
-                    Score -= value;
-                    CalcAverage();
-                }
+                CurrentThrow = "";
+                return; 
             }
-            
+
+            if (value < 0 || value > 180)
+            {
+                CurrentThrow = "";
+                return; 
+            }
+
+            var res = Score - value;
+
+           
+            if (res >= 0) 
+            {
+                Score -= value;
+                CalcAverage();
+                _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
+                HistoryScore.AddHistory(_playerId, Score.ToString());
+                Checkout = Domain.Checkout.checkout(Score); 
+            }
+            else
+            {
+                // Hráč přehodil (Bust). Skóre se neodečítá, ale tah mu končí.
+                // Můžeš sem přidat např. logiku pro zobrazení "Bust!" na obrazovce.
+            }
             CurrentThrow = "";
+            OnThrowSubmitted?.Invoke(this);
+        }
+
+        private string _checkout;
+
+        public string Checkout
+        {
+            get => _checkout;
+            set => SetProperty(ref _checkout, value);
         }
     }
 }

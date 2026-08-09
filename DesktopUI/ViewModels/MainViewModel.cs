@@ -6,7 +6,7 @@ namespace DesktopUI.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     public ObservableCollection<PlayerViewModel> Players { get; }
-    
+    private int _currentPlayerIndex = 0;
     private int playerCount = 10;
     private int score = 501;
     public int PlayerCount
@@ -36,10 +36,33 @@ public partial class MainViewModel : ViewModelBase
             Players.Add(new PlayerViewModel
             {
                 PlayerId = i,
-                Name = $"Hráč {i+1}",
-                Score = score, 
-                Average = 0.00
+                Name = $"Hráč {i + 1}",
+                Score = score,
+                Average = 0.00,
+                OnThrowSubmitted = SwitchToNextPlayer
             });
         }
+        _currentPlayerIndex = 0;
+        if (Players.Count > 0)
+        {
+            Players[_currentPlayerIndex].IsActive = true;
+        }
+
+        _ = SoundManagerDarts.SoundEffects.PlayGameOn();
+    }
+    
+    private void SwitchToNextPlayer(PlayerViewModel throwingPlayer)
+    {
+        if (Players.Count == 0) return;
+
+        int currentIndex = Players.IndexOf(throwingPlayer);
+        
+        if (currentIndex == -1) return;
+
+        throwingPlayer.IsActive = false;
+
+        int nextIndex = (currentIndex + 1) % Players.Count;
+
+        Players[nextIndex].IsActive = true;
     }
 }

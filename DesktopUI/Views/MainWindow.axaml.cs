@@ -13,8 +13,6 @@ public partial class MainWindow : Window
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
         AboutApp app  = new AboutApp();
-        app.Width = 300;
-        app.Height = 300;
         app.ShowDialog(this);
     }
 
