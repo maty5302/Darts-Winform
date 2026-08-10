@@ -12,16 +12,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # Assuming .NET 8.0, can be adjusted if needed
+        dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore Domain/Domain.csproj Tests/Domain.Tests/Domain.Tests.csproj
+      run: dotnet restore Tests/Domain.Tests/Domain.Tests.csproj
 
     - name: Build
-      run: dotnet build Domain/Domain.csproj Tests/Domain.Tests/Domain.Tests.csproj --no-restore
+      run: dotnet build Tests/Domain.Tests/Domain.Tests.csproj --no-restore
 
     - name: Run Domain.Tests
       run: dotnet test Tests/Domain.Tests/Domain.Tests.csproj --no-build --verbosity normal
