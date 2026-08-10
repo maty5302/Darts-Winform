@@ -9,10 +9,13 @@ namespace DesktopUI.ViewModels
     {
         [ObservableProperty]
         private bool _isActive;
-        private int _legsWon = 0;
         private int _playerId;
+        private static int _nextPlacement = 1;
+        private int? _placement;
+        private bool isEnabled = true;
         
         public Action<PlayerViewModel>? OnThrowSubmitted { get; set; }
+        public Action<PlayerViewModel>? OnInputFocused { get; set; }
         
         public int PlayerId
         {
@@ -36,11 +39,17 @@ namespace DesktopUI.ViewModels
                 if (SetProperty(ref _score, value))
                 {
                     OnPropertyChanged(nameof(ScoreText)); 
+                    OnPropertyChanged(nameof(DisplayText));
+                    OnPropertyChanged(nameof(DisplayFontSize));
                 }
             }
         }
         
         public string ScoreText => $"{Score}";
+        
+        public string DisplayText => _placement.HasValue ? $"{_placement.Value}. místo" : ScoreText;
+        public double DisplayFontSize => _placement.HasValue ? 26 : 42;
+        public bool HasFinished => _placement.HasValue;
 
         private double _average;
         public double Average
@@ -73,6 +82,12 @@ namespace DesktopUI.ViewModels
         [RelayCommand]
         public void SubmitThrow()
         {
+            if (_placement.HasValue)
+            {
+                CurrentThrow = "";
+                return;
+            }
+
             if (!int.TryParse(CurrentThrow, out int value))
             {
                 CurrentThrow = "";
@@ -88,13 +103,26 @@ namespace DesktopUI.ViewModels
             var res = Score - value;
 
            
-            if (res >= 0) 
+            if (res > 0) 
             {
                 Score -= value;
                 CalcAverage();
                 _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
                 HistoryScore.AddHistory(_playerId, Score.ToString());
                 Checkout = Domain.Checkout.checkout(Score); 
+            }
+            else if (res == 0)
+            {
+                Score = 0;
+                _placement = _nextPlacement++;
+                IsEnabled = false;
+                OnPropertyChanged(nameof(DisplayText));
+                OnPropertyChanged(nameof(DisplayFontSize));
+                OnPropertyChanged(nameof(IsEnabled));
+                CalcAverage();
+                _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                HistoryScore.AddHistory(_playerId, Score.ToString());
+                Checkout = Domain.Checkout.checkout(Score);
             }
             else
             {
@@ -111,6 +139,25 @@ namespace DesktopUI.ViewModels
         {
             get => _checkout;
             set => SetProperty(ref _checkout, value);
+        }
+
+        public static void ResetPlacements()
+        {
+            _nextPlacement = 1;
+        }
+        
+        public bool IsEnabled
+        {
+            get => isEnabled;
+            set => SetProperty(ref isEnabled, value);
+        }
+
+        public void NotifyInputFocused()
+        {
+            if (!HasFinished)
+            {
+                OnInputFocused?.Invoke(this);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@
         <entry key="DesktopUI/Views/DuelSetupWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
         <entry key="DesktopUI/Views/MainWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
         <entry key="DesktopUI/Views/PlayerCardView.axaml" value="DesktopUI/DesktopUI.csproj" />
+        <entry key="DesktopUI/Views/SettingsWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
       </map>
     </option>
   </component>

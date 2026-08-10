@@ -23,4 +23,37 @@
     <data name="StatsMenu" xml:space="preserve">
         <value>Statistiky</value>
     </data>
+    <data name="MainName" xml:space="preserve">
+        <value>Šipky</value>
+    </data>
+    <data name="NumPlayers" xml:space="preserve">
+        <value>Hráči</value>
+    </data>
+    <data name="NumScore" xml:space="preserve">
+        <value>Skore</value>
+    </data>
+    <data name="PlayMenu" xml:space="preserve">
+        <value>Přehrát</value>
+    </data>
+    <data name="StopMenu" xml:space="preserve">
+        <value>Zastavit</value>
+    </data>
+    <data name="MusicMMenu" xml:space="preserve">
+        <value>Hudba</value>
+    </data>
+    <data name="ButtonGameOn" xml:space="preserve">
+        <value>Hra</value>
+    </data>
+    <data name="ButtonTraining" xml:space="preserve">
+        <value>Trénink</value>
+    </data>
+    <data name="ButtonTournament" xml:space="preserve">
+        <value>Turnaj</value>
+    </data>
+    <data name="ButtonDetailOfTournament" xml:space="preserve">
+        <value>Detail turnaje</value>
+    </data>
+    <data name="MenuMute" xml:space="preserve">
+        <value>Ztlumit</value>
+    </data>
 </root>

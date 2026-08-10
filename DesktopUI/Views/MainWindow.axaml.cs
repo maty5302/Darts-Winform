@@ -23,4 +23,15 @@ public partial class MainWindow : Window
         setup.Height = 600;
         setup.ShowDialog(this);
     }
+
+    private void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
+    }
+
+    private void Button_OnClickSettings(object? sender, RoutedEventArgs e)
+    {
+        SettingsWindow settings = new SettingsWindow();
+        settings.ShowDialog(this);
+    }
 }

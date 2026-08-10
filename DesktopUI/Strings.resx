@@ -30,4 +30,37 @@
     <data name="StatsMenu" xml:space="preserve">
         <value>_MenuStats</value>
     </data>
+    <data name="MainName" xml:space="preserve">
+        <value>_MainName</value>
+    </data>
+    <data name="NumPlayers" xml:space="preserve">
+        <value>_NumPlayers</value>
+    </data>
+    <data name="NumScore" xml:space="preserve">
+        <value>_NumScore</value>
+    </data>
+    <data name="PlayMenu" xml:space="preserve">
+        <value>_MenuPlay</value>
+    </data>
+    <data name="StopMenu" xml:space="preserve">
+        <value>_MenuStop</value>
+    </data>
+    <data name="MusicMMenu" xml:space="preserve">
+        <value>_MenuMusic</value>
+    </data>
+    <data name="ButtonGameOn" xml:space="preserve">
+        <value>_ButtonGameOn</value>
+    </data>
+    <data name="ButtonTraining" xml:space="preserve">
+        <value>_ButtonTraining</value>
+    </data>
+    <data name="ButtonTournament" xml:space="preserve">
+        <value>_ButtonTournament</value>
+    </data>
+    <data name="ButtonDetailOfTournament" xml:space="preserve">
+        <value>_ButtonDetailOfTournament</value>
+    </data>
+    <data name="MenuMute" xml:space="preserve">
+        <value>_MenuMute</value>
+    </data>
 </root>

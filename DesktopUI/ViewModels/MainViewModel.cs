@@ -30,6 +30,7 @@ public partial class MainViewModel : ViewModelBase
     public void StartGame()
     {
         Players.Clear();
+        PlayerViewModel.ResetPlacements();
         Domain.AverageScore.ClearAverage();    
         for (int i = 0; i < PlayerCount; i++)
         {
@@ -39,7 +40,8 @@ public partial class MainViewModel : ViewModelBase
                 Name = $"Hráč {i + 1}",
                 Score = score,
                 Average = 0.00,
-                OnThrowSubmitted = SwitchToNextPlayer
+                OnThrowSubmitted = SwitchToNextPlayer,
+                OnInputFocused = SetActivePlayer
             });
         }
         _currentPlayerIndex = 0;
@@ -59,10 +61,34 @@ public partial class MainViewModel : ViewModelBase
         
         if (currentIndex == -1) return;
 
+        _currentPlayerIndex = currentIndex;
         throwingPlayer.IsActive = false;
+        for (int step = 1; step <= Players.Count; step++)
+        {
+            int nextIndex = (currentIndex + step) % Players.Count;
+            if (!Players[nextIndex].HasFinished)
+            {
+                SetActivePlayer(Players[nextIndex]);
+                return;
+            }
+        }
+    }
 
-        int nextIndex = (currentIndex + 1) % Players.Count;
+    private void SetActivePlayer(PlayerViewModel player)
+    {
+        int selectedIndex = Players.IndexOf(player);
+        if (selectedIndex == -1 || player.HasFinished) return;
 
-        Players[nextIndex].IsActive = true;
+        if (_currentPlayerIndex == selectedIndex && Players[selectedIndex].IsActive)
+        {
+            return;
+        }
+
+        for (int i = 0; i < Players.Count; i++)
+        {
+            Players[i].IsActive = i == selectedIndex;
+        }
+
+        _currentPlayerIndex = selectedIndex;
     }
 }

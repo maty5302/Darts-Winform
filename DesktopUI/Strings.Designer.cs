@@ -68,5 +68,71 @@ namespace DesktopUI {
                 return ResourceManager.GetString("StatsMenu", resourceCulture);
             }
         }
+        
+        public static string MainName {
+            get {
+                return ResourceManager.GetString("MainName", resourceCulture);
+            }
+        }
+        
+        public static string NumPlayers {
+            get {
+                return ResourceManager.GetString("NumPlayers", resourceCulture);
+            }
+        }
+        
+        public static string NumScore {
+            get {
+                return ResourceManager.GetString("NumScore", resourceCulture);
+            }
+        }
+        
+        public static string PlayMenu {
+            get {
+                return ResourceManager.GetString("PlayMenu", resourceCulture);
+            }
+        }
+        
+        public static string StopMenu {
+            get {
+                return ResourceManager.GetString("StopMenu", resourceCulture);
+            }
+        }
+        
+        public static string MusicMMenu {
+            get {
+                return ResourceManager.GetString("MusicMMenu", resourceCulture);
+            }
+        }
+        
+        public static string ButtonGameOn {
+            get {
+                return ResourceManager.GetString("ButtonGameOn", resourceCulture);
+            }
+        }
+        
+        public static string ButtonTraining {
+            get {
+                return ResourceManager.GetString("ButtonTraining", resourceCulture);
+            }
+        }
+        
+        public static string ButtonTournament {
+            get {
+                return ResourceManager.GetString("ButtonTournament", resourceCulture);
+            }
+        }
+        
+        public static string ButtonDetailOfTournament {
+            get {
+                return ResourceManager.GetString("ButtonDetailOfTournament", resourceCulture);
+            }
+        }
+        
+        public static string MenuMute {
+            get {
+                return ResourceManager.GetString("MenuMute", resourceCulture);
+            }
+        }
     }
 }
