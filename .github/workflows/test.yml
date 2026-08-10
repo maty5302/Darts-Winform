@@ -18,10 +18,10 @@ jobs:
         dotnet-version: '8.0.x' # Assuming .NET 8.0, can be adjusted if needed
 
     - name: Restore dependencies
-      run: dotnet restore šipky_Forms_DotNet.sln
+      run: dotnet restore Domain/Domain.csproj Tests/Domain.Tests/Domain.Tests.csproj
 
     - name: Build
-      run: dotnet build šipky_Forms_DotNet.sln --no-restore
+      run: dotnet build Domain/Domain.csproj Tests/Domain.Tests/Domain.Tests.csproj --no-restore
 
     - name: Run Domain.Tests
       run: dotnet test Tests/Domain.Tests/Domain.Tests.csproj --no-build --verbosity normal
