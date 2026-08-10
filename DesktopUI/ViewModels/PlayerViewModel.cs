@@ -66,6 +66,13 @@ namespace DesktopUI.ViewModels
         
         public string AverageText => $"Ø {Average:F2}";
 
+        private string _cardBackground = "#228B22";
+        public string CardBackground
+        {
+            get => _cardBackground;
+            set => SetProperty(ref _cardBackground, value);
+        }
+
         private void CalcAverage()
         {
             Average = Domain.AverageScore.AddAverage(_playerId, int.Parse(CurrentThrow));

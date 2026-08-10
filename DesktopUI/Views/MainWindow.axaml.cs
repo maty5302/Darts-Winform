@@ -1,13 +1,64 @@
+using System;
+using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using DesktopUI.ViewModels;
 
 namespace DesktopUI.Views;
 
 public partial class MainWindow : Window
 {
+    private MainViewModel? _boundViewModel;
+
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    protected override void OnDataContextChanged(EventArgs e)
+    {
+        base.OnDataContextChanged(e);
+
+        if (_boundViewModel != null)
+        {
+            _boundViewModel.PropertyChanged -= MainViewModelOnPropertyChanged;
+        }
+
+        _boundViewModel = DataContext as MainViewModel;
+        if (_boundViewModel == null)
+        {
+            return;
+        }
+
+        _boundViewModel.PropertyChanged += MainViewModelOnPropertyChanged;
+        ApplyWallpaper(_boundViewModel.MainBackgroundUri);
+    }
+
+    private void MainViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(MainViewModel.MainBackgroundUri) && _boundViewModel != null)
+        {
+            ApplyWallpaper(_boundViewModel.MainBackgroundUri);
+        }
+    }
+
+    private void ApplyWallpaper(string wallpaperUri)
+    {
+        var uri = Uri.TryCreate(wallpaperUri, UriKind.Absolute, out var parsedUri)
+            ? parsedUri
+            : new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+
+        if (!AssetLoader.Exists(uri))
+        {
+            uri = new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+        }
+
+        using var stream = AssetLoader.Open(uri);
+        var bitmap = new Bitmap(stream);
+        Background = new ImageBrush(bitmap) { Stretch = Stretch.UniformToFill };
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
@@ -29,9 +80,27 @@ public partial class MainWindow : Window
         _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
     }
 
-    private void Button_OnClickSettings(object? sender, RoutedEventArgs e)
+    private async void Button_OnClickSettings(object? sender, RoutedEventArgs e)
     {
-        SettingsWindow settings = new SettingsWindow();
-        settings.ShowDialog(this);
+        if (DataContext is not MainViewModel vm)
+        {
+            return;
+        }
+
+        SettingsWindow settings = new SettingsWindow(vm);
+        await settings.ShowDialog(this);
+
+        if (settings.RequiresMainWindowReload)
+        {
+            var newWindow = new MainWindow
+            {
+                DataContext = vm,
+                Width = Width,
+                Height = Height
+            };
+
+            newWindow.Show();
+            Close();
+        }
     }
 }

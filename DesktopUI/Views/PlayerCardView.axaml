@@ -4,7 +4,7 @@
              x:Class="DesktopUI.Views.PlayerCardView"
              x:DataType="vm:PlayerViewModel">
     
-    <Border Background="#228B22" CornerRadius="2" Margin="10" Padding="10" 
+    <Border Background="{Binding CardBackground}" CornerRadius="2" Margin="10" Padding="10" 
             BorderBrush="DarkGreen" BorderThickness="1">
         <Grid RowDefinitions="Auto,*,Auto,Auto">
             <TextBlock Grid.Row="0" Text="{Binding Name}" FontStyle="Italic" FontSize="16" Foreground="Black"/>

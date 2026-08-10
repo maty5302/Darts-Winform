@@ -9,15 +9,18 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Background>
-        <SolidColorBrush Color="#EEEEEE" /> </Window.Background>
+        <SolidColorBrush Color="Black" />
+    </Window.Background>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
-        
+        <StackPanel.Background>
+            <ImageBrush Source="avares://DesktopUI/Assets/Icons/duel.png"></ImageBrush>
+        </StackPanel.Background>
         <TextBlock Text="DUEL" 
                    FontSize="56" 
                    FontWeight="Black" 
-                   FontFamily="Impact" 
-                   Foreground="Black" 
+                   FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" 
+                   Foreground="White" 
                    HorizontalAlignment="Center" />
 
         <Border Background="#CCF5DEB3" Padding="20,15" CornerRadius="5">
@@ -34,7 +37,7 @@
                 <TextBlock Text="První tým" 
                            HorizontalAlignment="Center" 
                            FontWeight="Bold" 
-                           Foreground="Black" 
+                           Foreground="White" 
                            Margin="0,5,0,0"
                            IsVisible="{Binding Is2v2}"/>
 
@@ -47,15 +50,15 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
-                    <CheckBox Content="2V2" IsChecked="{Binding Is2v2, Mode=TwoWay}" Margin="0,0,15,0" Foreground="Black" FontWeight="Bold"/>
-                    <CheckBox Content="Sety" IsChecked="{Binding IsSets}" Foreground="Black"/>
+                    <CheckBox Content="2V2" IsChecked="{Binding Is2v2, Mode=TwoWay}" Margin="0,0,15,0" Foreground="White" FontWeight="Bold"/>
+                    <CheckBox Content="Sety" IsChecked="{Binding IsSets}" Foreground="White"/>
                 </StackPanel>
 
                 <StackPanel IsVisible="{Binding Is2v2}" Spacing="8">
                     <TextBlock Text="Druhý tým" 
                                HorizontalAlignment="Center" 
                                FontWeight="Bold" 
-                               Foreground="Black"
+                               Foreground="White"
                                Margin="0,5,0,0"/>
 
                     <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">

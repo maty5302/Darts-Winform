@@ -134,5 +134,71 @@ namespace DesktopUI {
                 return ResourceManager.GetString("MenuMute", resourceCulture);
             }
         }
+        
+        public static string AppSettingsMain {
+            get {
+                return ResourceManager.GetString("AppSettingsMain", resourceCulture);
+            }
+        }
+        
+        public static string SettingsNameAndColors {
+            get {
+                return ResourceManager.GetString("SettingsNameAndColors", resourceCulture);
+            }
+        }
+        
+        public static string SettingsPlayerName {
+            get {
+                return ResourceManager.GetString("SettingsPlayerName", resourceCulture);
+            }
+        }
+        
+        public static string SettingsPlayerColor {
+            get {
+                return ResourceManager.GetString("SettingsPlayerColor", resourceCulture);
+            }
+        }
+        
+        public static string SettingsOthers {
+            get {
+                return ResourceManager.GetString("SettingsOthers", resourceCulture);
+            }
+        }
+        
+        public static string SettingsLang {
+            get {
+                return ResourceManager.GetString("SettingsLang", resourceCulture);
+            }
+        }
+        
+        public static string SettingsWallpaper {
+            get {
+                return ResourceManager.GetString("SettingsWallpaper", resourceCulture);
+            }
+        }
+        
+        public static string SettingsStartupMusic {
+            get {
+                return ResourceManager.GetString("SettingsStartupMusic", resourceCulture);
+            }
+        }
+        
+        public static string SettingsSave {
+            get {
+                return ResourceManager.GetString("SettingsSave", resourceCulture);
+            }
+        }
+        
+        public static string SettingsCancel {
+            get {
+                return ResourceManager.GetString("SettingsCancel", resourceCulture);
+            }
+        }
+        
+        public static string SettingsDefault {
+            get {
+                return ResourceManager.GetString("SettingsDefault", resourceCulture);
+            }
+        }
     }
 }

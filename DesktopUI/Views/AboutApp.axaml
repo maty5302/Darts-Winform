@@ -10,15 +10,20 @@
         CanResize="False"
         Icon="/Assets/IcoFiles/about.ico" Title="{x:Static lang:Strings.AboutAppMenu }">
         
-        <Grid RowDefinitions="Auto, *">
-            <StackPanel Orientation="Vertical" Spacing="10">
-                <TextBlock Text="{x:Static lang:Strings.ProgName}"  FontSize="36" FontWeight="Heavy" FontFamily="Impact"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                <Image Source="avares://DesktopUI/Assets/Icons/Darts2.png" Width="300" Height="300"></Image> 
-                <Grid RowDefinitions="Auto,Auto">
-                    <TextBlock Text="Autor: Matěj Prudil" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Verze: 2.0.0 Alpha" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Grid>
+            <Border Background="Black">
+                <Grid Margin="12" RowDefinitions="Auto,Auto,Auto,Auto">
+                    <Border>
+                        <TextBlock Text="{x:Static lang:Strings.ProgName}"  FontSize="36" FontWeight="Heavy" FontFamily="Impact"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <Image Grid.Row="1" Source="avares://DesktopUI/Assets/Icons/Darts2.png" Width="200" Height="200"></Image> 
+                    <TextBox Grid.Row="2" Height="100" AcceptsReturn="False" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto">
+                        <TextBlock Text="Autor: Matěj Prudil" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <TextBlock Grid.Column="1" Text="Verze: 2.0.0 Alpha" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    </Grid>
                 </Grid>
-            </StackPanel>
+            </Border>
         </Grid>
         
         

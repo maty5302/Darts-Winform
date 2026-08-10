@@ -1,0 +1,125 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:colorPicker="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.ColorPicker"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lang="clr-namespace:DesktopUI"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+        x:Class="DesktopUI.Views.SettingsWindow"
+        Icon="/Assets/IcoFiles/settings.ico"
+        Title="{x:Static lang:Strings.SettingsMenu}"
+        CanResize="False"
+        Width="900"
+        Height="600">
+    <Grid>
+        <Border Background="Black"/>
+
+        <Grid Margin="12" RowDefinitions="Auto,*">
+            <Border Grid.Row="0" CornerRadius="10" Padding="8" Margin="0,0,0,8">
+                <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.AppSettingsMain}" FontSize="26" FontWeight="Bold" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" Foreground="White" />    
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="2*,2*" ColumnSpacing="14">
+                <Border Grid.Column="0" BorderBrush="#CC111827" BorderThickness="2" CornerRadius="10" Padding="14">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Spacing="12">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{x:Static lang:Strings.SettingsNameAndColors}" FontSize="22" FontWeight="Bold" Foreground="White"/>
+                            <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+    
+                                <Grid.Styles>
+                                    <Style Selector="TextBox">
+                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                    <Style Selector="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Grid.Styles>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="#" Foreground="#9CA3AF"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lang:Strings.SettingsPlayerName}" Foreground="#9CA3AF"/>
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{x:Static lang:Strings.SettingsPlayerColor}" Foreground="#9CA3AF"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="1" Foreground="White"/>
+                                <TextBox x:Name="PlayerName1" Grid.Row="1" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor1" Grid.Row="1" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="2" Foreground="White"/>
+                                <TextBox x:Name="PlayerName2" Grid.Row="2" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor2" Grid.Row="2" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="3" Foreground="White"/>
+                                <TextBox x:Name="PlayerName3" Grid.Row="3" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor3" Grid.Row="3" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="4" Foreground="White"/>
+                                <TextBox x:Name="PlayerName4" Grid.Row="4" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor4" Grid.Row="4" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="5" Foreground="White"/>
+                                <TextBox x:Name="PlayerName5" Grid.Row="5" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor5" Grid.Row="5" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="6" Grid.Column="0" Text="6" Foreground="White"/>
+                                <TextBox x:Name="PlayerName6" Grid.Row="6" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor6" Grid.Row="6" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="7" Grid.Column="0" Text="7" Foreground="White"/>
+                                <TextBox x:Name="PlayerName7" Grid.Row="7" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor7" Grid.Row="7" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="8" Grid.Column="0" Text="8" Foreground="White"/>
+                                <TextBox x:Name="PlayerName8" Grid.Row="8" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor8" Grid.Row="8" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="9" Grid.Column="0" Text="9" Foreground="White"/>
+                                <TextBox x:Name="PlayerName9" Grid.Row="9" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor9" Grid.Row="9" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                                
+                                <TextBlock Grid.Row="10" Grid.Column="0" Text="10" Foreground="White"/>
+                                <TextBox x:Name="PlayerName10" Grid.Row="10" Grid.Column="1"/>
+                                <colorPicker:ColorPicker x:Name="PlayerColor10" Grid.Row="10" Grid.Column="2" IsAlphaEnabled="False" MinWidth="180" MinHeight="30"/>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <Border Grid.Column="1" BorderBrush="#CC111827" BorderThickness="2" CornerRadius="10" Padding="14">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="{x:Static lang:Strings.SettingsOthers}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" Foreground="White"/>
+                        <Grid ColumnDefinitions="170,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="12">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.SettingsLang}" Foreground="White" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="LanguageComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
+                                <ComboBoxItem Content="Čeština" Tag="cs" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="English" Tag="en" HorizontalContentAlignment="Right"/>
+                            </ComboBox>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.SettingsWallpaper}" Foreground="White" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="WallpaperComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
+                                <ComboBoxItem Content="Darts Development" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="Darts Classic" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3.jpg" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="Darts New Reborn" Tag="avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg" HorizontalContentAlignment="Right"/>
+                            </ComboBox>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static lang:Strings.SettingsStartupMusic}" Foreground="White" VerticalAlignment="Center"/>
+                            <ToggleSwitch x:Name="StartupMusicToggle" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"/>
+                            
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Průhlednost" Foreground="White" VerticalAlignment="Center"/>
+                            <ToggleSwitch Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"/>
+                            
+                            
+                            <!-- <Slider Grid.Row="4" Grid.Column="1" Value="75" Minimum="40" Maximum="100"/> -->
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,6,0,0">
+                            <Border Grid.Column="0"/>
+                            <Button Grid.Column="1" Content="{x:Static lang:Strings.SettingsDefault}" Margin="0,0,8,0" />
+                            <Button Grid.Column="2" Content="{x:Static lang:Strings.SettingsSave}" Margin="0,0,8,0" Click="SaveButton_OnClick"/>
+                            <Button Grid.Column="3" Content="{x:Static lang:Strings.SettingsCancel}" Click="CancelButton_OnClick"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

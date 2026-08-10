@@ -63,4 +63,37 @@
     <data name="MenuMute" xml:space="preserve">
         <value>_MenuMute</value>
     </data>
+    <data name="AppSettingsMain" xml:space="preserve">
+        <value>_SettingsAppMain</value>
+    </data>
+    <data name="SettingsNameAndColors" xml:space="preserve">
+        <value>_SettingsNameColors</value>
+    </data>
+    <data name="SettingsPlayerName" xml:space="preserve">
+        <value>_SettingsPlayerName</value>
+    </data>
+    <data name="SettingsPlayerColor" xml:space="preserve">
+        <value>_SettingsPlayerColor</value>
+    </data>
+    <data name="SettingsOthers" xml:space="preserve">
+        <value>_SettingsOther</value>
+    </data>
+    <data name="SettingsLang" xml:space="preserve">
+        <value>_SettingsLang</value>
+    </data>
+    <data name="SettingsWallpaper" xml:space="preserve">
+        <value>_SettingsWallpaper</value>
+    </data>
+    <data name="SettingsStartupMusic" xml:space="preserve">
+        <value>_SettingsStartupMusic</value>
+    </data>
+    <data name="SettingsSave" xml:space="preserve">
+        <value>_SettingsSave</value>
+    </data>
+    <data name="SettingsCancel" xml:space="preserve">
+        <value>_SettingsCancel</value>
+    </data>
+    <data name="SettingsDefault" xml:space="preserve">
+        <value>_SettingsDefault</value>
+    </data>
 </root>

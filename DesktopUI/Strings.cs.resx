@@ -56,4 +56,37 @@
     <data name="MenuMute" xml:space="preserve">
         <value>Ztlumit</value>
     </data>
+    <data name="AppSettingsMain" xml:space="preserve">
+        <value>Nastavení aplikace</value>
+    </data>
+    <data name="SettingsNameAndColors" xml:space="preserve">
+        <value>Jména hráčů a barvy</value>
+    </data>
+    <data name="SettingsPlayerName" xml:space="preserve">
+        <value>Jméno hráče</value>
+    </data>
+    <data name="SettingsPlayerColor" xml:space="preserve">
+        <value>Barva</value>
+    </data>
+    <data name="SettingsOthers" xml:space="preserve">
+        <value>Ostatní nastavení</value>
+    </data>
+    <data name="SettingsLang" xml:space="preserve">
+        <value>Jazyk aplikace</value>
+    </data>
+    <data name="SettingsWallpaper" xml:space="preserve">
+        <value>Tapeta</value>
+    </data>
+    <data name="SettingsStartupMusic" xml:space="preserve">
+        <value>Hudba při spuštění</value>
+    </data>
+    <data name="SettingsSave" xml:space="preserve">
+        <value>Uložit</value>
+    </data>
+    <data name="SettingsCancel" xml:space="preserve">
+        <value>Zrušit</value>
+    </data>
+    <data name="SettingsDefault" xml:space="preserve">
+        <value>Výchozí</value>
+    </data>
 </root>

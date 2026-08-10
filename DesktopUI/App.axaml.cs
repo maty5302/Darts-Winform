@@ -17,10 +17,16 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var mainViewModel = new MainViewModel();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(),
+                DataContext = mainViewModel,
             };
+
+            if (mainViewModel.PlayMusicOnStartup)
+            {
+                _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
+            }
         }
 
         base.OnFrameworkInitializationCompleted();

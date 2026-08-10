@@ -3,6 +3,7 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="DesktopUI/App.axaml" value="DesktopUI/DesktopUI.csproj" />
         <entry key="DesktopUI/DuelSetupWindow.axaml" value="DesktopUI/DesktopUI.csproj" />
         <entry key="DesktopUI/PlayerCardView.axaml" value="DesktopUI/DesktopUI.csproj" />
         <entry key="DesktopUI/Views/AboutApp.axaml" value="DesktopUI/DesktopUI.csproj" />
