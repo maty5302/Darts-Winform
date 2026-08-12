@@ -61,7 +61,7 @@ public partial class MainWindow : Window
         Background = new ImageBrush(bitmap) { Stretch = Stretch.UniformToFill };
     }
 
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void Button_OnClickAbout(object? sender, RoutedEventArgs e)
     {
         AboutApp app  = new AboutApp();
         app.ShowDialog(this);
@@ -102,5 +102,22 @@ public partial class MainWindow : Window
             newWindow.Show();
             Close();
         }
+    }
+
+    private void Button_OnClickStatistics(object? sender, RoutedEventArgs e)
+    {
+        StatisticsWindow stats  = new StatisticsWindow();
+        stats.ShowDialog(this);
+    }
+
+    private void Button_OnClickBack(object? sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void Button_OnClickDartBoard(object? sender, RoutedEventArgs e)
+    {
+        DartboardWindow experiment = new DartboardWindow(_boundViewModel);
+        experiment.Show();
     }
 }

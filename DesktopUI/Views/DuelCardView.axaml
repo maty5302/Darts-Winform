@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:DesktopUI.ViewModels"
+             x:Class="DesktopUI.Views.DuelCardView"
+             x:DataType="vm:DuelViewModel"
+             Width="950"
+             Height="320">
+
+    <Border Background="White" CornerRadius="0" BorderBrush="Black" BorderThickness="2"
+            BoxShadow="5 5 15 0 DarkGray">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto">
+
+            <Border Grid.Row="0" Background="Black" Padding="20,10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBlock Grid.Column="0" Text="První do 3" Foreground="White" FontSize="32" />
+                    <TextBlock Grid.Column="1" Text="Leg" Foreground="White" FontSize="32" Margin="0,0,300,0"/>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto, Auto">
+                
+                <StackPanel Grid.Column="0" Background="White"  VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Player1.Name, FallbackValue='Test2'}" FontSize="48" FontWeight="Bold" Foreground="Black"/>
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <TextBlock Text="{Binding Player1.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black"/>
+                        <TextBlock Text="{Binding Player1.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" Background="#228B22" Padding="20,15">
+                    <StackPanel Orientation="Horizontal" Spacing="30" VerticalAlignment="Center">
+                        <TextBlock Text="0" FontSize="42" Foreground="White" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="{Binding Player1.Score, FallbackValue='301'}" FontSize="56" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                        
+                        <TextBox Text="{Binding Player1.CurrentThrow}" FontSize="36" FontWeight="Bold" 
+                                 Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="2" 
+                                 Width="100" Height="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                 CornerRadius="0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="DarkRed" Width="50" 
+                        IsVisible="{Binding Player1.IsActive, FallbackValue=True}">
+                    <TextBlock Text="&lt;" Foreground="White" FontSize="42" FontWeight="Bold" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Column="2" Width="50" IsVisible="{Binding !Player1.IsActive, FallbackValue=False}" Background="Transparent" />
+            </Grid>
+
+            <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto">
+                
+                <StackPanel Grid.Column="0" Background="White" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Player2.Name, FallbackValue='Test'}" FontSize="48" Foreground="Black"/>
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <TextBlock Text="{Binding Player2.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black"/>
+                        <TextBlock Text="{Binding Player2.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" Background="#228B22" Padding="20,15">
+                    <StackPanel Orientation="Horizontal" Spacing="30" VerticalAlignment="Center">
+                        <TextBlock Text="0" FontSize="42" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Player2.Score, FallbackValue='301'}" FontSize="56" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Player2.CurrentThrow}" FontSize="36" FontWeight="Bold" 
+                                 Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="2" 
+                                 Width="100" Height="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                 CornerRadius="0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="DarkRed" Width="50" 
+                        IsVisible="{Binding Player2.IsActive, FallbackValue=False}">
+                    <TextBlock Text="&lt;" Foreground="White" FontSize="42" FontWeight="Bold" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Column="2" Width="50" IsVisible="{Binding !Player2.IsActive, FallbackValue=True}" Background="Transparent" />
+            </Grid>
+
+            <Border Grid.Row="3" Background="Black" Padding="20,10">
+                <TextBlock Text="Duel" Foreground="White" FontSize="32" />
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

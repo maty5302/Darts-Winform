@@ -1,0 +1,135 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="DesktopUI.Views.StatisticsWindow"
+        Title="Statistiky" Width="350" Height="750"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Border.Card">
+            <Setter Property="Background" Value="{DynamicResource SystemRegionBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlDefaultBaseLowBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBlock.SectionHeader">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+        <Style Selector="TextBlock.StatLabel">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,16,8"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}"/>
+        </Style>
+        <Style Selector="TextBlock.StatValue">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Styles>
+
+    <DockPanel>
+        <ScrollViewer>
+            <StackPanel Margin="24">
+                
+                <TextBlock Text="STATISTIKY" 
+                           FontSize="32" 
+                           FontWeight="Black" 
+                           LetterSpacing="2"
+                           HorizontalAlignment="Center" 
+                           FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic"
+                           Margin="0,0,0,24"/>
+
+                <Border Classes="Card">
+                    <StackPanel>
+                        <TextBlock Text="Vytvoření hráče" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBox Grid.Column="0" Watermark="Zadejte jméno..." Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Vytvořit" Classes="accent" VerticalAlignment="Center" Padding="16,6"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="Card">
+                    <StackPanel>
+                        <TextBlock Text="Správa hráče" Classes="SectionHeader"/>
+                        
+                        <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,12">
+                            <ComboBox Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,12,0" SelectedIndex="0"/>
+                            <Button Grid.Column="1" Content="Smazat" Background="#33FF0000" Foreground="#FF5555"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,20">
+                            <TextBox Grid.Column="0" Text="Matějíček" Margin="0,0,12,0"/>
+                            <Button Grid.Column="1" Content="Přejmenovat"/>
+                        </Grid>
+
+                        <TabControl>
+                            <TabItem Header="Tento rok (2023)" FontSize="14">
+                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,16,0,0" HorizontalAlignment="Center">
+                                    
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Jméno hráče:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Matějíček" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Počet vítězství:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="8" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Největší zavření:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="141" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Poslední průměr:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="167" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="60+:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="2" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="100+:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" Text="1" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="120+:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="1" Text="17" Classes="StatValue"/>
+
+                                    <TextBlock Grid.Row="7" Grid.Column="0" Text="180:" Classes="StatLabel"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="1" Text="35" Classes="StatValue" Foreground="#FF8C00"/>
+                                </Grid>
+                            </TabItem>
+                            
+                            <TabItem Header="Předchozí roky" FontSize="14">
+                                <TextBlock Text="Zde budou historická data..." Margin="0,16,0,0" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="Card" Margin="0">
+                    <StackPanel>
+                        <!-- <TextBlock Text="Úspěchy" Classes="SectionHeader"/> -->
+                        
+                        <WrapPanel  HorizontalAlignment="Center" ItemWidth="50" ItemHeight="50" Margin="0,8,0,0">
+                            <Border Background="#22FFD700" CornerRadius="25" Margin="4">
+                                <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                            </Border>
+                            <Border Background="#22808080" CornerRadius="25" Margin="4">
+                                <TextBlock Text="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </Border>
+                            <Border Background="#22808080" CornerRadius="25" Margin="4">
+                                <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Opacity="0.5"/>
+                            </Border>
+                            <Border Background="#2200FF00" CornerRadius="25" Margin="4">
+                                <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                            </Border>
+                            <Border Background="#2200FF00" CornerRadius="25" Margin="4">
+                                <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

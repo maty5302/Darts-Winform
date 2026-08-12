@@ -13,9 +13,15 @@
     <Grid RowDefinitions="Auto, *">
         
         <Border Grid.Row="0" Padding="5">
-            <StackPanel Orientation="Horizontal" Spacing="15" Background="Aqua">
-                <Button Background="Transparent" Padding="5,0">
+            <StackPanel Orientation="Horizontal" Spacing="15" Background="Black" Opacity="0.7" >
+                <Button Background="Transparent" Padding="5,0" Click="Button_OnClickBack">
                     <Image Source="avares://DesktopUI/Assets/Icons/back.png" Width="16" Height="16" />
+                </Button>
+                <Button Background="Transparent" Padding="5,0" Click="Button_OnClickDartBoard">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Image Source="avares://DesktopUI/Assets/Icons/load.png" Width="16" Height="16" />
+                        <TextBlock Text="Terč" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </Button>
                 <SplitButton Background="Transparent">
                     <StackPanel Orientation="Horizontal" Spacing="8">
@@ -42,7 +48,7 @@
                         </MenuFlyout>
                     </SplitButton.Flyout>
                 </SplitButton>
-                <Button Background="Transparent">
+                <Button Background="Transparent" Click="Button_OnClickStatistics">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Image Source="avares://DesktopUI/Assets/Icons/stats.png" Width="16" Height="16" />
                         <TextBlock Text="{x:Static lang:Strings.StatsMenu }" VerticalAlignment="Center"/>
@@ -54,7 +60,7 @@
                         <TextBlock Text="{x:Static lang:Strings.SettingsMenu }" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Transparent" Click="Button_OnClick">
+                <Button Background="Transparent" Click="Button_OnClickAbout">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Image Source="avares://DesktopUI/Assets/Icons/about.png" Width="16" Height="16" />
                         <TextBlock Text="{x:Static lang:Strings.AboutAppMenu }" VerticalAlignment="Center"/>
@@ -102,11 +108,18 @@
                     
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <views:PlayerCardView />
+                            <views:PlayerCardView/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
+                    
                 </ItemsControl>
                 
+                <Panel IsVisible="{Binding IsDuelMode}" 
+                       Margin="20,250,20,20" >
+           
+                    <views:DuelCardView DataContext="{Binding DuelVM}" />
+        
+                </Panel>
             </Grid>
         </Viewbox>
     </Grid>
