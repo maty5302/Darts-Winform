@@ -19,6 +19,12 @@ namespace DesktopUI.ViewModels
         [ObservableProperty]
         private int _player2Legs;
 
+        [ObservableProperty]
+        private int _numberOfLegs;
+
+        [ObservableProperty]
+        private int _scoreToBeat;
+
         public DuelViewModel()
         {
             // Reset domain logic if needed for a fresh duel

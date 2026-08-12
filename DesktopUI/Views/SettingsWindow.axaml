@@ -119,7 +119,7 @@
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="{x:Static lang:Strings.SettingsTransparency}"  VerticalAlignment="Center" />
                             <ToggleSwitch Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Name="TransparencyToggle"/>
                             
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="" VerticalAlignment="Center" 
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="{x:Static lang:Strings.SettingsTransparencyIntensity}" VerticalAlignment="Center" 
                                        IsEnabled="{Binding #TransparencyToggle.IsChecked}"/>
 
                             <Slider Grid.Row="6" Grid.Column="1" 
