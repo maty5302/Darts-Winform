@@ -104,16 +104,15 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static lang:Strings.SettingsStartupMusic}" Foreground="White" VerticalAlignment="Center"/>
                             <ToggleSwitch x:Name="StartupMusicToggle" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"/>
                             
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Průhlednost" Foreground="White" VerticalAlignment="Center"/>
-                            <ToggleSwitch Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"/>
-                            
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Průhlednost"  Foreground="White" VerticalAlignment="Center" />
+                            <ToggleSwitch Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Name="Transparency"/>
                             
                             <!-- <Slider Grid.Row="4" Grid.Column="1" Value="75" Minimum="40" Maximum="100"/> -->
                         </Grid>
 
                         <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,6,0,0">
                             <Border Grid.Column="0"/>
-                            <Button Grid.Column="1" Content="{x:Static lang:Strings.SettingsDefault}" Margin="0,0,8,0" />
+                            <Button Grid.Column="1" Content="{x:Static lang:Strings.SettingsDefault}" Margin="0,0,8,0" Click="DefaultButton_OnClick"/>
                             <Button Grid.Column="2" Content="{x:Static lang:Strings.SettingsSave}" Margin="0,0,8,0" Click="SaveButton_OnClick"/>
                             <Button Grid.Column="3" Content="{x:Static lang:Strings.SettingsCancel}" Click="CancelButton_OnClick"/>
                         </Grid>

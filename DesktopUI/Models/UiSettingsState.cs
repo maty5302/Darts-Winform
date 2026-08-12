@@ -1,0 +1,17 @@
+using System.Collections.Generic;
+using System.Globalization;
+
+namespace DesktopUI.Models
+{
+    public sealed class UiSettingsState
+    {
+        public List<string>? PlayerNames { get; set; }
+        public List<string>? PlayerColors { get; set; }
+        public string? MainBackgroundUri { get; set; }
+        public string? CurrentLanguageCode { get; set; }
+        public bool PlayMusicOnStartup { get; set; }
+        public bool Opacity { get; set; }
+    }
+    
+    
+}

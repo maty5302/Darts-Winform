@@ -34,6 +34,13 @@ namespace DesktopUI.Views
             SelectByTag("LanguageComboBox", _mainViewModel.CurrentLanguageCode);
             SelectByTag("WallpaperComboBox", _mainViewModel.MainBackgroundUri);
             RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = _mainViewModel.PlayMusicOnStartup;
+            RequireControl<ToggleSwitch>("Transparency").IsChecked = _mainViewModel.OpacityEnabled;
+        }
+        
+        private void DefaultButton_OnClick(object? sender, RoutedEventArgs e)
+        {
+            //"#228B22"
+            
         }
 
         private void SaveButton_OnClick(object? sender, RoutedEventArgs e)
@@ -44,9 +51,10 @@ namespace DesktopUI.Views
             var wallpaper = GetSelectedTag(RequireControl<ComboBox>("WallpaperComboBox"))
                             ?? "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
             var playMusicOnStartup = RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked == true;
-
+            var opacityEnabled = RequireControl<ToggleSwitch>("Transparency").IsChecked == true;
+            
             RequiresMainWindowReload = !string.Equals(language, _mainViewModel.CurrentLanguageCode, StringComparison.OrdinalIgnoreCase);
-            _mainViewModel.ApplySettings(names, colors, language, wallpaper, playMusicOnStartup);
+            _mainViewModel.ApplySettings(names, colors, language, wallpaper, playMusicOnStartup, opacityEnabled);
             Close();
         }
 

@@ -12,7 +12,6 @@
 
     <ItemGroup>
         <Folder Include="Assets\Icons\" />
-        <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
         <AvaloniaResource Include="..\assets_md\SettingsMain.jpg" Link="Assets\Backgrounds\SettingsMain.jpg" />
     </ItemGroup>

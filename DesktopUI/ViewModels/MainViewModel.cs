@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DesktopUI.Models;
 
 namespace DesktopUI.ViewModels;
 
@@ -19,6 +21,14 @@ public partial class MainViewModel : ViewModelBase
     private string _mainBackgroundUri = "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
     private string _currentLanguageCode = "cs";
     private bool _playMusicOnStartup;
+    private bool _opacityEnabled;
+    
+    [ObservableProperty]
+    private DuelViewModel _duelVM = new();
+
+    [ObservableProperty]
+    private bool _isDuelMode;
+    
     private static readonly string SettingsFilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "DartsCounter",
@@ -56,6 +66,21 @@ public partial class MainViewModel : ViewModelBase
         set => SetProperty(ref score, value);
     }
     
+    public bool OpacityEnabled
+    {
+        get => _opacityEnabled;
+        set 
+        {
+            if (SetProperty(ref _opacityEnabled, value))
+            {
+                foreach (var player in Players)
+                {
+                    player.OpacityEnabled = value;
+                }
+            }
+        }
+    }
+
     public MainViewModel()
     {
         Players = new ObservableCollection<PlayerViewModel>();
@@ -66,6 +91,8 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     public void StartGame()
     {
+        //IsDuelMode = true;
+        
         Players.Clear();
         PlayerViewModel.ResetPlacements();
         Domain.AverageScore.ClearAverage();    
@@ -79,7 +106,8 @@ public partial class MainViewModel : ViewModelBase
                 Score = score,
                 Average = 0.00,
                 OnThrowSubmitted = SwitchToNextPlayer,
-                OnInputFocused = SetActivePlayer
+                OnInputFocused = SetActivePlayer,
+                OpacityEnabled = this.OpacityEnabled
             });
         }
         _currentPlayerIndex = 0;
@@ -87,7 +115,7 @@ public partial class MainViewModel : ViewModelBase
         {
             Players[_currentPlayerIndex].IsActive = true;
         }
-
+        
         _ = SoundManagerDarts.SoundEffects.PlayGameOn();
     }
     
@@ -130,7 +158,7 @@ public partial class MainViewModel : ViewModelBase
         _currentPlayerIndex = selectedIndex;
     }
 
-    public void ApplySettings(IReadOnlyList<string> playerNames, IReadOnlyList<string> playerColors, string languageCode, string wallpaperUri, bool playMusicOnStartup)
+    public void ApplySettings(IReadOnlyList<string> playerNames, IReadOnlyList<string> playerColors, string languageCode, string wallpaperUri, bool playMusicOnStartup, bool opacityEnabled)
     {
         EnsurePlayerSettingsCapacity();
         for (int i = 0; i < MaxPlayers; i++)
@@ -148,6 +176,7 @@ public partial class MainViewModel : ViewModelBase
 
         MainBackgroundUri = wallpaperUri;
         PlayMusicOnStartup = playMusicOnStartup;
+        OpacityEnabled = opacityEnabled;
         SetLanguage(languageCode);
         SaveSettings();
 
@@ -256,6 +285,7 @@ public partial class MainViewModel : ViewModelBase
 
         PlayMusicOnStartup = state.PlayMusicOnStartup;
         SetLanguage(state.CurrentLanguageCode ?? "cs");
+        OpacityEnabled = state.Opacity;
     }
 
     private void EnsurePlayerSettingsCapacity()
@@ -285,19 +315,11 @@ public partial class MainViewModel : ViewModelBase
             PlayerColors = PlayerColors,
             MainBackgroundUri = MainBackgroundUri,
             CurrentLanguageCode = CurrentLanguageCode,
-            PlayMusicOnStartup = PlayMusicOnStartup
+            PlayMusicOnStartup = PlayMusicOnStartup,
+            Opacity = OpacityEnabled
         };
 
         var json = JsonSerializer.Serialize(state, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(SettingsFilePath, json);
-    }
-
-    private sealed class UiSettingsState
-    {
-        public List<string>? PlayerNames { get; set; }
-        public List<string>? PlayerColors { get; set; }
-        public string? MainBackgroundUri { get; set; }
-        public string? CurrentLanguageCode { get; set; }
-        public bool PlayMusicOnStartup { get; set; }
     }
 }

@@ -166,5 +166,21 @@ namespace DesktopUI.ViewModels
                 OnInputFocused?.Invoke(this);
             }
         }
+        
+        private bool _opacityEnabled;
+
+        public bool OpacityEnabled
+        {
+            get => _opacityEnabled;
+            set
+            {
+                if (SetProperty(ref _opacityEnabled, value))
+                {
+                    OnPropertyChanged(nameof(OpacityPlayerCard));
+                }
+            }
+        }
+        
+        public double OpacityPlayerCard => OpacityEnabled ? 0.6 : 1.0;
     }
 }
