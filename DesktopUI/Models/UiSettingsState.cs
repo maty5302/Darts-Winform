@@ -9,8 +9,11 @@ namespace DesktopUI.Models
         public List<string>? PlayerColors { get; set; }
         public string? MainBackgroundUri { get; set; }
         public string? CurrentLanguageCode { get; set; }
+        public string? ThemePreference { get; set; }
         public bool PlayMusicOnStartup { get; set; }
+        public bool SoundEffects { get; set; }
         public bool Opacity { get; set; }
+        public double OpacityValue { get; set; }
     }
     
     

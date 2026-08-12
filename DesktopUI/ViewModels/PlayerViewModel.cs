@@ -13,6 +13,10 @@ namespace DesktopUI.ViewModels
         private static int _nextPlacement = 1;
         private int? _placement;
         private bool isEnabled = true;
+        [ObservableProperty]
+        private bool _soundEffectsEnabled;
+        
+        private double _opacityValue = 0.7;
         
         public Action<PlayerViewModel>? OnThrowSubmitted { get; set; }
         public Action<PlayerViewModel>? OnInputFocused { get; set; }
@@ -114,7 +118,8 @@ namespace DesktopUI.ViewModels
             {
                 Score -= value;
                 CalcAverage();
-                _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
+                if (SoundEffectsEnabled)
+                    _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
                 HistoryScore.AddHistory(_playerId, Score.ToString());
                 Checkout = Domain.Checkout.checkout(Score); 
             }
@@ -127,7 +132,8 @@ namespace DesktopUI.ViewModels
                 OnPropertyChanged(nameof(DisplayFontSize));
                 OnPropertyChanged(nameof(IsEnabled));
                 CalcAverage();
-                _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                if(SoundEffectsEnabled)
+                    _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
                 HistoryScore.AddHistory(_playerId, Score.ToString());
                 Checkout = Domain.Checkout.checkout(Score);
             }
@@ -181,6 +187,18 @@ namespace DesktopUI.ViewModels
             }
         }
         
-        public double OpacityPlayerCard => OpacityEnabled ? 0.6 : 1.0;
+        public double OpacityValue
+        {
+            get => _opacityValue;
+            set
+            {
+                if (SetProperty(ref _opacityValue, value))
+                {
+                    OnPropertyChanged(nameof(OpacityPlayerCard));
+                }
+            }
+        }
+
+        public double OpacityPlayerCard => OpacityEnabled ? OpacityValue : 1.0;
     }
 }

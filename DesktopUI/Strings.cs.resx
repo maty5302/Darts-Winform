@@ -89,4 +89,31 @@
     <data name="SettingsDefault" xml:space="preserve">
         <value>Výchozí</value>
     </data>
+    <data name="SettingsTransparency" xml:space="preserve">
+        <value>Průhlednost</value>
+    </data>
+    <data name="SettingsSoundEffects" xml:space="preserve">
+        <value>Zvukové efekty</value>
+    </data>
+    <data name="SettingsTheme" xml:space="preserve">
+        <value>Motiv aplikace</value>
+    </data>
+    <data name="SettingsThemeSystem" xml:space="preserve">
+        <value>Systém</value>
+    </data>
+    <data name="SettingsThemeDark" xml:space="preserve">
+        <value>Tmavý</value>
+    </data>
+    <data name="SettingsThemeLight" xml:space="preserve">
+        <value>Světlý</value>
+    </data>
+    <data name="SettingsUpdate" xml:space="preserve">
+        <value>Aktualizace</value>
+    </data>
+    <data name="MenuDartboard" xml:space="preserve">
+        <value>Terč</value>
+    </data>
+    <data name="SettingsTransparencyIntensity" xml:space="preserve">
+        <value>Intenzita průhlednosti</value>
+    </data>
 </root>

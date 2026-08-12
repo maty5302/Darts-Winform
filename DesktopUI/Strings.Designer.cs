@@ -200,5 +200,59 @@ namespace DesktopUI {
                 return ResourceManager.GetString("SettingsDefault", resourceCulture);
             }
         }
+        
+        public static string SettingsTransparency {
+            get {
+                return ResourceManager.GetString("SettingsTransparency", resourceCulture);
+            }
+        }
+        
+        public static string SettingsSoundEffects {
+            get {
+                return ResourceManager.GetString("SettingsSoundEffects", resourceCulture);
+            }
+        }
+        
+        public static string SettingsTheme {
+            get {
+                return ResourceManager.GetString("SettingsTheme", resourceCulture);
+            }
+        }
+        
+        public static string SettingsThemeSystem {
+            get {
+                return ResourceManager.GetString("SettingsThemeSystem", resourceCulture);
+            }
+        }
+        
+        public static string SettingsThemeDark {
+            get {
+                return ResourceManager.GetString("SettingsThemeDark", resourceCulture);
+            }
+        }
+        
+        public static string SettingsThemeLight {
+            get {
+                return ResourceManager.GetString("SettingsThemeLight", resourceCulture);
+            }
+        }
+        
+        public static string SettingsUpdate {
+            get {
+                return ResourceManager.GetString("SettingsUpdate", resourceCulture);
+            }
+        }
+        
+        public static string MenuDartboard {
+            get {
+                return ResourceManager.GetString("MenuDartboard", resourceCulture);
+            }
+        }
+        
+        public static string SettingsTransparencyIntensity {
+            get {
+                return ResourceManager.GetString("SettingsTransparencyIntensity", resourceCulture);
+            }
+        }
     }
 }

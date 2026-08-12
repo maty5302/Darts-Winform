@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
+using Avalonia;
+using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Models;
@@ -21,7 +23,10 @@ public partial class MainViewModel : ViewModelBase
     private string _mainBackgroundUri = "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
     private string _currentLanguageCode = "cs";
     private bool _playMusicOnStartup;
+    private bool _soundEffectsEnabled;
     private bool _opacityEnabled;
+    private string _themePreference = "System";
+    private double _opacityValue = 0.7;
     
     [ObservableProperty]
     private DuelViewModel _duelVM = new();
@@ -80,6 +85,61 @@ public partial class MainViewModel : ViewModelBase
             }
         }
     }
+    
+    public bool SoundEffectsEnabled
+    {
+        get => _soundEffectsEnabled;
+        set 
+        {
+            if (SetProperty(ref _soundEffectsEnabled, value))
+            {
+                foreach (var player in Players)
+                {
+                    player.SoundEffectsEnabled = value;
+                }
+            }
+        }
+    }
+    
+    public string ThemePreference
+    {
+        get => _themePreference;
+        set
+        {
+            if (SetProperty(ref _themePreference, value))
+            {
+                ApplyTheme(value);
+            }
+        }
+    }
+    
+    private void ApplyTheme(string theme)
+    {
+        if (Application.Current != null)
+        {
+            Application.Current.RequestedThemeVariant = theme switch
+            {
+                "Light" => ThemeVariant.Light,
+                "Dark" => ThemeVariant.Dark,
+                _ => ThemeVariant.Default // "System" nebo cokoliv jiného
+            };
+        }
+    }
+   
+    public double OpacityValue
+    {
+        get => _opacityValue;
+        set
+        {
+            if (SetProperty(ref _opacityValue, value))
+            {
+                foreach (var player in Players)
+                {
+                    player.OpacityValue = value;
+                }
+            }
+        }
+    }
 
     public MainViewModel()
     {
@@ -116,7 +176,8 @@ public partial class MainViewModel : ViewModelBase
             Players[_currentPlayerIndex].IsActive = true;
         }
         
-        _ = SoundManagerDarts.SoundEffects.PlayGameOn();
+        if(SoundEffectsEnabled)
+            _ = SoundManagerDarts.SoundEffects.PlayGameOn();
     }
     
     private void SwitchToNextPlayer(PlayerViewModel throwingPlayer)
@@ -158,7 +219,7 @@ public partial class MainViewModel : ViewModelBase
         _currentPlayerIndex = selectedIndex;
     }
 
-    public void ApplySettings(IReadOnlyList<string> playerNames, IReadOnlyList<string> playerColors, string languageCode, string wallpaperUri, bool playMusicOnStartup, bool opacityEnabled)
+    public void ApplySettings(IReadOnlyList<string> playerNames, IReadOnlyList<string> playerColors, string languageCode, string wallpaperUri, string themePreference ,  bool playMusicOnStartup, bool soundEffectsEnabled, bool opacityEnabled , double opacityValue)
     {
         EnsurePlayerSettingsCapacity();
         for (int i = 0; i < MaxPlayers; i++)
@@ -176,7 +237,10 @@ public partial class MainViewModel : ViewModelBase
 
         MainBackgroundUri = wallpaperUri;
         PlayMusicOnStartup = playMusicOnStartup;
+        ThemePreference = themePreference;
+        SoundEffectsEnabled = soundEffectsEnabled;
         OpacityEnabled = opacityEnabled;
+        OpacityValue = opacityValue;
         SetLanguage(languageCode);
         SaveSettings();
 
@@ -285,7 +349,10 @@ public partial class MainViewModel : ViewModelBase
 
         PlayMusicOnStartup = state.PlayMusicOnStartup;
         SetLanguage(state.CurrentLanguageCode ?? "cs");
+        ThemePreference = state.ThemePreference ?? "System";
+        SoundEffectsEnabled = state.SoundEffects;  
         OpacityEnabled = state.Opacity;
+        OpacityValue = state.OpacityValue;
     }
 
     private void EnsurePlayerSettingsCapacity()
@@ -316,7 +383,10 @@ public partial class MainViewModel : ViewModelBase
             MainBackgroundUri = MainBackgroundUri,
             CurrentLanguageCode = CurrentLanguageCode,
             PlayMusicOnStartup = PlayMusicOnStartup,
-            Opacity = OpacityEnabled
+            ThemePreference = ThemePreference,
+            SoundEffects = SoundEffectsEnabled,
+            Opacity = OpacityEnabled,
+            OpacityValue = OpacityValue
         };
 
         var json = JsonSerializer.Serialize(state, new JsonSerializerOptions { WriteIndented = true });

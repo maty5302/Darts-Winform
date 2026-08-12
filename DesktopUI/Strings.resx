@@ -96,4 +96,31 @@
     <data name="SettingsDefault" xml:space="preserve">
         <value>_SettingsDefault</value>
     </data>
+    <data name="SettingsTransparency" xml:space="preserve">
+        <value>_SettingsTransparency</value>
+    </data>
+    <data name="SettingsSoundEffects" xml:space="preserve">
+        <value>_SettingsSoundEffects</value>
+    </data>
+    <data name="SettingsTheme" xml:space="preserve">
+        <value>_SettingsTheme</value>
+    </data>
+    <data name="SettingsThemeSystem" xml:space="preserve">
+        <value>_SettingsThemeSystem</value>
+    </data>
+    <data name="SettingsThemeDark" xml:space="preserve">
+        <value>_SettingsThemeDark</value>
+    </data>
+    <data name="SettingsThemeLight" xml:space="preserve">
+        <value>_SettingsThemeLight</value>
+    </data>
+    <data name="SettingsUpdate" xml:space="preserve">
+        <value>_SettingsUpdate</value>
+    </data>
+    <data name="MenuDartboard" xml:space="preserve">
+        <value>_MenuDartboard</value>
+    </data>
+    <data name="SettingsTransparencyIntensity" xml:space="preserve">
+        <value>_SettingsTransparencyIntensity</value>
+    </data>
 </root>

@@ -33,13 +33,36 @@ namespace DesktopUI.Views
 
             SelectByTag("LanguageComboBox", _mainViewModel.CurrentLanguageCode);
             SelectByTag("WallpaperComboBox", _mainViewModel.MainBackgroundUri);
+            SelectByTag("ThemePreferenceComboBox", _mainViewModel.ThemePreference);
+            RequireControl<Slider>("OpacityValueSlider").Value = _mainViewModel.OpacityValue;
             RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = _mainViewModel.PlayMusicOnStartup;
-            RequireControl<ToggleSwitch>("Transparency").IsChecked = _mainViewModel.OpacityEnabled;
+            RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = _mainViewModel.SoundEffectsEnabled;  
+            RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked = _mainViewModel.OpacityEnabled;
         }
         
         private void DefaultButton_OnClick(object? sender, RoutedEventArgs e)
         {
-            //"#228B22"
+            var defaultColor = ParseHexColor("#228B22");
+
+            var nameBoxes = GetPlayerNameBoxes();
+            var colorPickers = GetPlayerColorPickers();
+            
+            var currentLanguage = GetSelectedTag(RequireControl<ComboBox>("LanguageComboBox")) ?? "cs";
+
+            for (int i = 0; i < 10; i++)
+            {
+                nameBoxes[i].Text = currentLanguage == "en" ? $"Player {i + 1}" : $"Hráč {i + 1}";
+                colorPickers[i].Color = defaultColor;
+            }
+            
+            SelectByTag("LanguageComboBox", "cs"); 
+            SelectByTag("ThemePreferenceComboBox", "System"); 
+            SelectByTag("WallpaperComboBox", "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg"); 
+
+            RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = true; 
+            RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = true;  
+            RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked = false;
+            RequireControl<Slider>("OpacityValueSlider").Value = 0.7;
             
         }
 
@@ -50,11 +73,14 @@ namespace DesktopUI.Views
             var language = GetSelectedTag(RequireControl<ComboBox>("LanguageComboBox")) ?? "cs";
             var wallpaper = GetSelectedTag(RequireControl<ComboBox>("WallpaperComboBox"))
                             ?? "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
+            var themePreference = GetSelectedTag(RequireControl<ComboBox>("ThemePreferenceComboBox")) ?? "System";
             var playMusicOnStartup = RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked == true;
-            var opacityEnabled = RequireControl<ToggleSwitch>("Transparency").IsChecked == true;
+            var soundEffects = RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked == true;
+            var opacityEnabled = RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked == true;
+            var opacityValue = RequireControl<Slider>("OpacityValueSlider").Value;
             
             RequiresMainWindowReload = !string.Equals(language, _mainViewModel.CurrentLanguageCode, StringComparison.OrdinalIgnoreCase);
-            _mainViewModel.ApplySettings(names, colors, language, wallpaper, playMusicOnStartup, opacityEnabled);
+            _mainViewModel.ApplySettings(names, colors, language, wallpaper, themePreference, playMusicOnStartup, soundEffects ,opacityEnabled, opacityValue);
             Close();
         }
 

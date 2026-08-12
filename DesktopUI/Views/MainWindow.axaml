@@ -13,14 +13,14 @@
     <Grid RowDefinitions="Auto, *">
         
         <Border Grid.Row="0" Padding="5">
-            <StackPanel Orientation="Horizontal" Spacing="15" Background="Black" Opacity="0.7" >
+            <StackPanel Orientation="Horizontal" Spacing="15" Background="{DynamicResource SystemRegionBrush}" Opacity="0.8" >
                 <Button Background="Transparent" Padding="5,0" Click="Button_OnClickBack">
                     <Image Source="avares://DesktopUI/Assets/Icons/back.png" Width="16" Height="16" />
                 </Button>
                 <Button Background="Transparent" Padding="5,0" Click="Button_OnClickDartBoard">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Image Source="avares://DesktopUI/Assets/Icons/load.png" Width="16" Height="16" />
-                        <TextBlock Text="Terč" VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Static lang:Strings.MenuDartboard}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <SplitButton Background="Transparent">
@@ -40,11 +40,6 @@
                                     <Image Source="avares://DesktopUI/Assets/Icons/pause.png" Width="16" Height="16" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="{x:Static lang:Strings.MenuMute}" ToggleType="CheckBox" Name="MuteMenuItem"> 
-                                <MenuItem.Icon>
-                                    <Image Source="avares://DesktopUI/Assets/Icons/mute.png" Width="16" Height="16" />
-                                </MenuItem.Icon>
-                            </MenuItem>
                         </MenuFlyout>
                     </SplitButton.Flyout>
                 </SplitButton>
@@ -59,7 +54,7 @@
                         <Image Source="avares://DesktopUI/Assets/Icons/settings.png" Width="16" Height="16" />
                         <TextBlock Text="{x:Static lang:Strings.SettingsMenu }" VerticalAlignment="Center"/>
                     </StackPanel>
-                </Button>
+                </Button>                     
                 <Button Background="Transparent" Click="Button_OnClickAbout">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Image Source="avares://DesktopUI/Assets/Icons/about.png" Width="16" Height="16" />
@@ -74,11 +69,11 @@
             
             <Grid Width="1000" Height="650">
                 
-                <Border Background="Black" CornerRadius="5" Padding="5" Opacity="0.7" 
+                <Border Background="{DynamicResource SystemRegionBrush}" CornerRadius="5" Padding="5" Opacity="0.8" 
                         HorizontalAlignment="Left" VerticalAlignment="Top" 
                         Margin="20">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="{x:Static lang:Strings.MainName}" FontSize="36" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{x:Static lang:Strings.MainName}" FontSize="36" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" HorizontalAlignment="Center" />
                         
                         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Margin="0,10">
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.NumPlayers}" HorizontalAlignment="Center"/>
