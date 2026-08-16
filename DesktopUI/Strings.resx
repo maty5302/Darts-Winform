@@ -132,4 +132,16 @@
     <data name="AppVersion" xml:space="preserve">
         <value>_AppVersion</value>
     </data>
+    <data name="UpdateCheck" xml:space="preserve">
+        <value>_UpdateCheck</value>
+    </data>
+    <data name="UpdateCheckFailed" xml:space="preserve">
+        <value>_UpdateCheckFailed</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>_UpdateAvailable</value>
+    </data>
+    <data name="UpdateUpToDate" xml:space="preserve">
+        <value>_UpdateUpToDate</value>
+    </data>
 </root>

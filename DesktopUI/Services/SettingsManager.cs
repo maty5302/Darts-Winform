@@ -4,8 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DesktopUI.Models;
+using Domain;
 
 namespace DesktopUI.Services
 {
@@ -18,6 +20,8 @@ namespace DesktopUI.Services
         [ObservableProperty] private bool _opacityEnabled;
         [ObservableProperty] private string _themePreference = "System";
         [ObservableProperty] private double _opacityValue = 0.7;
+        [ObservableProperty] private string _updateStatus = Strings.UpdateCheck;
+        [ObservableProperty] private bool _isUpdateAvailable = false;
 
         // Seznamy hráčů je lepší držet jako ObservableCollection
         public ObservableCollection<string> PlayerNames { get; } = new();
@@ -156,6 +160,29 @@ namespace DesktopUI.Services
 
             var json = JsonSerializer.Serialize(state, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(SettingsFilePath, json);
+        }
+        
+        public async Task CheckForUpdatesAsync()
+        {
+            try
+            {
+                var updateAvailable = await GithubIntegration.CheckForUpdates();
+                if (updateAvailable)
+                {
+                    UpdateStatus = Strings.UpdateAvailable;
+                    IsUpdateAvailable = true;
+                }
+                else
+                {
+                    UpdateStatus = Strings.UpdateUpToDate;
+                    IsUpdateAvailable = false;
+                }
+            }
+            catch
+            {
+                UpdateStatus = Strings.UpdateCheckFailed;
+                IsUpdateAvailable = false;
+            }
         }
     }
 }

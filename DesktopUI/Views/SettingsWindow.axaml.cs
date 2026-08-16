@@ -11,12 +11,10 @@ namespace DesktopUI.Views
 {
     public partial class SettingsWindow : Window
     {
-        // 1. Přidána proměnná pro přístup k ViewModelu a Settings
         private readonly SettingsViewModel _viewModel;
         
         public bool RequiresMainWindowReload { get; private set; }
-
-        // Výchozí konstruktor pro XAML Designera
+        
         public SettingsWindow()
         {
             InitializeComponent();
@@ -24,7 +22,6 @@ namespace DesktopUI.Views
 
         public SettingsWindow(SettingsViewModel viewModel) : this()
         {
-            // 2. Uložíme si referenci na ViewModel
             _viewModel = viewModel;
             DataContext = viewModel; 
             
@@ -74,7 +71,6 @@ namespace DesktopUI.Views
             RequireControl<Slider>("OpacityValueSlider").Value = 0.7;
         }
 
-        // 3. TOTO BYLO ZAKOMENTOVANÉ A CHYBNÉ - OPRAVENO:
         private void SaveButton_OnClick(object? sender, RoutedEventArgs e)
         {
             var names = GetPlayerNameBoxes().Select(tb => tb.Text ?? string.Empty).ToList();
@@ -89,8 +85,7 @@ namespace DesktopUI.Views
             var opacityValue = RequireControl<Slider>("OpacityValueSlider").Value;
 
             RequiresMainWindowReload = !string.Equals(language, _viewModel.Settings.CurrentLanguageCode, StringComparison.OrdinalIgnoreCase);
-
-            // Zápis do SettingsManageru
+            
             for (int i = 0; i < 10; i++)
             {
                 _viewModel.Settings.PlayerNames[i] = names[i];
@@ -105,7 +100,6 @@ namespace DesktopUI.Views
             _viewModel.Settings.OpacityEnabled = opacityEnabled;
             _viewModel.Settings.OpacityValue = opacityValue;
 
-            // Zavolání metody uložení do JSONu
             _viewModel.Settings.SaveSettings();
 
             Close();

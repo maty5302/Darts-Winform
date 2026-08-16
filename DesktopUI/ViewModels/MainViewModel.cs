@@ -27,13 +27,10 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        // 1. Inicializujeme správce nastavení (on si sám načte JSON)
         Settings = new SettingsManager();
-        
-        // 2. Aplikujeme téma rovnou při startu
+        _ = Settings.CheckForUpdatesAsync();
         ApplyTheme(Settings.ThemePreference);
 
-        // 3. Posloucháme změny (kdyby uživatel v nastavení změnil téma)
         Settings.PropertyChanged += (s, e) => 
         {
             if (e.PropertyName == nameof(SettingsManager.ThemePreference))

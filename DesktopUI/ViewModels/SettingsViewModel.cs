@@ -1,9 +1,11 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Services;
+using Domain;
 
 namespace DesktopUI.ViewModels
 {
-    public class SettingsViewModel : ViewModelBase
+    public partial class SettingsViewModel : ViewModelBase
     {
         public SettingsManager Settings { get; }
 

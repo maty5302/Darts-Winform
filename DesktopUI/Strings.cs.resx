@@ -125,4 +125,16 @@
     <data name="AppVersion" xml:space="preserve">
         <value>Verze: </value>
     </data>
+    <data name="UpdateCheck" xml:space="preserve">
+        <value>Kontrola aktualizací...</value>
+    </data>
+    <data name="UpdateCheckFailed" xml:space="preserve">
+        <value>Nelze ověřit aktualizace.</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>Aktualizace k dispozici!</value>
+    </data>
+    <data name="UpdateUpToDate" xml:space="preserve">
+        <value>Aplikace je aktuální.</value>
+    </data>
 </root>

@@ -125,4 +125,16 @@
     <data name="AppVersion" xml:space="preserve">
         <value>Version: </value>
     </data>
+    <data name="UpdateCheck" xml:space="preserve">
+        <value>Checking for updates...</value>
+    </data>
+    <data name="UpdateCheckFailed" xml:space="preserve">
+        <value>Unable to verify updates.</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>Update is available!</value>
+    </data>
+    <data name="UpdateUpToDate" xml:space="preserve">
+        <value>App is up to date.</value>
+    </data>
 </root>

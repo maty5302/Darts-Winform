@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,10 +77,10 @@ namespace Domain
             }
         }
 
-        public static async Task<bool> CheckForUpdates(string appVersion)
+        public static async Task<bool> CheckForUpdates()
         {
             var gitVersion = await GetGitVersion();
-            
+            var appVersion = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "0.0.0.0";
             gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
             appVersion = appVersion.Replace(".", "");
             
