@@ -9,10 +9,10 @@ namespace Domain.Tests
         [InlineData(170, "T20 T20 Bull")]
         [InlineData(160, "T20 T20 D20")]
         [InlineData(169, "")]
-        [InlineData(171, ".")]
+        [InlineData(171, "")]
         [InlineData(100, "T20 D20")]
         [InlineData(2, "D1")]
-        [InlineData(0, ".")]
+        [InlineData(0, "")]
         public void Checkout_ReturnsExpected(int score, string expected)
         {
             var result = Checkout.checkout(score);
