@@ -18,5 +18,12 @@ namespace Domain.Tests
             var result = Checkout.checkout(score);
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void CheckoutReturnsEmptyOnMoreLike180()
+        {
+            var res = Checkout.checkout(254);
+            Assert.Empty(res);
+        }
     }
 }

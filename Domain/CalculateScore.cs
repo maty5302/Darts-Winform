@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-#pragma warning disable CA1416 // Ověřit kompatibilitu platformy
 namespace Domain
 {
     public static class CalculateScore
@@ -14,13 +13,13 @@ namespace Domain
             if (thrown < 0 || thrown > 180 || result < 0)
             {
                 if(!muteSounds)
-                    SoundEffects.SoundEffects.player[0].Play();
+                    SoundManagerDarts.SoundEffects.PlayScoreAsync(0);
                 return null;
             }
             else
             {
                 if (!muteSounds)
-                    SoundEffects.SoundEffects.player.ElementAt(thrown).Play();
+                    SoundManagerDarts.SoundEffects.PlayScoreAsync(score);
                 return result.ToString();
             }
         }

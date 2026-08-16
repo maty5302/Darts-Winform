@@ -10,7 +10,7 @@ namespace Domain
     {
         public static string checkout(int score)
         {
-            string checkoutscore = ".";
+            string checkoutscore = "";
             if (score <= 170)
             {
                 switch (score)
