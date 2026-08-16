@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using DesktopUI.ViewModels;
 
 namespace DesktopUI.Views
 {
@@ -9,6 +10,7 @@ namespace DesktopUI.Views
         public AboutApp()
         {
             InitializeComponent();
+            DataContext = new AboutAppViewModel();
         }
     }
-}
+} 

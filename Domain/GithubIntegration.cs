@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace Domain
 			}
 		}
 
-		public static async Task<string> GetVersion()
+		public static async Task<string> GetGitVersion()
 		{
 			using (HttpClient client = new HttpClient())
 			{
@@ -52,6 +53,47 @@ namespace Domain
 				return latestRelease;
 			}
 		}
+        
+        public static async Task<string> GetReleaseNotes(string version)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = $"https://api.github.com/repos/maty5302/Darts-Winform/releases/tags/{version}";
+
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                client.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
+
+                var response = await client.GetAsync(apiUrl);
+                response.EnsureSuccessStatusCode();
+
+                string responseJson = await response.Content.ReadAsStringAsync();
+                dynamic responseObject = JsonConvert.DeserializeObject(responseJson);
+
+                string releaseNotes = responseObject.body;
+
+                return releaseNotes;
+            }
+        }
+
+        public static async Task<bool> CheckForUpdates(string appVersion)
+        {
+            var gitVersion = await GetGitVersion();
+            
+            gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
+            appVersion = appVersion.Replace(".", "");
+            
+            int indexof = appVersion.IndexOf('+');
+            if (indexof != -1)
+                appVersion = appVersion.Remove(indexof);
+
+            if (String.Compare(gitVersion, appVersion) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
 	}
 }

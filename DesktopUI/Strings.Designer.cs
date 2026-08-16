@@ -254,5 +254,23 @@ namespace DesktopUI {
                 return ResourceManager.GetString("SettingsTransparencyIntensity", resourceCulture);
             }
         }
+        
+        public static string AppReleaseNotesErr {
+            get {
+                return ResourceManager.GetString("AppReleaseNotesErr", resourceCulture);
+            }
+        }
+        
+        public static string AppReleaseNotesLoad {
+            get {
+                return ResourceManager.GetString("AppReleaseNotesLoad", resourceCulture);
+            }
+        }
+        
+        public static string AppVersion {
+            get {
+                return ResourceManager.GetString("AppVersion", resourceCulture);
+            }
+        }
     }
 }

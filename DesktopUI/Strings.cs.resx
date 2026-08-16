@@ -116,4 +116,13 @@
     <data name="SettingsTransparencyIntensity" xml:space="preserve">
         <value>Intenzita průhlednosti</value>
     </data>
+    <data name="AppReleaseNotesErr" xml:space="preserve">
+        <value>Nepodařilo se načíst poznámky k vydání.</value>
+    </data>
+    <data name="AppReleaseNotesLoad" xml:space="preserve">
+        <value>Načítání informací o verzi...</value>
+    </data>
+    <data name="AppVersion" xml:space="preserve">
+        <value>Verze: </value>
+    </data>
 </root>

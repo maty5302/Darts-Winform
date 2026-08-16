@@ -116,4 +116,13 @@
     <data name="SettingsTransparencyIntensity" xml:space="preserve">
         <value>Transparency level</value>
     </data>
+    <data name="AppReleaseNotesErr" xml:space="preserve">
+        <value>Failed to load release notes.</value>
+    </data>
+    <data name="AppReleaseNotesLoad" xml:space="preserve">
+        <value>Loading version information...</value>
+    </data>
+    <data name="AppVersion" xml:space="preserve">
+        <value>Version: </value>
+    </data>
 </root>

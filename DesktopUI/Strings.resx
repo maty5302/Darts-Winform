@@ -123,4 +123,13 @@
     <data name="SettingsTransparencyIntensity" xml:space="preserve">
         <value>_SettingsTransparencyIntensity</value>
     </data>
+    <data name="AppReleaseNotesErr" xml:space="preserve">
+        <value>_AppReleaseNotesErr</value>
+    </data>
+    <data name="AppReleaseNotesLoad" xml:space="preserve">
+        <value>_AppReleaseNotesLoad</value>
+    </data>
+    <data name="AppVersion" xml:space="preserve">
+        <value>_AppVersion</value>
+    </data>
 </root>
