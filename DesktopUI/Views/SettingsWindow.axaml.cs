@@ -4,58 +4,67 @@ using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using DesktopUI.Services;
 using DesktopUI.ViewModels;
 
 namespace DesktopUI.Views
 {
     public partial class SettingsWindow : Window
     {
-        private readonly MainViewModel _mainViewModel;
+        // 1. Přidána proměnná pro přístup k ViewModelu a Settings
+        private readonly SettingsViewModel _viewModel;
+        
         public bool RequiresMainWindowReload { get; private set; }
 
-        public SettingsWindow(MainViewModel mainViewModel)
+        // Výchozí konstruktor pro XAML Designera
+        public SettingsWindow()
         {
-            _mainViewModel = mainViewModel;
             InitializeComponent();
-            LoadCurrentValues();
         }
 
-        private void LoadCurrentValues()
+        public SettingsWindow(SettingsViewModel viewModel) : this()
+        {
+            // 2. Uložíme si referenci na ViewModel
+            _viewModel = viewModel;
+            DataContext = viewModel; 
+            
+            LoadCurrentValues(viewModel.Settings);
+        }
+
+        private void LoadCurrentValues(SettingsManager settings)
         {
             var nameBoxes = GetPlayerNameBoxes();
             var colorPickers = GetPlayerColorPickers();
 
             for (int i = 0; i < 10; i++)
             {
-                nameBoxes[i].Text = _mainViewModel.PlayerNames[i];
-                colorPickers[i].Color = ParseHexColor(_mainViewModel.PlayerColors[i]);
+                nameBoxes[i].Text = settings.PlayerNames[i];
+                colorPickers[i].Color = ParseHexColor(settings.PlayerColors[i]);
             }
 
-            SelectByTag("LanguageComboBox", _mainViewModel.CurrentLanguageCode);
-            SelectByTag("WallpaperComboBox", _mainViewModel.MainBackgroundUri);
-            SelectByTag("ThemePreferenceComboBox", _mainViewModel.ThemePreference);
-            RequireControl<Slider>("OpacityValueSlider").Value = _mainViewModel.OpacityValue;
-            RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = _mainViewModel.PlayMusicOnStartup;
-            RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = _mainViewModel.SoundEffectsEnabled;  
-            RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked = _mainViewModel.OpacityEnabled;
+            SelectByTag("LanguageComboBox", settings.CurrentLanguageCode);
+            SelectByTag("WallpaperComboBox", settings.MainBackgroundUri);
+            SelectByTag("ThemePreferenceComboBox", settings.ThemePreference);
+            RequireControl<Slider>("OpacityValueSlider").Value = settings.OpacityValue;
+            RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = settings.PlayMusicOnStartup;
+            RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = settings.SoundEffectsEnabled;  
+            RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked = settings.OpacityEnabled;
         }
-        
+
         private void DefaultButton_OnClick(object? sender, RoutedEventArgs e)
         {
             var defaultColor = ParseHexColor("#228B22");
-
             var nameBoxes = GetPlayerNameBoxes();
             var colorPickers = GetPlayerColorPickers();
-            
-            var currentLanguage = GetSelectedTag(RequireControl<ComboBox>("LanguageComboBox")) ?? "cs";
+            const string defaultLanguage = "cs";
+            SelectByTag("LanguageComboBox", defaultLanguage);
 
             for (int i = 0; i < 10; i++)
             {
-                nameBoxes[i].Text = currentLanguage == "en" ? $"Player {i + 1}" : $"Hráč {i + 1}";
+                nameBoxes[i].Text = $"Hráč {i + 1}";
                 colorPickers[i].Color = defaultColor;
             }
-            
-            SelectByTag("LanguageComboBox", "cs"); 
+
             SelectByTag("ThemePreferenceComboBox", "System"); 
             SelectByTag("WallpaperComboBox", "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg"); 
 
@@ -63,9 +72,9 @@ namespace DesktopUI.Views
             RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = true;  
             RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked = false;
             RequireControl<Slider>("OpacityValueSlider").Value = 0.7;
-            
         }
 
+        // 3. TOTO BYLO ZAKOMENTOVANÉ A CHYBNÉ - OPRAVENO:
         private void SaveButton_OnClick(object? sender, RoutedEventArgs e)
         {
             var names = GetPlayerNameBoxes().Select(tb => tb.Text ?? string.Empty).ToList();
@@ -78,9 +87,27 @@ namespace DesktopUI.Views
             var soundEffects = RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked == true;
             var opacityEnabled = RequireControl<ToggleSwitch>("TransparencyToggle").IsChecked == true;
             var opacityValue = RequireControl<Slider>("OpacityValueSlider").Value;
+
+            RequiresMainWindowReload = !string.Equals(language, _viewModel.Settings.CurrentLanguageCode, StringComparison.OrdinalIgnoreCase);
+
+            // Zápis do SettingsManageru
+            for (int i = 0; i < 10; i++)
+            {
+                _viewModel.Settings.PlayerNames[i] = names[i];
+                _viewModel.Settings.PlayerColors[i] = colors[i];
+            }
             
-            RequiresMainWindowReload = !string.Equals(language, _mainViewModel.CurrentLanguageCode, StringComparison.OrdinalIgnoreCase);
-            _mainViewModel.ApplySettings(names, colors, language, wallpaper, themePreference, playMusicOnStartup, soundEffects ,opacityEnabled, opacityValue);
+            _viewModel.Settings.CurrentLanguageCode = language;
+            _viewModel.Settings.MainBackgroundUri = wallpaper;
+            _viewModel.Settings.ThemePreference = themePreference;
+            _viewModel.Settings.PlayMusicOnStartup = playMusicOnStartup;
+            _viewModel.Settings.SoundEffectsEnabled = soundEffects;
+            _viewModel.Settings.OpacityEnabled = opacityEnabled;
+            _viewModel.Settings.OpacityValue = opacityValue;
+
+            // Zavolání metody uložení do JSONu
+            _viewModel.Settings.SaveSettings();
+
             Close();
         }
 
@@ -109,7 +136,6 @@ namespace DesktopUI.Views
             {
                 return value;
             }
-
             return string.Empty;
         }
 
@@ -143,11 +169,7 @@ namespace DesktopUI.Views
 
         private static Color ParseHexColor(string hexColor)
         {
-            if (Color.TryParse(hexColor, out var color))
-            {
-                return color;
-            }
-
+            if (Color.TryParse(hexColor, out var color)) return color;
             return Color.Parse("#228B22");
         }
 
@@ -157,10 +179,6 @@ namespace DesktopUI.Views
         {
             return this.FindControl<T>(name)
                    ?? throw new InvalidOperationException($"Control '{name}' was not found in SettingsWindow.");
-        }
-        
-        public SettingsWindow() : this(new MainViewModel())
-        {
         }
     }
 }

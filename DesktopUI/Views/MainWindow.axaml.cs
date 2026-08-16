@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using DesktopUI.Services;
 using DesktopUI.ViewModels;
 
 namespace DesktopUI.Views;
@@ -21,27 +22,28 @@ public partial class MainWindow : Window
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);
-
+    
         if (_boundViewModel != null)
         {
-            _boundViewModel.PropertyChanged -= MainViewModelOnPropertyChanged;
+            _boundViewModel.Settings.PropertyChanged -= SettingsOnPropertyChanged;
         }
-
+    
         _boundViewModel = DataContext as MainViewModel;
         if (_boundViewModel == null)
         {
             return;
         }
-
-        _boundViewModel.PropertyChanged += MainViewModelOnPropertyChanged;
-        ApplyWallpaper(_boundViewModel.MainBackgroundUri);
+    
+        _boundViewModel.Settings.PropertyChanged += SettingsOnPropertyChanged;
+        
+        ApplyWallpaper(_boundViewModel.Settings.MainBackgroundUri);
     }
-
-    private void MainViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    
+    private void SettingsOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(MainViewModel.MainBackgroundUri) && _boundViewModel != null)
+        if (e.PropertyName == nameof(SettingsManager.MainBackgroundUri) && _boundViewModel != null)
         {
-            ApplyWallpaper(_boundViewModel.MainBackgroundUri);
+            ApplyWallpaper(_boundViewModel.Settings.MainBackgroundUri);
         }
     }
 
@@ -63,7 +65,10 @@ public partial class MainWindow : Window
 
     private void Button_OnClickAbout(object? sender, RoutedEventArgs e)
     {
-        AboutApp app  = new AboutApp();
+        AboutApp app = new AboutApp
+        {
+            DataContext = new AboutAppViewModel() 
+        };
         app.ShowDialog(this);
     }
 
@@ -82,26 +87,29 @@ public partial class MainWindow : Window
 
     private async void Button_OnClickSettings(object? sender, RoutedEventArgs e)
     {
-        if (DataContext is not MainViewModel vm)
-        {
+       if (DataContext is not MainViewModel vm)
+       {
             return;
-        }
+       }
+       var settingsVM = new SettingsViewModel(vm.Settings);
 
-        SettingsWindow settings = new SettingsWindow(vm);
-        await settings.ShowDialog(this);
-
-        if (settings.RequiresMainWindowReload)
-        {
-            var newWindow = new MainWindow
-            {
-                DataContext = vm,
-                Width = Width,
-                Height = Height
-            };
-
-            newWindow.Show();
-            Close();
-        }
+       SettingsWindow settingsWindow = new SettingsWindow(settingsVM);
+    
+       await settingsWindow.ShowDialog(this);
+       vm.RefreshActivePlayers();
+        
+       if (settingsWindow.RequiresMainWindowReload)
+       {
+           var newWindow = new MainWindow
+           {
+               DataContext = vm,
+               Width = Width,
+               Height = Height
+           };
+        
+           newWindow.Show();
+           Close();
+       }
     }
 
     private void Button_OnClickStatistics(object? sender, RoutedEventArgs e)

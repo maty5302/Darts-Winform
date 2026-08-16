@@ -23,7 +23,7 @@ public partial class App : Application
                 DataContext = mainViewModel,
             };
 
-            if (mainViewModel.PlayMusicOnStartup)
+            if (mainViewModel.Settings.PlayMusicOnStartup)
             {
                 _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
             }

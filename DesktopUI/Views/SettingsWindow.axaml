@@ -8,7 +8,7 @@
         x:Class="DesktopUI.Views.SettingsWindow"
         Icon="/Assets/IcoFiles/settings.ico"
         xmlns:vm="using:DesktopUI.ViewModels"
-        x:DataType="vm:MainViewModel"
+        x:DataType="vm:SettingsViewModel"
         Title="{x:Static lang:Strings.SettingsMenu}"
         CanResize="False"
         Width="900"
@@ -91,20 +91,20 @@
                         <TextBlock Text="{x:Static lang:Strings.SettingsOthers}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
                         <Grid ColumnDefinitions="170,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="12">
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.SettingsLang}"  VerticalAlignment="Center"/>
-                            <ComboBox x:Name="LanguageComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
+                            <ComboBox x:Name="LanguageComboBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
                                 <ComboBoxItem Content="Čeština" Tag="cs" HorizontalContentAlignment="Right"/>
                                 <ComboBoxItem Content="English" Tag="en" HorizontalContentAlignment="Right"/>
                             </ComboBox>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.SettingsTheme}" VerticalAlignment="Center"/>
-                            <ComboBox x:Name="ThemePreferenceComboBox" Grid.Row="1" Grid.Column="1" SelectedValue="{Binding ThemePreference}" SelectedValueBinding="{ReflectionBinding Tag}" SelectedIndex="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
+                            <ComboBox x:Name="ThemePreferenceComboBox"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
                                 <ComboBoxItem Content="{x:Static lang:Strings.SettingsThemeDark}" Tag="Dark" HorizontalContentAlignment="Right"/>
                                 <ComboBoxItem Content="{x:Static lang:Strings.SettingsThemeLight}" Tag="Light" HorizontalContentAlignment="Right"/>
                                 <ComboBoxItem Content="{x:Static lang:Strings.SettingsThemeSystem}" Tag="System" HorizontalContentAlignment="Right"/>
                             </ComboBox>
                             
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static lang:Strings.SettingsWallpaper}"  VerticalAlignment="Center"/>
-                            <ComboBox x:Name="WallpaperComboBox" Grid.Row="2" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
+                            <ComboBox x:Name="WallpaperComboBox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
                                 <ComboBoxItem Content="Darts Development" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg" HorizontalContentAlignment="Right"/>
                                 <ComboBoxItem Content="Darts Classic" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3.jpg" HorizontalContentAlignment="Right"/>
                                 <ComboBoxItem Content="Darts 2.0 Reborn" Tag="avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg" HorizontalContentAlignment="Right"/>
@@ -127,14 +127,14 @@
                                     Width="180" 
                                     HorizontalAlignment="Right" 
                                     Minimum="0.2" Maximum="0.95" 
-                                    Value="{Binding OpacityValue}" 
+                                    Value="0.7" 
                                     IsEnabled="{Binding #TransparencyToggle.IsChecked}"/>
                            
                             
                             <TextBlock Grid.Row="7" Grid.Column="0" Text="{x:Static lang:Strings.SettingsUpdate}" VerticalAlignment="Center"/>
                             <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" Spacing="8">                                   
-                                    <TextBlock Name="StatusText" Text="Status here (To-Do)"></TextBlock>
+                                    <TextBlock Name="StatusText" Text="To-Do"/>
                                     <Image Name="StatusImage" Source="avares://DesktopUI/Assets/Icons/update.png" Width="16" Height="16" />
                                 </StackPanel> 
                             </Button>
