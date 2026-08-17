@@ -53,9 +53,6 @@
     <data name="ButtonDetailOfTournament" xml:space="preserve">
         <value>Detail of tournament</value>
     </data>
-    <data name="MenuMute" xml:space="preserve">
-        <value>Mute</value>
-    </data>
     <data name="AppSettingsMain" xml:space="preserve">
         <value>Application settings</value>
     </data>
@@ -163,5 +160,23 @@
     </data>
     <data name="DartboardUpNext" xml:space="preserve">
         <value>Up next</value>
+    </data>
+    <data name="StatisticsCreatePlayer" xml:space="preserve">
+        <value>Create player</value>
+    </data>
+    <data name="StatisticsCreateButton" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="StatisticsManage" xml:space="preserve">
+        <value>Manage player</value>
+    </data>
+    <data name="StatisticsRemove" xml:space="preserve">
+        <value>Delete</value>
+    </data>
+    <data name="StatisticsRename" xml:space="preserve">
+        <value>Rename</value>
+    </data>
+    <data name="StatisticsVictoryCount" xml:space="preserve">
+        <value>Number of victories:</value>
     </data>
 </root>

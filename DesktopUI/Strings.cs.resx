@@ -53,9 +53,6 @@
     <data name="ButtonDetailOfTournament" xml:space="preserve">
         <value>Detail turnaje</value>
     </data>
-    <data name="MenuMute" xml:space="preserve">
-        <value>Ztlumit</value>
-    </data>
     <data name="AppSettingsMain" xml:space="preserve">
         <value>Nastavení aplikace</value>
     </data>
@@ -163,5 +160,23 @@
     </data>
     <data name="DartboardUpNext" xml:space="preserve">
         <value>Na řadě</value>
+    </data>
+    <data name="StatisticsCreatePlayer" xml:space="preserve">
+        <value>Vytvoření hráče</value>
+    </data>
+    <data name="StatisticsCreateButton" xml:space="preserve">
+        <value>Vytvořit</value>
+    </data>
+    <data name="StatisticsManage" xml:space="preserve">
+        <value>Správa hráče</value>
+    </data>
+    <data name="StatisticsRemove" xml:space="preserve">
+        <value>Smazat</value>
+    </data>
+    <data name="StatisticsRename" xml:space="preserve">
+        <value>Přejmenovat</value>
+    </data>
+    <data name="StatisticsVictoryCount" xml:space="preserve">
+        <value>Počet vítězství:</value>
     </data>
 </root>

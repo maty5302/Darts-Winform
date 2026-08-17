@@ -8,6 +8,7 @@ using Avalonia.Platform;
 using DesktopUI.Services;
 using DesktopUI.ViewModels;
 using Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DesktopUI.Views;
 
@@ -115,8 +116,9 @@ public partial class MainWindow : Window
 
     private void Button_OnClickStatistics(object? sender, RoutedEventArgs e)
     {
-        StatisticsWindow stats  = new StatisticsWindow();
-        stats.ShowDialog(this);
+        var vm = App.Services?.GetRequiredService<StatisticsViewModel>();
+        var window = new StatisticsWindow { DataContext = vm };
+        window.Show();
     }
 
     private void Button_OnClickDartBoard(object? sender, RoutedEventArgs e)

@@ -129,12 +129,6 @@ namespace DesktopUI {
             }
         }
         
-        public static string MenuMute {
-            get {
-                return ResourceManager.GetString("MenuMute", resourceCulture);
-            }
-        }
-        
         public static string AppSettingsMain {
             get {
                 return ResourceManager.GetString("AppSettingsMain", resourceCulture);
@@ -348,6 +342,42 @@ namespace DesktopUI {
         public static string DartboardUpNext {
             get {
                 return ResourceManager.GetString("DartboardUpNext", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsCreatePlayer {
+            get {
+                return ResourceManager.GetString("StatisticsCreatePlayer", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsCreateButton {
+            get {
+                return ResourceManager.GetString("StatisticsCreateButton", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsManage {
+            get {
+                return ResourceManager.GetString("StatisticsManage", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsRemove {
+            get {
+                return ResourceManager.GetString("StatisticsRemove", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsRename {
+            get {
+                return ResourceManager.GetString("StatisticsRename", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsVictoryCount {
+            get {
+                return ResourceManager.GetString("StatisticsVictoryCount", resourceCulture);
             }
         }
     }

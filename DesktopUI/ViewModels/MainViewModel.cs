@@ -5,23 +5,27 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Services;
 using Domain;
+using Domain.Interfaces;
 
 namespace DesktopUI.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public SettingsManager Settings { get; }
-
     [ObservableProperty] private int _playerCount = 10;
     [ObservableProperty] private int _score = 501;
     [ObservableProperty] private DuelViewModel _duelVM = new();
     [ObservableProperty] private bool _isDuelMode;
+    
+    public SettingsManager Settings { get; }
+    
+    private readonly IDartsRepository _repo;
 
     private int _currentPlayerIndex = 0;
     public ObservableCollection<PlayerViewModel> Players { get; } = new();
 
-    public MainViewModel()
+    public MainViewModel(IDartsRepository repo)
     {
+        _repo = repo;
         Settings = new SettingsManager();
         _ = Settings.CheckForUpdatesAsync();
         ApplyTheme(Settings.ThemePreference);

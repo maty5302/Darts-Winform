@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using DataLayer;
+using DesktopUI.ViewModels;
 
 namespace DesktopUI.Views
 {
@@ -9,6 +11,9 @@ namespace DesktopUI.Views
         public StatisticsWindow()
         {
             InitializeComponent();
+            
+            var repository = new DartsRepository(); 
+            DataContext = new StatisticsViewModel(repository);
         }
     }
 }
