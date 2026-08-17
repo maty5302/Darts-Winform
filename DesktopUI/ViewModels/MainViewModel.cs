@@ -1,15 +1,10 @@
-using System;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.Json;
 using Avalonia;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DesktopUI.Models;
 using DesktopUI.Services;
+using Domain;
 
 namespace DesktopUI.ViewModels;
 
@@ -150,6 +145,26 @@ public partial class MainViewModel : ViewModelBase
             player.OpacityEnabled = Settings.OpacityEnabled;
             player.OpacityValue = Settings.OpacityValue;
             player.SoundEffectsEnabled = Settings.SoundEffectsEnabled;
+        }
+    }
+
+    [RelayCommand]
+    public void RedoLast()
+    {
+        if (_currentPlayerIndex >= 0 && _currentPlayerIndex < Players.Count)
+        {
+            var currentPlayer = Players[_currentPlayerIndex];
+            if (currentPlayer.HasFinished) return;
+            
+            if(HistoryScore.IsEmpty(currentPlayer.PlayerId)) return;
+            
+            string? lastScore = HistoryScore.RedoLastScore(currentPlayer.PlayerId);
+            if (lastScore != null && int.TryParse(lastScore, out int scoreValue))
+            {
+                currentPlayer.Score = scoreValue;
+                currentPlayer.Average = AverageScore.GetAverageOfPlayer(currentPlayer.PlayerId);
+                currentPlayer.Checkout = Checkout.checkout(currentPlayer.Score); 
+            }
         }
     }
 }

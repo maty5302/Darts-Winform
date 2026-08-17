@@ -82,7 +82,7 @@ namespace DesktopUI.ViewModels
             Average = Domain.AverageScore.AddAverage(_playerId, int.Parse(CurrentThrow));
         }
         
-        private string _currentThrow;
+        private string _currentThrow = "";
 
         public string CurrentThrow
         {
@@ -116,15 +116,16 @@ namespace DesktopUI.ViewModels
            
             if (res > 0) 
             {
+                HistoryScore.AddHistory(_playerId, Score.ToString());
                 Score -= value;
                 CalcAverage();
                 if (SoundEffectsEnabled)
                     _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
-                HistoryScore.AddHistory(_playerId, Score.ToString());
                 Checkout = Domain.Checkout.checkout(Score); 
             }
             else if (res == 0)
             {
+                HistoryScore.AddHistory(_playerId, Score.ToString());
                 Score = 0;
                 _placement = _nextPlacement++;
                 IsEnabled = false;
@@ -134,7 +135,6 @@ namespace DesktopUI.ViewModels
                 CalcAverage();
                 if(SoundEffectsEnabled)
                     _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
-                HistoryScore.AddHistory(_playerId, Score.ToString());
                 Checkout = Domain.Checkout.checkout(Score);
             }
             else
@@ -146,7 +146,7 @@ namespace DesktopUI.ViewModels
             OnThrowSubmitted?.Invoke(this);
         }
 
-        private string _checkout;
+        private string _checkout = "";
 
         public string Checkout
         {

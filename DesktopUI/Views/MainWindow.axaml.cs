@@ -7,6 +7,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using DesktopUI.Services;
 using DesktopUI.ViewModels;
+using Domain;
 
 namespace DesktopUI.Views;
 
@@ -116,11 +117,6 @@ public partial class MainWindow : Window
     {
         StatisticsWindow stats  = new StatisticsWindow();
         stats.ShowDialog(this);
-    }
-
-    private void Button_OnClickBack(object? sender, RoutedEventArgs e)
-    {
-        
     }
 
     private void Button_OnClickDartBoard(object? sender, RoutedEventArgs e)
