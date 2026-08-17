@@ -137,4 +137,31 @@
     <data name="UpdateUpToDate" xml:space="preserve">
         <value>Aplikace je aktuální.</value>
     </data>
+    <data name="DartboardThrown" xml:space="preserve">
+        <value>Naházeno</value>
+    </data>
+    <data name="DartboardClear" xml:space="preserve">
+        <value>Vymazat</value>
+    </data>
+    <data name="DartboardConfirm" xml:space="preserve">
+        <value>Potvrdit</value>
+    </data>
+    <data name="DartboardCurrentRound" xml:space="preserve">
+        <value>Aktuální kolo</value>
+    </data>
+    <data name="DartboardOutside" xml:space="preserve">
+        <value>Mimo (0x)</value>
+    </data>
+    <data name="DartboardDouble" xml:space="preserve">
+        <value>Double (2x)</value>
+    </data>
+    <data name="DartboardSingle" xml:space="preserve">
+        <value>Single (1x)</value>
+    </data>
+    <data name="DartboardTreble" xml:space="preserve">
+        <value>Treble (3x)</value>
+    </data>
+    <data name="DartboardUpNext" xml:space="preserve">
+        <value>Na řadě</value>
+    </data>
 </root>

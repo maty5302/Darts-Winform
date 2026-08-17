@@ -296,5 +296,59 @@ namespace DesktopUI {
                 return ResourceManager.GetString("UpdateUpToDate", resourceCulture);
             }
         }
+        
+        public static string DartboardThrown {
+            get {
+                return ResourceManager.GetString("DartboardThrown", resourceCulture);
+            }
+        }
+        
+        public static string DartboardClear {
+            get {
+                return ResourceManager.GetString("DartboardClear", resourceCulture);
+            }
+        }
+        
+        public static string DartboardConfirm {
+            get {
+                return ResourceManager.GetString("DartboardConfirm", resourceCulture);
+            }
+        }
+        
+        public static string DartboardCurrentRound {
+            get {
+                return ResourceManager.GetString("DartboardCurrentRound", resourceCulture);
+            }
+        }
+        
+        public static string DartboardOutside {
+            get {
+                return ResourceManager.GetString("DartboardOutside", resourceCulture);
+            }
+        }
+        
+        public static string DartboardSingle {
+            get {
+                return ResourceManager.GetString("DartboardSingle", resourceCulture);
+            }
+        }
+        
+        public static string DartboardDouble {
+            get {
+                return ResourceManager.GetString("DartboardDouble", resourceCulture);
+            }
+        }
+        
+        public static string DartboardTreble {
+            get {
+                return ResourceManager.GetString("DartboardTreble", resourceCulture);
+            }
+        }
+        
+        public static string DartboardUpNext {
+            get {
+                return ResourceManager.GetString("DartboardUpNext", resourceCulture);
+            }
+        }
     }
 }

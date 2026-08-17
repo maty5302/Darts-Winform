@@ -144,4 +144,31 @@
     <data name="UpdateUpToDate" xml:space="preserve">
         <value>_UpdateUpToDate</value>
     </data>
+    <data name="DartboardThrown" xml:space="preserve">
+        <value>_DartboardThrown</value>
+    </data>
+    <data name="DartboardClear" xml:space="preserve">
+        <value>_DartboardClear</value>
+    </data>
+    <data name="DartboardConfirm" xml:space="preserve">
+        <value>_DartboardConfirm</value>
+    </data>
+    <data name="DartboardCurrentRound" xml:space="preserve">
+        <value>_DartboardCurrentRound</value>
+    </data>
+    <data name="DartboardOutside" xml:space="preserve">
+        <value>_DartboardOutside</value>
+    </data>
+    <data name="DartboardSingle" xml:space="preserve">
+        <value>_DartboardSingle</value>
+    </data>
+    <data name="DartboardDouble" xml:space="preserve">
+        <value>_DartboardDouble</value>
+    </data>
+    <data name="DartboardTreble" xml:space="preserve">
+        <value>_DartboardTreble</value>
+    </data>
+    <data name="DartboardUpNext" xml:space="preserve">
+        <value>_DartboardUpNext</value>
+    </data>
 </root>

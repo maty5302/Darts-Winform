@@ -36,11 +36,11 @@ public partial class DartboardWindow : Window
             var activePlayer = _mainViewModel.Players.FirstOrDefault(p => p.IsActive);
             if (activePlayer != null)
             {
-                ActivePlayerText.Text = $"Na řadě: {activePlayer.Name}";
+                ActivePlayerText.Text = $"{Strings.DartboardUpNext}: {activePlayer.Name}";
             }
             else
             {
-                ActivePlayerText.Text = "Na řadě: --";
+                ActivePlayerText.Text = $"{Strings.DartboardUpNext}: --";
             }
         }
     }
@@ -129,7 +129,7 @@ public partial class DartboardWindow : Window
             }
         }
 
-        ScoreDisplay.Text = $"Naházeno: {_currentThrows.Sum(t => t.TotalScore)}";
+        ScoreDisplay.Text = $"{Strings.DartboardThrown}: {_currentThrows.Sum(t => t.TotalScore)}";
         ConfirmButton.IsEnabled = _currentThrows.Count > 0;
         UpdateActivePlayerName();  
         _isUpdatingUi = false;
@@ -189,10 +189,8 @@ public partial class DartboardWindow : Window
     {
         if (_mainViewModel == null) return;
 
-        // Posloucháme změny v kolekci (přidání/odebrání hráčů při startu nové hry)
         _mainViewModel.Players.CollectionChanged += OnPlayersCollectionChanged;
 
-        // Posloucháme změny vlastností u všech aktuálních hráčů
         foreach (var player in _mainViewModel.Players)
         {
             player.PropertyChanged += OnPlayerPropertyChanged;
@@ -229,7 +227,6 @@ public partial class DartboardWindow : Window
 
     private void OnPlayerPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        // Jakmile se u některého hráče změní IsActive nebo Name, přepsat jméno na terči
         if (e.PropertyName == nameof(PlayerViewModel.IsActive) || e.PropertyName == nameof(PlayerViewModel.Name))
         {
             UpdateActivePlayerName();

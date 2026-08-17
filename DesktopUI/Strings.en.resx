@@ -137,4 +137,31 @@
     <data name="UpdateUpToDate" xml:space="preserve">
         <value>App is up to date.</value>
     </data>
+    <data name="DartboardThrown" xml:space="preserve">
+        <value>Thrown</value>
+    </data>
+    <data name="DartboardClear" xml:space="preserve">
+        <value>Clear</value>
+    </data>
+    <data name="DartboardConfirm" xml:space="preserve">
+        <value>Confirm</value>
+    </data>
+    <data name="DartboardCurrentRound" xml:space="preserve">
+        <value>Current round</value>
+    </data>
+    <data name="DartboardOutside" xml:space="preserve">
+        <value>Outside (0x)</value>
+    </data>
+    <data name="DartboardDouble" xml:space="preserve">
+        <value>Double (2x)</value>
+    </data>
+    <data name="DartboardSingle" xml:space="preserve">
+        <value>Single (1x)</value>
+    </data>
+    <data name="DartboardTreble" xml:space="preserve">
+        <value>Treble (3x)</value>
+    </data>
+    <data name="DartboardUpNext" xml:space="preserve">
+        <value>Up next</value>
+    </data>
 </root>

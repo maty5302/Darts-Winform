@@ -3,15 +3,16 @@
         x:Class="DesktopUI.Views.DartboardWindow"
         Title="Interactive Dartboard" Width="800" Height="600"
         CanResize="False"
+        xmlns:lang="clr-namespace:DesktopUI"
         >
 
     <Grid ColumnDefinitions="300,*" RowDefinitions="*">
         
         <StackPanel Grid.Column="0" Margin="20" Spacing="15" VerticalAlignment="Center">
             
-            <TextBlock Text="Aktuální kolo" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="{x:Static lang:Strings.DartboardCurrentRound}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
             
-            <TextBlock Name="ActivePlayerText" Text="Na řadě: --" FontSize="20" FontWeight="Bold" 
+            <TextBlock Name="ActivePlayerText" Text="{x:Static lang:Strings.DartboardUpNext}" FontSize="20" FontWeight="Bold"
                        Foreground="Green" HorizontalAlignment="Center" Margin="0,0,0,10"/>
             
             <Border BorderBrush="Gray" BorderThickness="1" Padding="10" CornerRadius="5">
@@ -19,10 +20,10 @@
                     <TextBlock Text="1." VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
                     <ComboBox Name="Dart1TypeCombo" Grid.Column="1" HorizontalAlignment="Stretch" 
                               SelectionChanged="OnDartTypeChanged" IsEnabled="False">
-                        <ComboBoxItem Content="Mimo (0x)"/>
-                        <ComboBoxItem Content="Single (1x)"/>
-                        <ComboBoxItem Content="Double (2x)"/>
-                        <ComboBoxItem Content="Treble (3x)"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardOutside}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardSingle}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardDouble}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardTreble}"/>
                     </ComboBox>
                     <TextBlock Name="Dart1ScoreText" Grid.Column="2" Text="--" VerticalAlignment="Center" 
                                FontWeight="Bold" Margin="10,0,0,0" Width="35" TextAlignment="Right"/>
@@ -34,10 +35,10 @@
                     <TextBlock Text="2." VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
                     <ComboBox Name="Dart2TypeCombo" Grid.Column="1" HorizontalAlignment="Stretch" 
                               SelectionChanged="OnDartTypeChanged" IsEnabled="False">
-                        <ComboBoxItem Content="Mimo (0x)"/>
-                        <ComboBoxItem Content="Single (1x)"/>
-                        <ComboBoxItem Content="Double (2x)"/>
-                        <ComboBoxItem Content="Treble (3x)"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardOutside}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardSingle}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardDouble}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardTreble}"/>
                     </ComboBox>
                     <TextBlock Name="Dart2ScoreText" Grid.Column="2" Text="--" VerticalAlignment="Center" 
                                FontWeight="Bold" Margin="10,0,0,0" Width="35" TextAlignment="Right"/>
@@ -49,10 +50,10 @@
                     <TextBlock Text="3." VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
                     <ComboBox Name="Dart3TypeCombo" Grid.Column="1" HorizontalAlignment="Stretch" 
                               SelectionChanged="OnDartTypeChanged" IsEnabled="False">
-                        <ComboBoxItem Content="Mimo (0x)"/>
-                        <ComboBoxItem Content="Single (1x)"/>
-                        <ComboBoxItem Content="Double (2x)"/>
-                        <ComboBoxItem Content="Treble (3x)"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardOutside}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardSingle}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardDouble}"/>
+                        <ComboBoxItem Content="{x:Static lang:Strings.DartboardTreble}"/>
                     </ComboBox>
                     <TextBlock Name="Dart3ScoreText" Grid.Column="2" Text="--" VerticalAlignment="Center" 
                                FontWeight="Bold" Margin="10,0,0,0" Width="35" TextAlignment="Right"/>
@@ -60,11 +61,11 @@
             </Border>
 
             <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Margin="0,15,0,0">
-                <Button Name="ClearButton" Content="Vymazat" Click="OnClearClicked" Width="100" HorizontalContentAlignment="Center"/>
-                <Button Name="ConfirmButton" Content="Potvrdit" Click="OnConfirmClicked" Width="100" HorizontalContentAlignment="Center" IsEnabled="False"/>
+                <Button Name="ClearButton" Content="{x:Static lang:Strings.DartboardClear}" Click="OnClearClicked" Width="100" HorizontalContentAlignment="Center"/>
+                <Button Name="ConfirmButton" Content="{x:Static lang:Strings.DartboardConfirm}" Click="OnConfirmClicked" Width="100" HorizontalContentAlignment="Center" IsEnabled="False"/>
             </StackPanel>
 
-            <TextBlock Name="ScoreDisplay" Text="Naházeno: 0" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+            <TextBlock Name="ScoreDisplay" Text="{x:Static lang:Strings.DartboardThrown}" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,0"/>
         </StackPanel>
 
         <Image Name="DartboardImage" Grid.Column="1"
