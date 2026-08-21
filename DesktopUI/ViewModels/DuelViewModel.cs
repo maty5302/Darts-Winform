@@ -24,7 +24,11 @@ namespace DesktopUI.ViewModels
 
         [ObservableProperty]
         private int _scoreToBeat;
+
+        [ObservableProperty]
+        private int _setsToBeat;
         
+        public bool IsSetsMode { get; set; }
         public bool Is2v2Mode { get; set; }
         public int Team1Player2Id { get; set; }
         public int Team2Player2Id { get; set; }
@@ -33,26 +37,25 @@ namespace DesktopUI.ViewModels
         {
             // Reset domain logic if needed for a fresh duel
             Domain.AverageScore.ClearAverage();
-            PlayerViewModel.ResetPlacements();
+            //PlayerViewModel.ResetPlacements();
 
-            // Initialize Player 1
+            // Initialize Players
             Player1 = new PlayerViewModel
             {
                 PlayerId = 0,
                 Name = "Player 1", // You can pass actual names from a setup window later
-                Score = 301,       // Standard starting score for the duel
+                Score = _scoreToBeat,       // Standard starting score for the duel
                 Average = 0.00,
                 IsActive = true,   // Player 1 starts
                 OnThrowSubmitted = SwitchTurn,
                 OnInputFocused = SetActivePlayer
             };
 
-            // Initialize Player 2
             Player2 = new PlayerViewModel
             {
                 PlayerId = 1,
                 Name = "Player 2",
-                Score = 301,
+                Score = _scoreToBeat,
                 Average = 0.00,
                 IsActive = false,
                 OnThrowSubmitted = SwitchTurn,
@@ -71,7 +74,6 @@ namespace DesktopUI.ViewModels
             Player1.Name = string.IsNullOrWhiteSpace(t1Name) ? "Tým 1" : t1Name;
             Player2.Name = string.IsNullOrWhiteSpace(t2Name) ? "Tým 2" : t2Name;
 
-            // Reset skóre a legů
             Player1.Score = startingScore;
             Player2.Score = startingScore;
             Player1.CurrentThrow = "";
@@ -80,11 +82,14 @@ namespace DesktopUI.ViewModels
             Player1Legs = 0;
             Player2Legs = 0;
 
-            PlayerViewModel.ResetPlacements();
+            Player1.ResetPlacements();
+            Player2.ResetPlacements();
 
-            // Tým 1 vždy začíná
             Player1.IsActive = true;
             Player2.IsActive = false;
+            
+            Player1.IsEnabled = true;
+            Player2.IsEnabled = true;
         }
 
         /// <summary>
@@ -113,6 +118,11 @@ namespace DesktopUI.ViewModels
                     Player1.IsActive = true;
                 }
             }
+            
+            if(Player1.HasFinished || Player2.HasFinished)
+            {
+                NextLeg();
+            }
         }
 
         /// <summary>
@@ -134,25 +144,46 @@ namespace DesktopUI.ViewModels
             }
         }
         
-        /// <summary>
-        /// Optional: Command to reset the board for the next Leg
-        /// </summary>
         [RelayCommand]
         public void NextLeg()
         {
-            // Add win logic here (e.g., if Player1 won, Player1Legs++)
+            if (Player1.HasFinished)
+            {
+                Player1Legs++;
+            }
+            else if (Player2.HasFinished)
+            {
+                Player2Legs++;
+            }
             
-            PlayerViewModel.ResetPlacements();
-            
-            Player1.Score = 301;
-            Player1.CurrentThrow = "";
-            
-            Player2.Score = 301;
-            Player2.CurrentThrow = "";
+            if (Player1Legs == NumberOfLegs || Player2Legs == NumberOfLegs)
+            {
+                // TODO: Zavolat zápis do databáze a ukázat okno "Konec zápasu"
+                // Prozatím můžeme hru resetovat úplně od nuly
+                // Player1Legs = 0;
+                // Player2Legs = 0;
+                Player1.IsEnabled = false;
+                Player2.IsEnabled = false;
+                _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+            }
+            else
+            {
+                //Cuz player card has placement, we need to reset it for the next leg
+                Player1.ResetPlacements();
+                Player2.ResetPlacements();
+                
+                Player1.Score = ScoreToBeat; 
+                Player1.CurrentThrow = "";
+                Player1.IsEnabled = true; 
+        
+                Player2.Score = ScoreToBeat;
+                Player2.CurrentThrow = "";
+                Player2.IsEnabled = true;
 
-            // Alternate who starts the next leg
-            Player1.IsActive = !Player1.IsActive;
-            Player2.IsActive = !Player1.IsActive;
+                // ToDo zjistit, kdo začíná leg kdy jak v pravidlech ve šipkach turnajich - prozatim jednoduche prohozeni
+                Player1.IsActive = !Player1.IsActive;
+                Player2.IsActive = !Player1.IsActive;
+            }
         }
     }
 }

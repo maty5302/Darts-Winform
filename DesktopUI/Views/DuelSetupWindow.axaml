@@ -5,7 +5,7 @@
         x:DataType="vm:DuelSetupViewModel"
         Icon="/Assets/IcoFiles/versus.ico"
         Title="Příprava duelu" 
-        Width="400" Height="450"
+        Width="300" Height="650"
         CanResize="False"
         WindowStartupLocation="CenterScreen">
 

@@ -15,6 +15,8 @@ namespace DesktopUI.ViewModels
         private bool isEnabled = true;
         [ObservableProperty]
         private bool _soundEffectsEnabled;
+
+        private bool _isDuel = false;
         
         private double _opacityValue = 0.7;
         
@@ -154,8 +156,9 @@ namespace DesktopUI.ViewModels
             set => SetProperty(ref _checkout, value);
         }
 
-        public static void ResetPlacements()
+        public void ResetPlacements()
         {
+            _placement = null;
             _nextPlacement = 1;
         }
         

@@ -58,7 +58,10 @@ public partial class MainViewModel : ViewModelBase
     {
         IsDuelMode = false;
         Players.Clear();
-        PlayerViewModel.ResetPlacements();
+        foreach (var player in Players)
+        {
+            player.ResetPlacements();
+        }
         AverageScore.ClearAverage();    
         
         for (int i = 0; i < PlayerCount; i++)
@@ -182,6 +185,7 @@ public partial class MainViewModel : ViewModelBase
         string team2Name;
 
         DuelVM.Is2v2Mode = config.Is2v2;
+        DuelVM.IsSetsMode = config.IsSets;
 
         if (config.Is2v2)
         {
