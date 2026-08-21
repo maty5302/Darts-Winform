@@ -24,6 +24,10 @@ namespace DesktopUI.ViewModels
 
         [ObservableProperty]
         private int _scoreToBeat;
+        
+        public bool Is2v2Mode { get; set; }
+        public int Team1Player2Id { get; set; }
+        public int Team2Player2Id { get; set; }
 
         public DuelViewModel()
         {
@@ -57,6 +61,30 @@ namespace DesktopUI.ViewModels
 
             Player1Legs = 0;
             Player2Legs = 0;
+        }
+        
+        public void InitializeDuel(string t1Name, string t2Name, int startingScore, int targetLegs)
+        {
+            ScoreToBeat = startingScore;
+            NumberOfLegs = targetLegs;
+
+            Player1.Name = string.IsNullOrWhiteSpace(t1Name) ? "Tým 1" : t1Name;
+            Player2.Name = string.IsNullOrWhiteSpace(t2Name) ? "Tým 2" : t2Name;
+
+            // Reset skóre a legů
+            Player1.Score = startingScore;
+            Player2.Score = startingScore;
+            Player1.CurrentThrow = "";
+            Player2.CurrentThrow = "";
+
+            Player1Legs = 0;
+            Player2Legs = 0;
+
+            PlayerViewModel.ResetPlacements();
+
+            // Tým 1 vždy začíná
+            Player1.IsActive = true;
+            Player2.IsActive = false;
         }
 
         /// <summary>

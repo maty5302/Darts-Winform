@@ -94,7 +94,7 @@
                     </StackPanel>
                 </Border>
 
-                <ItemsControl ItemsSource="{Binding Players}" Margin="20,250,20,20" Background="Chartreuse">
+                <ItemsControl ItemsSource="{Binding Players}" Margin="20,250,20,20" IsVisible="{Binding !IsDuelMode}"> 
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="5" Rows="2" />

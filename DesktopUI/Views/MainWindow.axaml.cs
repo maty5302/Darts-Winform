@@ -8,6 +8,7 @@ using Avalonia.Platform;
 using DesktopUI.Services;
 using DesktopUI.ViewModels;
 using Domain;
+using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DesktopUI.Views;
@@ -74,12 +75,17 @@ public partial class MainWindow : Window
         app.ShowDialog(this);
     }
 
-    private void Button_OnClickDuel(object? sender, RoutedEventArgs e)
+    private async void Button_OnClickDuel(object? sender, RoutedEventArgs e)
     {
-        DuelSetupWindow setup = new DuelSetupWindow();
-        setup.Width = 300;
-        setup.Height = 600;
-        setup.ShowDialog(this);
+        if (_boundViewModel != null)
+        {
+            
+            var dbPlayers = await _boundViewModel.GetDatabasePlayersAsync();
+
+            DuelSetupWindow setup = new DuelSetupWindow(_boundViewModel, dbPlayers);
+        
+            await setup.ShowDialog(this);
+        }
     }
 
     private void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)

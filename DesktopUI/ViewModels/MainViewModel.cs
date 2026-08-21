@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -6,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Services;
 using Domain;
 using Domain.Interfaces;
+using Domain.Models;
 
 namespace DesktopUI.ViewModels;
 
@@ -53,9 +56,10 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     public void StartGame()
     {
+        IsDuelMode = false;
         Players.Clear();
         PlayerViewModel.ResetPlacements();
-        Domain.AverageScore.ClearAverage();    
+        AverageScore.ClearAverage();    
         
         for (int i = 0; i < PlayerCount; i++)
         {
@@ -170,5 +174,48 @@ public partial class MainViewModel : ViewModelBase
                 currentPlayer.Checkout = Checkout.checkout(currentPlayer.Score); 
             }
         }
+    }
+    
+    public void StartDuel(DuelSetupViewModel config)
+    {
+        string team1Name;
+        string team2Name;
+
+        DuelVM.Is2v2Mode = config.Is2v2;
+
+        if (config.Is2v2)
+        {
+            team1Name = $"{config.Player1?.PlayerName} & {config.Player2?.PlayerName}";
+            team2Name = $"{config.Player3?.PlayerName} & {config.Player4?.PlayerName}";
+
+            // Tým 1 IDs
+            DuelVM.Player1.PlayerId = (int)(config.Player1?.Id ?? 0);
+            DuelVM.Team1Player2Id = (int)(config.Player2?.Id ?? 0);
+        
+            // Tým 2 IDs
+            DuelVM.Player2.PlayerId = (int)(config.Player3?.Id ?? 0);
+            DuelVM.Team2Player2Id = (int)(config.Player4?.Id ?? 0);
+        }
+        else
+        {
+            team1Name = config.Player1?.PlayerName ?? "Hráč 1";
+            team2Name = config.Player2?.PlayerName ?? "Hráč 2"; 
+
+            DuelVM.Player1.PlayerId = (int)(config.Player1?.Id ?? 0);
+            DuelVM.Player2.PlayerId = (int)(config.Player2?.Id ?? 0);
+        }
+        DuelVM.InitializeDuel(team1Name, team2Name, config.Score, config.Legs);
+
+        IsDuelMode = true;
+    
+        if (Settings.SoundEffectsEnabled)
+        {
+            _ = SoundManagerDarts.SoundEffects.PlayGameOn();
+        }
+    }
+    
+    public async Task<List<PlayerDto>> GetDatabasePlayersAsync()
+    {
+        return await _repo.GetAllPlayersAsync();
     }
 }
