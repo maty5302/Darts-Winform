@@ -23,7 +23,7 @@ namespace Domain.Tests
             var a = AverageScore.AddAverage(1, 30);
             Assert.Equal(20,a);
             AverageScore.RemoveLastAverage(1);
-            a = AverageScore.GetAverageOfPlayer(1); // adds 0 -> average (10+0)/2 = 5
+            a = AverageScore.GetAverageOfPlayer(1); 
             Assert.Equal(10, a);
         }
 

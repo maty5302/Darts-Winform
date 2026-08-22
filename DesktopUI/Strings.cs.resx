@@ -179,4 +179,43 @@
     <data name="StatisticsVictoryCount" xml:space="preserve">
         <value>Počet vítězství:</value>
     </data>
+    <data name="DuelSetMatch" xml:space="preserve">
+        <value>Příprava duelu</value>
+    </data>
+    <data name="DuelSetMainText" xml:space="preserve">
+        <value>Duel</value>
+    </data>
+    <data name="DuelFirstTeam" xml:space="preserve">
+        <value>První tým</value>
+    </data>
+    <data name="DuelSecondTeam" xml:space="preserve">
+        <value>Druhý tým</value>
+    </data>
+    <data name="DuelPlayerOne" xml:space="preserve">
+        <value>Hráč první</value>
+    </data>
+    <data name="DuelPlayerTwo" xml:space="preserve">
+        <value>Hráč druhý</value>
+    </data>
+    <data name="DuelPlayerThree" xml:space="preserve">
+        <value>Hráč třetí</value>
+    </data>
+    <data name="DuelPlayerFour" xml:space="preserve">
+        <value>Hráč čtvrtý</value>
+    </data>
+    <data name="DuelSetSets" xml:space="preserve">
+        <value>Sety</value>
+    </data>
+    <data name="DuelFirstTo" xml:space="preserve">
+        <value>První do</value>
+    </data>
+    <data name="DuelWins" xml:space="preserve">
+        <value>vyhrává</value>
+    </data>
+    <data name="DuelSetNumberOfLegs" xml:space="preserve">
+        <value>Počet legů</value>
+    </data>
+    <data name="DuelSetNumberOfSets" xml:space="preserve">
+        <value>Počet setů</value>
+    </data>
 </root>

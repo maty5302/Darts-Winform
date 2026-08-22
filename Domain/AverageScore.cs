@@ -25,7 +25,8 @@
 
         public static void RemoveLastAverage(int player)
         {
-            averages[player].RemoveAt(averages[player].Count - 1);
+            if(averages[player].Count > 0)
+                averages[player].RemoveAt(averages[player].Count - 1);
         }
 
         public static double GetAverageOfPlayer(int player)

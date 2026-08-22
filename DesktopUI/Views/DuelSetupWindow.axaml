@@ -1,84 +1,77 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:DesktopUI.ViewModels"
+        xmlns:lang="clr-namespace:DesktopUI"
         x:Class="DesktopUI.Views.DuelSetupWindow"
         x:DataType="vm:DuelSetupViewModel"
-        Title="Příprava duelu" 
-        Width="400" Height="450"
+        Icon="/Assets/IcoFiles/versus.ico"
+        Title="{x:Static lang:Strings.DuelSetMatch}" 
+        Width="300" Height="550"
         CanResize="False"
         WindowStartupLocation="CenterScreen">
-
-    <Window.Background>
-        <SolidColorBrush Color="Black" />
-    </Window.Background>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
         <StackPanel.Background>
             <ImageBrush Source="avares://DesktopUI/Assets/Icons/duel.png"></ImageBrush>
         </StackPanel.Background>
-        <TextBlock Text="DUEL" 
+        <TextBlock Text="{x:Static lang:Strings.DuelSetMainText}" 
                    FontSize="56" 
                    FontWeight="Black" 
                    FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" 
-                   Foreground="White" 
                    HorizontalAlignment="Center" />
 
         <Border Background="#CCF5DEB3" Padding="20,15" CornerRadius="5">
             <StackPanel Spacing="10">
                 
                 <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Skore" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                    <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Score}" Minimum="301" Increment="100"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.NumScore}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Score}" Minimum="301" Increment="200" Maximum="901"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Počet legů" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                    <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Legs}" Minimum="1"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding LegsOrSetsText}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Legs}" Minimum="1" Increment="2"/>
                 </Grid>
 
-                <TextBlock Text="První tým" 
+                <TextBlock Text="{x:Static lang:Strings.DuelFirstTeam}" 
                            HorizontalAlignment="Center" 
-                           FontWeight="Bold" 
-                           Foreground="White" 
+                           FontWeight="Bold"
                            Margin="0,5,0,0"
                            IsVisible="{Binding Is2v2}"/>
 
                 <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Hráč první" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                    <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player1}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.DuelPlayerOne}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player1}" DisplayMemberBinding="{Binding PlayerName}" HorizontalAlignment="Stretch"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Hráč druhý" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player2}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.DuelPlayerTwo}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player2}" DisplayMemberBinding="{Binding PlayerName}" HorizontalAlignment="Stretch"/>
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
-                    <CheckBox Content="2V2" IsChecked="{Binding Is2v2, Mode=TwoWay}" Margin="0,0,15,0" Foreground="White" FontWeight="Bold"/>
-                    <CheckBox Content="Sety" IsChecked="{Binding IsSets}" Foreground="White"/>
+                    <CheckBox Content="2V2" IsChecked="{Binding Is2v2, Mode=TwoWay}" Margin="0,0,15,0"  FontWeight="Bold"/>
+                    <CheckBox Content="{x:Static lang:Strings.DuelSetSets}" IsChecked="{Binding IsSets}" />
                 </StackPanel>
 
                 <StackPanel IsVisible="{Binding Is2v2}" Spacing="8">
-                    <TextBlock Text="Druhý tým" 
+                    <TextBlock Text="{x:Static lang:Strings.DuelSecondTeam}" 
                                HorizontalAlignment="Center" 
                                FontWeight="Bold" 
-                               Foreground="White"
                                Margin="0,5,0,0"/>
 
                     <Grid ColumnDefinitions="Auto, 130" RowDefinitions="Auto, Auto">
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Hráč třetí" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player3}" HorizontalAlignment="Stretch"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.DuelPlayerThree}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player3}" DisplayMemberBinding="{Binding PlayerName}" HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Hráč čtvrtý" VerticalAlignment="Center" Margin="0,0,10,8"/>
-                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player4}" HorizontalAlignment="Stretch"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.DuelPlayerFour}" VerticalAlignment="Center" Margin="0,0,10,8"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailablePlayers}" SelectedItem="{Binding Player4}" DisplayMemberBinding="{Binding PlayerName}" HorizontalAlignment="Stretch"/>
                     </Grid>
                 </StackPanel>
 
             </StackPanel>
         </Border>
 
-        <Button Content="Hra" 
+        <Button Content="{x:Static lang:Strings.ButtonGameOn}" 
                 Command="{Binding StartGameCommand}" 
                 Width="120" 
-                HorizontalContentAlignment="Center" 
-                Background="#E0E0E0" 
-                BorderBrush="#0078D7" 
+                HorizontalContentAlignment="Center"  
                 BorderThickness="2"/>
     </StackPanel>
 </Window>
