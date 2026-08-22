@@ -1,21 +1,38 @@
-﻿using DesktopUI.ViewModels;
+﻿using System;
+using System.Threading.Tasks;
+using DesktopUI.ViewModels;
 using DataLayer;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 namespace Integration.Tests
 {
     public class GameFlowIntegrationTests
     {
+        // Pomocná metoda, abychom nemuseli v každém testu psát to samé dokola
+        private DartsRepository CreateInMemoryRepo()
+        {
+            var options = new DbContextOptionsBuilder<DartsDbContext>()
+                .UseInMemoryDatabase(databaseName: $"Integration_{Guid.NewGuid()}")
+                .Options;
+            return new DartsRepository(options);
+        }
+
         [Fact]
         public void SubmitThrow_ShouldUpdateDomainStats_And_ViewModelProperties()
         {
-            var playerVm = new PlayerViewModel
+            var repo = CreateInMemoryRepo();
+            
+            // PŘIDÁNO: Předání repozitáře do konstruktoru
+            var playerVm = new PlayerViewModel(repo)
             {
                 Score = 501,
                 CurrentThrow = "60" 
             };
-           
-            playerVm.SubmitThrow();
+            
+            // Poznámka: SubmitThrow je nyní async, takže musíme buď změnit test na async Task,
+            // nebo pro účely tohoto jednoduchého testu zavolat .Wait()
+            playerVm.SubmitThrow().Wait();
 
             Assert.Equal(441, playerVm.Score); 
             Assert.Equal(60.0, playerVm.Average); 
@@ -28,11 +45,7 @@ namespace Integration.Tests
         [Fact]
         public async Task MainViewModel_ShouldLoadPlayersFromDatabase()
         {
-            var options = new DbContextOptionsBuilder<DartsDbContext>()
-                .UseInMemoryDatabase(databaseName: $"Integration_{Guid.NewGuid()}")
-                .Options;
-            
-            var repo = new DartsRepository(options);
+            var repo = CreateInMemoryRepo();
             await repo.CreatePlayerAsync("Matěj");
             await repo.CreatePlayerAsync("Soupeř");
 
@@ -48,9 +61,12 @@ namespace Integration.Tests
         [Fact]
         public void UndoThrow_ShouldCompletelyRestorePreviousState()
         {
-            var playerVm = new PlayerViewModel { Score = 100 };
+            var repo = CreateInMemoryRepo();
+            
+            // PŘIDÁNO: Předání repozitáře
+            var playerVm = new PlayerViewModel(repo) { Score = 100 };
             playerVm.CurrentThrow = "40";
-            playerVm.SubmitThrow();
+            playerVm.SubmitThrow().Wait();
             
             Assert.Equal(60, playerVm.Score);
             Assert.Equal(40.0, playerVm.Average);
@@ -65,10 +81,13 @@ namespace Integration.Tests
         [Fact]
         public void SubmitThrow_WinningThrow_ShouldFinishPlayerAndLockUI()
         {
-            var playerVm = new PlayerViewModel { Score = 40 };
+            var repo = CreateInMemoryRepo();
+            
+            // PŘIDÁNO: Předání repozitáře
+            var playerVm = new PlayerViewModel(repo) { Score = 40 };
 
             playerVm.CurrentThrow = "40";
-            playerVm.SubmitThrow();
+            playerVm.SubmitThrow().Wait();
 
             Assert.Equal(0, playerVm.Score); 
             Assert.True(playerVm.HasFinished);
@@ -80,11 +99,7 @@ namespace Integration.Tests
         [Fact]
         public void StartGame_ShouldGenerateCorrectNumberOfPlayersAndSetFirstActive()
         {
-            
-            var options = new DbContextOptionsBuilder<DartsDbContext>()
-                .UseInMemoryDatabase(databaseName: $"Integration_{Guid.NewGuid()}")
-                .Options;
-            var repo = new DartsRepository(options);
+            var repo = CreateInMemoryRepo();
             
             var mainVm = new MainViewModel(repo)
             {
