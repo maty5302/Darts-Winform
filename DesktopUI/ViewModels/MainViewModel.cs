@@ -16,20 +16,21 @@ public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty] private int _playerCount = 10;
     [ObservableProperty] private int _score = 501;
-    [ObservableProperty] private DuelViewModel _duelVM = new();
+    [ObservableProperty] private DuelViewModel _duelVM;
     [ObservableProperty] private bool _isDuelMode;
     
     public SettingsManager Settings { get; }
     
     private readonly IDartsRepository _repo;
 
-    private int _currentPlayerIndex = 0;
+    private int _currentPlayerIndex;
     public ObservableCollection<PlayerViewModel> Players { get; } = new();
 
     public MainViewModel(IDartsRepository repo)
     {
         _repo = repo;
         Settings = new SettingsManager();
+        _duelVM = new DuelViewModel(_repo);
         _ = Settings.CheckForUpdatesAsync();
         ApplyTheme(Settings.ThemePreference);
 
@@ -54,7 +55,7 @@ public partial class MainViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    public void StartGame()
+    private void StartGame()
     {
         IsDuelMode = false;
         Players.Clear();
@@ -160,7 +161,7 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void RedoLast()
+    private void RedoLast()
     {
         if (_currentPlayerIndex >= 0 && _currentPlayerIndex < Players.Count)
         {

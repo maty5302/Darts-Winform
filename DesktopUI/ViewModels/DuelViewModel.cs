@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Domain.Interfaces;
+using Domain.Models;
 
 namespace DesktopUI.ViewModels
 {
     public partial class DuelViewModel : ViewModelBase
     {
+        private readonly IDartsRepository _repo;
         // The two players bound to the UI
         [ObservableProperty]
         private PlayerViewModel _player1;
@@ -14,7 +18,7 @@ namespace DesktopUI.ViewModels
         [ObservableProperty]
         private PlayerViewModel _player2;
 
-        // Track how many legs each player has won
+        // Track how many legs and sets each player has won
         [ObservableProperty]
         private int _player1Legs;
 
@@ -26,7 +30,8 @@ namespace DesktopUI.ViewModels
         
         [ObservableProperty] 
         private int _player2Sets;
-
+        
+        // Track how many legs and sets needs to be won
         [ObservableProperty]
         private int _numberOfLegs;
         
@@ -40,15 +45,14 @@ namespace DesktopUI.ViewModels
         private int _scoreToBeat;
 
         [ObservableProperty]
-        private int _setsToBeat;
-
-        [ObservableProperty]
         private bool _showWinner;
         
         [ObservableProperty]
         private bool _isSetsMode;
 
         private bool _soundEffects;
+        
+        //sets winner name to View
         public string WinnerName
         {
             get => field;
@@ -60,13 +64,14 @@ namespace DesktopUI.ViewModels
                 }
             }
         }
-
+        
         public bool Is2V2Mode { get; set; }
         public int Team1Player2Id { get; set; }
         public int Team2Player2Id { get; set; }
 
-        public DuelViewModel()
+        public DuelViewModel(IDartsRepository repo)
         {
+            _repo = repo;
             // Reset domain logic if needed for a fresh duel
             Domain.AverageScore.ClearAverage();
             WinnerName = "";
@@ -100,6 +105,15 @@ namespace DesktopUI.ViewModels
             Player2Sets = 0;
         }
         
+        /// <summary>
+        /// Initializes duel
+        /// </summary>
+        /// <param name="t1Name">Team one or Player one name (upon if you play 2V2 or not)</param>
+        /// <param name="t2Name">Team two or Player two name (upon if you play 2V2 or not)</param>
+        /// <param name="startingScore">Score to beat and starting score</param>
+        /// <param name="targetLegs">Sets target legs or sets beat to win</param>
+        /// <param name="isSets">Determines if you play sets</param>
+        /// <param name="soundEffects">Sets if sound effect are played</param>
         public void InitializeDuel(string t1Name, string t2Name, int startingScore, int targetLegs, bool isSets, bool soundEffects)
         {
             ScoreToBeat = startingScore;
@@ -126,14 +140,14 @@ namespace DesktopUI.ViewModels
             Player1Sets = 0;
             Player2Sets = 0;
 
-            foreach (var Player in new List<PlayerViewModel>(){Player1, Player2})
+            foreach (var player in new List<PlayerViewModel>(){Player1, Player2})
             {
-                Player.SoundEffectsEnabled = soundEffects;
-                Player.IsEnabled = true;
-                Player.CurrentThrow = "";
-                Player.Score = startingScore;
-                Player.ResetPlacements();
-                Player.IsInDuel = true;
+                player.SoundEffectsEnabled = soundEffects;
+                player.IsEnabled = true;
+                player.CurrentThrow = "";
+                player.Score = startingScore;
+                player.ResetPlacements();
+                player.IsInDuel = true;
             }
             Player1.IsActive = true;
             Player2.IsActive = false;
@@ -169,7 +183,7 @@ namespace DesktopUI.ViewModels
             
             if(Player1.HasFinished || Player2.HasFinished)
             {
-                NextLeg();
+                _ = NextLeg();
             }
         }
 
@@ -192,8 +206,11 @@ namespace DesktopUI.ViewModels
             }
         }
         
+        /// <summary>
+        ///  Called when players finish leg
+        /// </summary>
         [RelayCommand]
-        public void NextLeg()
+        private async Task NextLeg()
         {
             if (Player1.HasFinished)
             {
@@ -222,12 +239,16 @@ namespace DesktopUI.ViewModels
                 if (Player1Sets == NumberOfSets || Player2Sets == NumberOfSets)
                 {
                     ShowWinner = true;
-                    WinnerName = Player1Sets == NumberOfSets ? Player1.Name : Player2.Name;
+                    bool team1Won = Player1Legs == NumberOfLegs;
+                    WinnerName = team1Won ? Player1.Name : Player2.Name;
         
                     Player1.IsEnabled = false;
                     Player2.IsEnabled = false;
                     if(_soundEffects)
                         _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                    
+                    await SaveWinStatisticsAsync(team1Won);
+                    
                     return; 
                 }
             }
@@ -235,14 +256,16 @@ namespace DesktopUI.ViewModels
             {
                 if (Player1Legs == NumberOfLegs || Player2Legs == NumberOfLegs)
                 {
-                    // TODO: Zavolat zápis do databáze zde nebo v playercardview
                     ShowWinner = true;
-                    WinnerName = Player1Legs == NumberOfLegs ? Player1.Name : Player2.Name;
+                    bool team1Won = Player1Legs == NumberOfLegs;
+                    WinnerName = team1Won ? Player1.Name : Player2.Name;
         
                     Player1.IsEnabled = false;
                     Player2.IsEnabled = false;
                     if(_soundEffects)
                         _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                    
+                    await SaveWinStatisticsAsync(team1Won);
                     return; 
                 }
             }
@@ -280,6 +303,42 @@ namespace DesktopUI.ViewModels
                 Player2.IsActive = !Player1.IsActive;
             }
             
+        }
+        private async Task SaveWinStatisticsAsync(bool isTeam1Winner)
+        {
+            int currentYear = DateTime.Now.Year;
+            List<long> winnersIds = new List<long>();
+            
+            if (isTeam1Winner)
+            {
+                winnersIds.Add(Player1.PlayerId);
+                if (Is2V2Mode) winnersIds.Add(Team1Player2Id);
+            }
+            else
+            {
+                winnersIds.Add(Player2.PlayerId);
+                if (Is2V2Mode) winnersIds.Add(Team2Player2Id);
+            }
+
+            foreach (long id in winnersIds)
+            {
+                if (id <= 0) continue;
+
+                var stats = await _repo.GetStatsForYearAsync(id, currentYear);
+                
+                if (stats == null)
+                {
+                    stats = new PlayerStatsDto
+                    {
+                        PlayerId = id,
+                        Year = currentYear
+                    };
+                }
+
+                stats.Wins++;
+                stats.AllWins++;
+                await _repo.UpdateStatsAsync(stats);
+            }
         }
     }
 }

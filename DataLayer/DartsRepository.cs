@@ -20,7 +20,6 @@ public class DartsRepository : IDartsRepository
     {
         await using var context = new DartsDbContext();
         
-        // Pomocí Select() rovnou přemapujeme Entity na DTO pro UI
         return await context.Players
             .Select(p => new PlayerDto 
             { 
@@ -55,7 +54,6 @@ public class DartsRepository : IDartsRepository
         context.Players.Add(player);
         await context.SaveChangesAsync();
         
-        // Vracíme DTO nově vytvořeného hráče (bude už mít vyplněné Id z databáze)
         return new PlayerDto 
         { 
             Id = player.Id, 
@@ -87,17 +85,18 @@ public class DartsRepository : IDartsRepository
         }
     }
     
-    // --- Metody pro Statistiky ---
-    
+    /// <summary>
+    /// Methods for statistics
+    /// </summary>
+    /// 
     public async Task<PlayerStatsDto?> GetStatsForYearAsync(long playerId, int year)
     {
-        using var context = new DartsDbContext();
+        await using var context = new DartsDbContext();
         var stats = await context.YearlyStatistics
             .FirstOrDefaultAsync(s => s.PlayerId == playerId && s.Year == year);
 
         if (stats == null) return null;
 
-        // Přemapování z Entity do DTO
         return new PlayerStatsDto
         {
             PlayerId = stats.PlayerId,
@@ -120,17 +119,16 @@ public class DartsRepository : IDartsRepository
     
     public async Task UpdateStatsAsync(PlayerStatsDto statsDto)
     {
-        using var context = new DartsDbContext();
+        await using var context = new DartsDbContext();
     
         var existing = await context.YearlyStatistics
             .FirstOrDefaultAsync(s => s.PlayerId == statsDto.PlayerId && s.Year == statsDto.Year);
 
         if (existing == null)
         {
-            // Vytváříme novou Entitu z DTO
             var newStats = new YearlyStatistic
             {
-                PlayerId = (int)statsDto.PlayerId, // Pozor na přetypování, pokud v entitě máte int
+                PlayerId = statsDto.PlayerId, 
                 Year = statsDto.Year,
                 Wins = statsDto.Wins,
                 Average = statsDto.Average,
@@ -150,7 +148,6 @@ public class DartsRepository : IDartsRepository
         }
         else
         {
-            // Aktualizace existujících hodnot z DTO
             existing.Wins = statsDto.Wins;
             existing.Average = statsDto.Average;
             existing.HighestOut = statsDto.HighestOut;
@@ -173,7 +170,6 @@ public class DartsRepository : IDartsRepository
     {
         using var context = new DartsDbContext();
     
-        // Získáme nejnovější záznam statistik pro daného hráče
         var latestStats = await context.YearlyStatistics
             .Where(s => s.PlayerId == playerId)
             .OrderByDescending(s => s.Year)
@@ -182,7 +178,6 @@ public class DartsRepository : IDartsRepository
         if (latestStats == null) 
             return null;
 
-        // Vrátíme DTO naplněné historickými "All" hodnotami
         return new PlayerStatsDto
         {
             PlayerId = latestStats.PlayerId,

@@ -4,7 +4,7 @@ namespace DataLayer.Models
     {
         public long Id { get; set; }
         
-        public int PlayerId { get; set; }
+        public long PlayerId { get; set; }
         public Player? Player { get; set; }
 
         public int Year { get; set; }
