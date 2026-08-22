@@ -16,6 +16,7 @@ namespace DesktopUI.ViewModels
         [ObservableProperty]
         private bool _soundEffectsEnabled;
 
+        public PlayerMatchStatistics MatchStats { get; } = new();
         public bool IsInDuel { get; set; }
         
         private double _opacityValue = 0.7;
@@ -33,7 +34,7 @@ namespace DesktopUI.ViewModels
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value); // Předpokládá implementaci INotifyPropertyChanged
+            set => SetProperty(ref _name, value); 
         }
 
         private int _score;
@@ -78,11 +79,6 @@ namespace DesktopUI.ViewModels
             get => _cardBackground;
             set => SetProperty(ref _cardBackground, value);
         }
-
-        private void CalcAverage()
-        {
-            Average = Domain.AverageScore.AddAverage(_playerId, int.Parse(CurrentThrow));
-        }
         
         private string _currentThrow = "";
 
@@ -118,23 +114,25 @@ namespace DesktopUI.ViewModels
            
             if (res > 0) 
             {
-                HistoryScore.AddHistory(_playerId, Score.ToString());
+                MatchStats.AddThrow(CurrentThrow, value);
+                //HistoryScore.AddHistory(_playerId, Score.ToString());
                 Score -= value;
-                CalcAverage();
+                Average = MatchStats.CurrentAverage; 
                 if (SoundEffectsEnabled)
                     _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
                 Checkout = Domain.Checkout.checkout(Score); 
             }
             else if (res == 0)
             {
-                HistoryScore.AddHistory(_playerId, Score.ToString());
+                MatchStats.AddThrow(CurrentThrow, value);
+                //HistoryScore.AddHistory(_playerId, Score.ToString());
                 Score = 0;
                 _placement = _nextPlacement++;
                 IsEnabled = false;
                 OnPropertyChanged(nameof(DisplayText));
                 OnPropertyChanged(nameof(DisplayFontSize));
                 OnPropertyChanged(nameof(IsEnabled));
-                CalcAverage();
+                Average = MatchStats.CurrentAverage; 
                 if(SoundEffectsEnabled && !IsInDuel)
                     _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
                 Checkout = Domain.Checkout.checkout(Score);
@@ -199,5 +197,32 @@ namespace DesktopUI.ViewModels
         }
 
         public double OpacityPlayerCard => OpacityEnabled ? OpacityValue : 1.0;
+        
+        [RelayCommand]
+        public void UndoThrow()
+        {
+            if (MatchStats.IsEmpty) return;
+
+            var lastValue = MatchStats.UndoLastThrow();
+            
+            if (!String.IsNullOrEmpty(lastValue))
+            {
+                Score += Convert.ToInt32(lastValue);
+                
+                Average = MatchStats.CurrentAverage;
+                Checkout = Domain.Checkout.checkout(Score);
+                
+                if (HasFinished)
+                {
+                    _placement = null;
+                    _nextPlacement--; 
+                    IsEnabled = true;
+                    OnPropertyChanged(nameof(DisplayText));
+                    OnPropertyChanged(nameof(DisplayFontSize));
+                    OnPropertyChanged(nameof(IsEnabled));
+                }
+                
+            }
+        }
     }
 }

@@ -73,7 +73,6 @@ namespace DesktopUI.ViewModels
         {
             _repo = repo;
             // Reset domain logic if needed for a fresh duel
-            Domain.AverageScore.ClearAverage();
             WinnerName = "";
             // Initialize Players
             Player1 = new PlayerViewModel
@@ -148,6 +147,7 @@ namespace DesktopUI.ViewModels
                 player.Score = startingScore;
                 player.ResetPlacements();
                 player.IsInDuel = true;
+                player.MatchStats.Clear();
             }
             Player1.IsActive = true;
             Player2.IsActive = false;
