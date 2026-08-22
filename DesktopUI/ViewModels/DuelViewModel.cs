@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Domain;
 using Domain.Interfaces;
 using Domain.Models;
 
@@ -75,7 +76,7 @@ namespace DesktopUI.ViewModels
             // Reset domain logic if needed for a fresh duel
             WinnerName = "";
             // Initialize Players
-            Player1 = new PlayerViewModel
+            Player1 = new PlayerViewModel(_repo)
             {
                 PlayerId = 0,
                 Name = "Player 1", // You can pass actual names from a setup window later
@@ -86,7 +87,7 @@ namespace DesktopUI.ViewModels
                 OnInputFocused = SetActivePlayer
             };
 
-            Player2 = new PlayerViewModel
+            Player2 = new PlayerViewModel(_repo)
             {
                 PlayerId = 1,
                 Name = "Player 2",
@@ -247,7 +248,7 @@ namespace DesktopUI.ViewModels
                     if(_soundEffects)
                         _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
                     
-                    await SaveWinStatisticsAsync(team1Won);
+                    await ProcessDuelEndAsync(team1Won);
                     
                     return; 
                 }
@@ -265,7 +266,7 @@ namespace DesktopUI.ViewModels
                     if(_soundEffects)
                         _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
                     
-                    await SaveWinStatisticsAsync(team1Won);
+                    await ProcessDuelEndAsync(team1Won);
                     return; 
                 }
             }
@@ -302,43 +303,94 @@ namespace DesktopUI.ViewModels
                 Player1.IsActive = (totalLegsPlayed % 2 == 0);
                 Player2.IsActive = !Player1.IsActive;
             }
-            
         }
-        private async Task SaveWinStatisticsAsync(bool isTeam1Winner)
+        
+        /// <summary>
+        ///
+        /// </summary>
+        private async Task ProcessDuelEndAsync(bool isTeam1Winner)
+        {
+            var team1Ids = GetTeamIds(Player1.PlayerId, Team1Player2Id);
+            var team2Ids = GetTeamIds(Player2.PlayerId, Team2Player2Id);
+
+            
+            await UpdateTeamStatisticsAsync(Player1, team1Ids, isWinner: isTeam1Winner);
+            await UpdateTeamStatisticsAsync(Player2, team2Ids, isWinner: !isTeam1Winner);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<long> GetTeamIds(long mainPlayerId, long secondPlayerId)
+        {
+            var ids = new List<long>();
+            
+            if (mainPlayerId > 0) 
+                ids.Add(mainPlayerId);
+                
+            if (Is2V2Mode && secondPlayerId > 0) 
+                ids.Add(secondPlayerId);
+                
+            return ids;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task UpdateTeamStatisticsAsync(PlayerViewModel teamVm, List<long> playerIds, bool isWinner)
+        {
+            foreach (var playerId in playerIds)
+            {
+                await UpdateSinglePlayerStatsAsync(playerId, teamVm.MatchStats, isWinner);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task UpdateSinglePlayerStatsAsync(long playerId, PlayerMatchStatistics matchStats, bool isWinner)
         {
             int currentYear = DateTime.Now.Year;
-            List<long> winnersIds = new List<long>();
+            var stats = await _repo.GetStatsForYearAsync(playerId, currentYear);
             
-            if (isTeam1Winner)
+            if (stats == null)
             {
-                winnersIds.Add(Player1.PlayerId);
-                if (Is2V2Mode) winnersIds.Add(Team1Player2Id);
-            }
-            else
-            {
-                winnersIds.Add(Player2.PlayerId);
-                if (Is2V2Mode) winnersIds.Add(Team2Player2Id);
-            }
-
-            foreach (long id in winnersIds)
-            {
-                if (id <= 0) continue;
-
-                var stats = await _repo.GetStatsForYearAsync(id, currentYear);
-                
-                if (stats == null)
+                stats = new PlayerStatsDto
                 {
-                    stats = new PlayerStatsDto
-                    {
-                        PlayerId = id,
-                        Year = currentYear
-                    };
+                    PlayerId = playerId,
+                    Year = currentYear
+                };
+            }
+
+            if (isWinner)
+            {
+                stats.Wins++;
+                // stats.AllWins++; 
+            }
+
+            if (matchStats != null && !matchStats.IsEmpty)
+            {
+                stats.Sixty += matchStats.Sixty;
+                stats.Hundred += matchStats.Hundred;
+                stats.Hundred20 += matchStats.Hundred20;
+                stats.Hundred80 += matchStats.Hundred80;
+
+                if (matchStats.HighestOut > stats.HighestOut)
+                {
+                    stats.HighestOut = matchStats.HighestOut;
                 }
 
-                stats.Wins++;
-                stats.AllWins++;
-                await _repo.UpdateStatsAsync(stats);
+                if (stats.Average == 0)
+                {
+                    stats.Average = matchStats.CurrentAverage;
+                }
+                else
+                {
+                    stats.Average = (stats.Average + matchStats.CurrentAverage) / 2.0;
+                }
             }
+
+            await _repo.UpdateStatsAsync(stats);
         }
     }
 }

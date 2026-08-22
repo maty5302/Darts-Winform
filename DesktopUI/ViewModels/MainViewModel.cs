@@ -59,15 +59,11 @@ public partial class MainViewModel : ViewModelBase
     {
         IsDuelMode = false;
         Players.Clear();
-        foreach (var player in Players)
-        {
-            player.ResetPlacements();
-        }
         //AverageScore.ClearAverage();    
-        
+        PlayerViewModel.ResetGlobalPlacement();
         for (int i = 0; i < PlayerCount; i++)
         {
-            Players.Add(new PlayerViewModel
+            Players.Add(new PlayerViewModel(_repo)
             {
                 PlayerId = i,
                 Name = GetPlayerName(i),              
@@ -80,6 +76,7 @@ public partial class MainViewModel : ViewModelBase
                 OnThrowSubmitted = SwitchToNextPlayer,
                 OnInputFocused = SetActivePlayer
             });
+            Players[i].ResetPlacement();
         }
         
         _currentPlayerIndex = 0;

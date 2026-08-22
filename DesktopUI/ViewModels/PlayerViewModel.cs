@@ -1,12 +1,22 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Domain;
+using Domain.Interfaces;
+using Domain.Models;
 
 namespace DesktopUI.ViewModels
 {
     public partial class PlayerViewModel : ViewModelBase
     {
+        private readonly IDartsRepository _repository;
+
+        public PlayerViewModel(IDartsRepository repository)
+        {
+            _repository = repository;
+        }
         [ObservableProperty]
         private bool _isActive;
         private int _playerId;
@@ -89,7 +99,7 @@ namespace DesktopUI.ViewModels
         }
 
         [RelayCommand]
-        public void SubmitThrow()
+        public async Task SubmitThrow()
         {
             if (_placement.HasValue)
             {
@@ -115,7 +125,6 @@ namespace DesktopUI.ViewModels
             if (res > 0) 
             {
                 MatchStats.AddThrow(CurrentThrow, value);
-                //HistoryScore.AddHistory(_playerId, Score.ToString());
                 Score -= value;
                 Average = MatchStats.CurrentAverage; 
                 if (SoundEffectsEnabled)
@@ -124,8 +133,7 @@ namespace DesktopUI.ViewModels
             }
             else if (res == 0)
             {
-                MatchStats.AddThrow(CurrentThrow, value);
-                //HistoryScore.AddHistory(_playerId, Score.ToString());
+                MatchStats.AddThrow(CurrentThrow, value, isCheckout: true);
                 Score = 0;
                 _placement = _nextPlacement++;
                 IsEnabled = false;
@@ -135,6 +143,54 @@ namespace DesktopUI.ViewModels
                 Average = MatchStats.CurrentAverage; 
                 if(SoundEffectsEnabled && !IsInDuel)
                     _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                if (!IsInDuel)
+                {
+                    var allDbPlayers = await _repository.GetAllPlayersAsync();
+                    
+                    var matchedDbPlayer = allDbPlayers.FirstOrDefault(p => p.PlayerName == this.Name);
+
+                    if (matchedDbPlayer != null)
+                    {
+                        long realDbId = matchedDbPlayer.Id;
+                        int currentYear = DateTime.Now.Year;
+
+                        var existingStats = await _repository.GetStatsForYearAsync(realDbId, currentYear);
+                        
+                        if (existingStats == null)
+                        {
+                            existingStats = new PlayerStatsDto 
+                            {
+                                PlayerId = realDbId,
+                                Year = currentYear,
+                                Wins = 1,
+                                Average = MatchStats.CurrentAverage,
+                                HighestOut = MatchStats.HighestOut,
+                                Sixty = MatchStats.Sixty,
+                                Hundred = MatchStats.Hundred,
+                                Hundred20 = MatchStats.Hundred20,
+                                Hundred80 = MatchStats.Hundred80
+                            };
+                        }
+                        else
+                        {
+                            existingStats.Wins += 1;
+                            
+                            if (MatchStats.HighestOut > existingStats.HighestOut)
+                            {
+                                existingStats.HighestOut = MatchStats.HighestOut;
+                            }
+
+                            existingStats.Sixty += MatchStats.Sixty;
+                            existingStats.Hundred += MatchStats.Hundred;
+                            existingStats.Hundred20 += MatchStats.Hundred20;
+                            existingStats.Hundred80 += MatchStats.Hundred80;
+                            
+                            existingStats.Average = (existingStats.Average + MatchStats.CurrentAverage) / 2.0; 
+                        }
+                        
+                        await _repository.UpdateStatsAsync(existingStats);
+                    }
+                }
                 Checkout = Domain.Checkout.checkout(Score);
             }
             
@@ -223,6 +279,16 @@ namespace DesktopUI.ViewModels
                 }
                 
             }
+        }
+
+        public void ResetPlacement()
+        {
+            _placement = null;
+        }
+        
+        public static void ResetGlobalPlacement()
+        {
+            _nextPlacement = 1;
         }
     }
 }
