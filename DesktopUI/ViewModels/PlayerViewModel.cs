@@ -15,6 +15,8 @@ namespace DesktopUI.ViewModels
         private bool isEnabled = true;
         [ObservableProperty]
         private bool _soundEffectsEnabled;
+
+        public bool IsInDuel { get; set; }
         
         private double _opacityValue = 0.7;
         
@@ -133,15 +135,11 @@ namespace DesktopUI.ViewModels
                 OnPropertyChanged(nameof(DisplayFontSize));
                 OnPropertyChanged(nameof(IsEnabled));
                 CalcAverage();
-                if(SoundEffectsEnabled)
+                if(SoundEffectsEnabled && !IsInDuel)
                     _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
                 Checkout = Domain.Checkout.checkout(Score);
             }
-            else
-            {
-                // Hráč přehodil (Bust). Skóre se neodečítá, ale tah mu končí.
-                // Můžeš sem přidat např. logiku pro zobrazení "Bust!" na obrazovce.
-            }
+            
             CurrentThrow = "";
             OnThrowSubmitted?.Invoke(this);
         }

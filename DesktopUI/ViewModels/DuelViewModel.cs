@@ -133,6 +133,7 @@ namespace DesktopUI.ViewModels
                 Player.CurrentThrow = "";
                 Player.Score = startingScore;
                 Player.ResetPlacements();
+                Player.IsInDuel = true;
             }
             Player1.IsActive = true;
             Player2.IsActive = false;
