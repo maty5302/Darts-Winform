@@ -10,9 +10,15 @@ namespace DataLayer
         
         private readonly string dbPath = "Darts.db";
         
+        public DartsDbContext() { }
+        public DartsDbContext(DbContextOptions<DartsDbContext> options) : base(options) { }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={dbPath}");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite($"Data Source={dbPath}");
+            }
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -10,15 +10,28 @@ namespace DataLayer;
 
 public class DartsRepository : IDartsRepository
 {
+    private readonly DbContextOptions<DartsDbContext>? _testOptions;
     public DartsRepository()
     {
         using var context = new DartsDbContext();
         context.Database.EnsureCreated();
     }
+    public DartsRepository(DbContextOptions<DartsDbContext> testOptions)
+    {
+        _testOptions = testOptions;
+        using var context = CreateContext();
+        context.Database.EnsureCreated();
+    }
+    private DartsDbContext CreateContext()
+    {
+        return _testOptions != null 
+            ? new DartsDbContext(_testOptions) 
+            : new DartsDbContext();
+    }
     
     public async Task<List<PlayerDto>> GetAllPlayersAsync()
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         
         return await context.Players
             .Select(p => new PlayerDto 
@@ -31,7 +44,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task<PlayerDto?> GetPlayerByIdAsync(long playerId)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         var player = await context.Players.FirstOrDefaultAsync(p => p.Id == playerId);
         
         if (player == null) return null;
@@ -45,7 +58,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task<PlayerDto?> CreatePlayerAsync(string playerName)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         
         if (await context.Players.AnyAsync(p => p.PlayerName == playerName))
             return null;
@@ -63,7 +76,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task DeletePlayerAsync(long playerId)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         var player = await context.Players.FindAsync(playerId);
         
         if (player != null)
@@ -75,7 +88,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task RenamePlayerAsync(long playerId, string newName)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         var player = await context.Players.FindAsync(playerId);
         
         if (player != null)
@@ -91,7 +104,7 @@ public class DartsRepository : IDartsRepository
     /// 
     public async Task<PlayerStatsDto?> GetStatsForYearAsync(long playerId, int year)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
         var stats = await context.YearlyStatistics
             .FirstOrDefaultAsync(s => s.PlayerId == playerId && s.Year == year);
 
@@ -119,7 +132,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task UpdateStatsAsync(PlayerStatsDto statsDto)
     {
-        await using var context = new DartsDbContext();
+        await using var context = CreateContext();
     
         var existing = await context.YearlyStatistics
             .FirstOrDefaultAsync(s => s.PlayerId == statsDto.PlayerId && s.Year == statsDto.Year);
@@ -168,7 +181,7 @@ public class DartsRepository : IDartsRepository
     
     public async Task<PlayerStatsDto?> GetAllYearsStatsAsync(long playerId)
     {
-        using var context = new DartsDbContext();
+        await using var context = CreateContext();
     
         var latestStats = await context.YearlyStatistics
             .Where(s => s.PlayerId == playerId)
