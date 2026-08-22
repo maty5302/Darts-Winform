@@ -225,4 +225,7 @@
     <data name="DuelSetNumberOfSets" xml:space="preserve">
         <value>_DuelSetNumberOfSets</value>
     </data>
+    <data name="DartboardMain" xml:space="preserve">
+        <value>_DartboardMain</value>
+    </data>
 </root>

@@ -218,4 +218,7 @@
     <data name="DuelSetNumberOfSets" xml:space="preserve">
         <value>Počet setů</value>
     </data>
+    <data name="DartboardMain" xml:space="preserve">
+        <value>Interaktivní terč</value>
+    </data>
 </root>
