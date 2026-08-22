@@ -59,15 +59,11 @@ public partial class MainViewModel : ViewModelBase
     {
         IsDuelMode = false;
         Players.Clear();
-        foreach (var player in Players)
-        {
-            player.ResetPlacements();
-        }
-        AverageScore.ClearAverage();    
-        
+        //AverageScore.ClearAverage();    
+        PlayerViewModel.ResetGlobalPlacement();
         for (int i = 0; i < PlayerCount; i++)
         {
-            Players.Add(new PlayerViewModel
+            Players.Add(new PlayerViewModel(_repo)
             {
                 PlayerId = i,
                 Name = GetPlayerName(i),              
@@ -75,12 +71,12 @@ public partial class MainViewModel : ViewModelBase
                 OpacityEnabled = Settings.OpacityEnabled,   
                 OpacityValue = Settings.OpacityValue,       
                 SoundEffectsEnabled = Settings.SoundEffectsEnabled, 
-                
                 Score = Score,
                 Average = 0.00,
                 OnThrowSubmitted = SwitchToNextPlayer,
                 OnInputFocused = SetActivePlayer
             });
+            Players[i].ResetPlacement();
         }
         
         _currentPlayerIndex = 0;
@@ -163,19 +159,24 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void RedoLast()
     {
-        if (_currentPlayerIndex >= 0 && _currentPlayerIndex < Players.Count)
+        if (IsDuelMode)
         {
-            var currentPlayer = Players[_currentPlayerIndex];
-            if (currentPlayer.HasFinished) return;
-            
-            if(HistoryScore.IsEmpty(currentPlayer.PlayerId)) return;
-            
-            string? lastScore = HistoryScore.RedoLastScore(currentPlayer.PlayerId);
-            if (lastScore != null && int.TryParse(lastScore, out int scoreValue))
+            if (DuelVM.Player1.IsActive)
             {
-                currentPlayer.Score = scoreValue;
-                currentPlayer.Average = AverageScore.GetAverageOfPlayer(currentPlayer.PlayerId);
-                currentPlayer.Checkout = Checkout.checkout(currentPlayer.Score); 
+                DuelVM.Player1.UndoThrow();
+            }
+            else if (DuelVM.Player2.IsActive)
+            {
+                DuelVM.Player2.UndoThrow();
+            }
+        }
+        else
+        {
+            if (_currentPlayerIndex >= 0 && _currentPlayerIndex < Players.Count)
+            {
+                var currentPlayer = Players[_currentPlayerIndex];
+            
+                currentPlayer.UndoThrow();
             }
         }
     }

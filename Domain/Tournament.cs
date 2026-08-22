@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Models;
 
-namespace Domain.Tournament
+namespace Domain
 {
 	public class Tournament
 	{
@@ -36,7 +32,7 @@ namespace Domain.Tournament
 
 		public Match? getNextMatch()
 		{			
-			return this.matches.Find(x => x.winnerId == 0);
+			return this.matches.Find(x => x.WinnerId == 0);
 		}
 		//if all matches are played, generate next round (getNextMatch() returns null)
         public void generateNextRound()
@@ -44,9 +40,9 @@ namespace Domain.Tournament
 			List<Player> winners = new List<Player>();
 			foreach (Match match in matches)
 			{
-				if (match.winnerId != 0)
+				if (match.WinnerId != 0)
 				{
-					winners.Add(this.players.Find(x => x.Id == match.winnerId));
+					winners.Add(this.players.Find(x => x.Id == match.WinnerId));
 				}
 			}
 			if (winners.Count == matches.Count && winners.Count>=2)

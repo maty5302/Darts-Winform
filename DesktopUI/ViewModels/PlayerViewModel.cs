@@ -1,12 +1,22 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Domain;
+using Domain.Interfaces;
+using Domain.Models;
 
 namespace DesktopUI.ViewModels
 {
     public partial class PlayerViewModel : ViewModelBase
     {
+        private readonly IDartsRepository _repository;
+
+        public PlayerViewModel(IDartsRepository repository)
+        {
+            _repository = repository;
+        }
         [ObservableProperty]
         private bool _isActive;
         private int _playerId;
@@ -16,6 +26,7 @@ namespace DesktopUI.ViewModels
         [ObservableProperty]
         private bool _soundEffectsEnabled;
 
+        public PlayerMatchStatistics MatchStats { get; } = new();
         public bool IsInDuel { get; set; }
         
         private double _opacityValue = 0.7;
@@ -33,7 +44,7 @@ namespace DesktopUI.ViewModels
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value); // Předpokládá implementaci INotifyPropertyChanged
+            set => SetProperty(ref _name, value); 
         }
 
         private int _score;
@@ -78,11 +89,6 @@ namespace DesktopUI.ViewModels
             get => _cardBackground;
             set => SetProperty(ref _cardBackground, value);
         }
-
-        private void CalcAverage()
-        {
-            Average = Domain.AverageScore.AddAverage(_playerId, int.Parse(CurrentThrow));
-        }
         
         private string _currentThrow = "";
 
@@ -93,7 +99,7 @@ namespace DesktopUI.ViewModels
         }
 
         [RelayCommand]
-        public void SubmitThrow()
+        public async Task SubmitThrow()
         {
             if (_placement.HasValue)
             {
@@ -118,25 +124,73 @@ namespace DesktopUI.ViewModels
            
             if (res > 0) 
             {
-                HistoryScore.AddHistory(_playerId, Score.ToString());
+                MatchStats.AddThrow(CurrentThrow, value);
                 Score -= value;
-                CalcAverage();
+                Average = MatchStats.CurrentAverage; 
                 if (SoundEffectsEnabled)
                     _ = SoundManagerDarts.SoundEffects.PlayScoreAsync(value);
                 Checkout = Domain.Checkout.checkout(Score); 
             }
             else if (res == 0)
             {
-                HistoryScore.AddHistory(_playerId, Score.ToString());
+                MatchStats.AddThrow(CurrentThrow, value, isCheckout: true);
                 Score = 0;
                 _placement = _nextPlacement++;
                 IsEnabled = false;
                 OnPropertyChanged(nameof(DisplayText));
                 OnPropertyChanged(nameof(DisplayFontSize));
                 OnPropertyChanged(nameof(IsEnabled));
-                CalcAverage();
+                Average = MatchStats.CurrentAverage; 
                 if(SoundEffectsEnabled && !IsInDuel)
                     _ = SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                if (!IsInDuel)
+                {
+                    var allDbPlayers = await _repository.GetAllPlayersAsync();
+                    
+                    var matchedDbPlayer = allDbPlayers.FirstOrDefault(p => p.PlayerName == this.Name);
+
+                    if (matchedDbPlayer != null)
+                    {
+                        long realDbId = matchedDbPlayer.Id;
+                        int currentYear = DateTime.Now.Year;
+
+                        var existingStats = await _repository.GetStatsForYearAsync(realDbId, currentYear);
+                        
+                        if (existingStats == null)
+                        {
+                            existingStats = new PlayerStatsDto 
+                            {
+                                PlayerId = realDbId,
+                                Year = currentYear,
+                                Wins = 1,
+                                Average = MatchStats.CurrentAverage,
+                                HighestOut = MatchStats.HighestOut,
+                                Sixty = MatchStats.Sixty,
+                                Hundred = MatchStats.Hundred,
+                                Hundred20 = MatchStats.Hundred20,
+                                Hundred80 = MatchStats.Hundred80
+                            };
+                        }
+                        else
+                        {
+                            existingStats.Wins += 1;
+                            
+                            if (MatchStats.HighestOut > existingStats.HighestOut)
+                            {
+                                existingStats.HighestOut = MatchStats.HighestOut;
+                            }
+
+                            existingStats.Sixty += MatchStats.Sixty;
+                            existingStats.Hundred += MatchStats.Hundred;
+                            existingStats.Hundred20 += MatchStats.Hundred20;
+                            existingStats.Hundred80 += MatchStats.Hundred80;
+                            
+                            existingStats.Average = (existingStats.Average + MatchStats.CurrentAverage) / 2.0; 
+                        }
+                        
+                        await _repository.UpdateStatsAsync(existingStats);
+                    }
+                }
                 Checkout = Domain.Checkout.checkout(Score);
             }
             
@@ -199,5 +253,42 @@ namespace DesktopUI.ViewModels
         }
 
         public double OpacityPlayerCard => OpacityEnabled ? OpacityValue : 1.0;
+        
+        [RelayCommand]
+        public void UndoThrow()
+        {
+            if (MatchStats.IsEmpty) return;
+
+            var lastValue = MatchStats.UndoLastThrow();
+            
+            if (!String.IsNullOrEmpty(lastValue))
+            {
+                Score += Convert.ToInt32(lastValue);
+                
+                Average = MatchStats.CurrentAverage;
+                Checkout = Domain.Checkout.checkout(Score);
+                
+                if (HasFinished)
+                {
+                    _placement = null;
+                    _nextPlacement--; 
+                    IsEnabled = true;
+                    OnPropertyChanged(nameof(DisplayText));
+                    OnPropertyChanged(nameof(DisplayFontSize));
+                    OnPropertyChanged(nameof(IsEnabled));
+                }
+                
+            }
+        }
+
+        public void ResetPlacement()
+        {
+            _placement = null;
+        }
+        
+        public static void ResetGlobalPlacement()
+        {
+            _nextPlacement = 1;
+        }
     }
 }

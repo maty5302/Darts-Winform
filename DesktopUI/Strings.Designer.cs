@@ -458,5 +458,11 @@ namespace DesktopUI {
                 return ResourceManager.GetString("DuelSetNumberOfSets", resourceCulture);
             }
         }
+        
+        public static string DartboardMain {
+            get {
+                return ResourceManager.GetString("DartboardMain", resourceCulture);
+            }
+        }
     }
 }
