@@ -19,12 +19,15 @@ namespace DesktopUI.ViewModels
             set => SetProperty(ref _is2v2, value);
         }
 
-        [ObservableProperty] private bool _isSets;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(LegsOrSetsText))]
+        private bool _isSets;
 
-        // TADY: Seznam už nedrží stringy, ale přímo objekty hráčů z databáze
+
+        public string LegsOrSetsText => IsSets ? Strings.DuelSetNumberOfSets : Strings.DuelSetNumberOfLegs;
+
         public ObservableCollection<PlayerDto> AvailablePlayers { get; }
 
-        // TADY: Vybraní hráči jsou také typu PlayerDto
         [ObservableProperty] private PlayerDto? _player1;
         [ObservableProperty] private PlayerDto? _player2;
         [ObservableProperty] private PlayerDto? _player3;
@@ -32,7 +35,6 @@ namespace DesktopUI.ViewModels
 
         private readonly Action<DuelSetupViewModel>? _onStartGameRequested;
 
-        // Konstruktor přijímá seznam hráčů z databáze
         public DuelSetupViewModel(IEnumerable<PlayerDto> players, Action<DuelSetupViewModel> onStartGameRequested)
         {
             _onStartGameRequested = onStartGameRequested;
@@ -43,6 +45,7 @@ namespace DesktopUI.ViewModels
                 Player1 = AvailablePlayers[0];
                 Player2 = AvailablePlayers[1];
             }
+
         }
 
         [RelayCommand]
@@ -50,12 +53,10 @@ namespace DesktopUI.ViewModels
         {
             if (Is2v2)
             {
-                // Kontrola pro 4 hráče
                 if (Player1 == null || Player2 == null || Player3 == null || Player4 == null) return;
             }
             else
             {
-                // Kontrola pro 2 hráče
                 if (Player1 == null || Player2 == null) return;
             }
 

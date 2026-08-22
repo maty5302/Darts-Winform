@@ -15,8 +15,6 @@ namespace DesktopUI.ViewModels
         private bool isEnabled = true;
         [ObservableProperty]
         private bool _soundEffectsEnabled;
-
-        private bool _isDuel = false;
         
         private double _opacityValue = 0.7;
         

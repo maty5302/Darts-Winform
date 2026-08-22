@@ -184,8 +184,7 @@ public partial class MainViewModel : ViewModelBase
         string team1Name;
         string team2Name;
 
-        DuelVM.Is2v2Mode = config.Is2v2;
-        DuelVM.IsSetsMode = config.IsSets;
+        DuelVM.Is2V2Mode = config.Is2v2;
 
         if (config.Is2v2)
         {
@@ -208,7 +207,7 @@ public partial class MainViewModel : ViewModelBase
             DuelVM.Player1.PlayerId = (int)(config.Player1?.Id ?? 0);
             DuelVM.Player2.PlayerId = (int)(config.Player2?.Id ?? 0);
         }
-        DuelVM.InitializeDuel(team1Name, team2Name, config.Score, config.Legs);
+        DuelVM.InitializeDuel(team1Name, team2Name, config.Score, config.Legs, config.IsSets, Settings.SoundEffectsEnabled);
 
         IsDuelMode = true;
     

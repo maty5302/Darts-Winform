@@ -3,6 +3,7 @@
              xmlns:vm="using:DesktopUI.ViewModels"
              x:Class="DesktopUI.Views.DuelCardView"
              x:DataType="vm:DuelViewModel"
+             xmlns:lang="clr-namespace:DesktopUI"
              Width="950"
              Height="320">
 
@@ -12,7 +13,10 @@
 
             <Border Grid.Row="0" Background="Black" Padding="20,10">
                 <Grid ColumnDefinitions="*, Auto, Auto">
-                    <TextBlock Grid.Column="0" Text="{Binding NumberOfLegs, StringFormat='První do {0}'}" Foreground="White" FontSize="32" />
+                    <TextBlock Grid.Column="0" Foreground="White" FontSize="32" VerticalAlignment="Center">
+                        <Run Text="{x:Static lang:Strings.DuelFirstTo}" />
+                        <Run Text="{Binding NumToBeat}" />
+                    </TextBlock>
                     <TextBlock Grid.Column="1" Text="Set" Foreground="White" FontSize="32" Margin="0,0,25,0" IsVisible="{Binding IsSetsMode}"/>
                     <TextBlock Grid.Column="2" Text="Leg" Foreground="White" FontSize="32" Margin="0,0,310,0"/>
                 </Grid>
@@ -21,16 +25,16 @@
             <Grid Grid.Row="1" ColumnDefinitions="*, Auto, Auto">
                 
                 <StackPanel Grid.Column="0" Background="White"  VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Player1.Name, FallbackValue='Test2'}"  FontSize="48" FontWeight="Bold" Foreground="Black"/>
+                    <TextBlock Text="{Binding Player1.Name, FallbackValue='Test2'}"  FontSize="48" FontWeight="Bold" Foreground="Black" Margin="20,0,0,0"/>
                     <StackPanel Orientation="Horizontal" Spacing="20">
-                        <TextBlock Text="{Binding Player1.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black"/>
-                        <TextBlock Text="{Binding Player1.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black"/>
+                        <TextBlock Text="{Binding Player1.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black" Margin="25,0,0,0"/>
+                        <TextBlock Text="{Binding Player1.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black" Margin="25,0,0,0"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Border Grid.Column="1" Background="#228B22" Padding="20,15">
                     <StackPanel Orientation="Horizontal" Spacing="30" VerticalAlignment="Center">
-                        <TextBlock Text="0" FontSize="42" Foreground="White"  Width="55" TextAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsSetsMode}" />
+                        <TextBlock Text="{Binding Player1Sets, FallbackValue='0'}" FontSize="42" Foreground="White"  Width="55" TextAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsSetsMode}" />
                         
                         <TextBlock Text="{Binding Player1Legs , FallbackValue='0'}" FontSize="42" Foreground="White"  Width="25" TextAlignment="Center" VerticalAlignment="Center"  />
                         
@@ -58,16 +62,16 @@
             <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto">
                 
                 <StackPanel Grid.Column="0" Background="White" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Player2.Name, FallbackValue='Test'}" FontSize="48" Foreground="Black"/>
+                    <TextBlock Text="{Binding Player2.Name, FallbackValue='Test'}" FontSize="48" Foreground="Black" Margin="20,0,0,0"/>
                     <StackPanel Orientation="Horizontal" Spacing="20">
-                        <TextBlock Text="{Binding Player2.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black"/>
-                        <TextBlock Text="{Binding Player2.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black"/>
+                        <TextBlock Text="{Binding Player2.AverageText, FallbackValue='Ø: 0.00'}" FontSize="16" Foreground="Black" Margin="25,0,0,0"/>
+                        <TextBlock Text="{Binding Player2.Checkout, FallbackValue='.'}" FontSize="16" Foreground="Black" Margin="25,0,0,0"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Border Grid.Column="1" Background="#228B22" Padding="20,15">
                     <StackPanel Orientation="Horizontal" Spacing="30" VerticalAlignment="Center">
-                        <TextBlock Text="0" FontSize="42" Foreground="White"  Width="55" TextAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsSetsMode}"/>
+                        <TextBlock Text="{Binding Player2Sets, FallbackValue='0'}" FontSize="42" Foreground="White"  Width="55" TextAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsSetsMode}"/>
                         <TextBlock Text="{Binding Player2Legs, FallbackValue='0'}" FontSize="42" Foreground="White" Width="25" TextAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Player2.Score, FallbackValue='301'}" FontSize="56" FontWeight="Bold" Foreground="White" Width="120" TextAlignment="Center" VerticalAlignment="Center"/>
                         <TextBox x:Name="Player2Input" GotFocus="Player2Input_OnGotFocus" IsEnabled="{Binding Player2.IsEnabled}" Text="{Binding Player2.CurrentThrow}" FontSize="36" FontWeight="Bold" 
@@ -90,7 +94,13 @@
             </Grid>
 
             <Border Grid.Row="3" Background="Black" Padding="20,10">
-                <TextBlock Text="Duel" Foreground="White" FontSize="32" />
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBlock Text="Duel" Foreground="White" FontSize="32" />
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="32" Foreground="White" IsVisible="{Binding ShowWinner}">
+                        <Run Text="{Binding WinnerName}"/>
+                        <Run Text="{x:Static lang:Strings.DuelWins}" />
+                    </TextBlock>
+                </Grid>
             </Border>
 
         </Grid>

@@ -380,5 +380,83 @@ namespace DesktopUI {
                 return ResourceManager.GetString("StatisticsVictoryCount", resourceCulture);
             }
         }
+        
+        public static string DuelSetMatch {
+            get {
+                return ResourceManager.GetString("DuelSetMatch", resourceCulture);
+            }
+        }
+        
+        public static string DuelSetMainText {
+            get {
+                return ResourceManager.GetString("DuelSetMainText", resourceCulture);
+            }
+        }
+        
+        public static string DuelFirstTeam {
+            get {
+                return ResourceManager.GetString("DuelFirstTeam", resourceCulture);
+            }
+        }
+        
+        public static string DuelSecondTeam {
+            get {
+                return ResourceManager.GetString("DuelSecondTeam", resourceCulture);
+            }
+        }
+        
+        public static string DuelPlayerOne {
+            get {
+                return ResourceManager.GetString("DuelPlayerOne", resourceCulture);
+            }
+        }
+        
+        public static string DuelPlayerTwo {
+            get {
+                return ResourceManager.GetString("DuelPlayerTwo", resourceCulture);
+            }
+        }
+        
+        public static string DuelPlayerThree {
+            get {
+                return ResourceManager.GetString("DuelPlayerThree", resourceCulture);
+            }
+        }
+        
+        public static string DuelPlayerFour {
+            get {
+                return ResourceManager.GetString("DuelPlayerFour", resourceCulture);
+            }
+        }
+        
+        public static string DuelSetSets {
+            get {
+                return ResourceManager.GetString("DuelSetSets", resourceCulture);
+            }
+        }
+        
+        public static string DuelFirstTo {
+            get {
+                return ResourceManager.GetString("DuelFirstTo", resourceCulture);
+            }
+        }
+        
+        public static string DuelWins {
+            get {
+                return ResourceManager.GetString("DuelWins", resourceCulture);
+            }
+        }
+        
+        public static string DuelSetNumberOfLegs {
+            get {
+                return ResourceManager.GetString("DuelSetNumberOfLegs", resourceCulture);
+            }
+        }
+        
+        public static string DuelSetNumberOfSets {
+            get {
+                return ResourceManager.GetString("DuelSetNumberOfSets", resourceCulture);
+            }
+        }
     }
 }

@@ -186,4 +186,43 @@
     <data name="StatisticsVictoryCount" xml:space="preserve">
         <value>_StatisticsVictoryCount</value>
     </data>
+    <data name="DuelSetMatch" xml:space="preserve">
+        <value>_DuelSetMatch</value>
+    </data>
+    <data name="DuelSetMainText" xml:space="preserve">
+        <value>_DuelSetMainText</value>
+    </data>
+    <data name="DuelFirstTeam" xml:space="preserve">
+        <value>_DuelFirstTeam</value>
+    </data>
+    <data name="DuelSecondTeam" xml:space="preserve">
+        <value>_DuelSecondTeam</value>
+    </data>
+    <data name="DuelPlayerOne" xml:space="preserve">
+        <value>_DuelPlayerOne</value>
+    </data>
+    <data name="DuelPlayerTwo" xml:space="preserve">
+        <value>_DuelPlayerTwo</value>
+    </data>
+    <data name="DuelPlayerThree" xml:space="preserve">
+        <value>_DuelPlayerThree</value>
+    </data>
+    <data name="DuelPlayerFour" xml:space="preserve">
+        <value>_DuelPlayerFour</value>
+    </data>
+    <data name="DuelSetSets" xml:space="preserve">
+        <value>_DuelSetSets</value>
+    </data>
+    <data name="DuelFirstTo" xml:space="preserve">
+        <value>_DuelFirstTo</value>
+    </data>
+    <data name="DuelWins" xml:space="preserve">
+        <value>_DuelWins</value>
+    </data>
+    <data name="DuelSetNumberOfLegs" xml:space="preserve">
+        <value>_DuelSetNumberOfLegs</value>
+    </data>
+    <data name="DuelSetNumberOfSets" xml:space="preserve">
+        <value>_DuelSetNumberOfSets</value>
+    </data>
 </root>
