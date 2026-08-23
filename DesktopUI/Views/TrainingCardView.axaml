@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:DesktopUI.ViewModels"
+             xmlns:lang="clr-namespace:DesktopUI"
              mc:Ignorable="d" d:DesignWidth="950" d:DesignHeight="370"
              x:DataType="vm:TrainingViewModel"
              x:Class="DesktopUI.Views.TrainingCardView">
@@ -11,18 +12,18 @@
         <Grid RowDefinitions="Auto, *">
             
             <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundBaseHighBrush}" Padding="20,10">
-                <TextBlock Text="Trénink" Foreground="{DynamicResource SystemControlForegroundAltHighBrush}" FontSize="36" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" />
+                <TextBlock Text="{x:Static lang:Strings.ButtonTraining}" Foreground="{DynamicResource SystemControlForegroundAltHighBrush}" FontSize="36" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" />
             </Border>
 
             <Grid Grid.Row="1" ColumnDefinitions="Auto, *, Auto" Margin="20">
                 
                 <StackPanel Grid.Column="0" MinWidth="150">
-                    <TextBlock Text="Výběr obtížnosti a úrovně" Margin="0,0,0,10" FontWeight="Bold"/>
-                    <RadioButton Content="Single hody" IsChecked="{Binding IsSingleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
-                    <RadioButton Content="Double hody" IsChecked="{Binding IsDoubleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
-                    <RadioButton Content="Triple hody" IsChecked="{Binding IsTripleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
-                    <RadioButton Content="Náhodně všechny" IsChecked="{Binding IsRandomMode}" IsEnabled="{Binding !IsTrainingActive}"/>
-                    <RadioButton Content="Uzavření legu" IsChecked="{Binding IsCheckoutMode}" IsEnabled="{Binding !IsTrainingActive}"/>
+                    <TextBlock Text="{x:Static lang:Strings.TrainingLevel}" Margin="0,0,0,10" FontWeight="Bold"/>
+                    <RadioButton Content="{x:Static lang:Strings.TrainingSingleThrows}" IsChecked="{Binding IsSingleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
+                    <RadioButton Content="{x:Static lang:Strings.TrainingDoubleThrows}" IsChecked="{Binding IsDoubleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
+                    <RadioButton Content="{x:Static lang:Strings.TrainingTrebleThrows}" IsChecked="{Binding IsTripleMode}" IsEnabled="{Binding !IsTrainingActive}"/>
+                    <RadioButton Content="{x:Static lang:Strings.TrainingRandomThrows}" IsChecked="{Binding IsRandomMode}" IsEnabled="{Binding !IsTrainingActive}"/>
+                    <RadioButton Content="{x:Static lang:Strings.TrainingCheckoutThrows}" IsChecked="{Binding IsCheckoutMode}" IsEnabled="{Binding !IsTrainingActive}"/>
                     
                     <StackPanel Spacing="5" Margin="0,15,0,0">
                         <Button Content="Start" Command="{Binding StartTrainingCommand}" 
@@ -43,16 +44,28 @@
                     </Border>
                     
                     <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
-                        <Button Content="Nehozeno (další)" Command="{Binding MissCommand}" IsEnabled="{Binding IsTrainingActive}"/>
-                        <Button Content="Hozeno (další)" Command="{Binding HitCommand}" IsEnabled="{Binding IsTrainingActive}"/>
+                        <Button Content="{x:Static lang:Strings.TrainingNotThrownNext}" Command="{Binding MissCommand}" IsEnabled="{Binding IsTrainingActive}"/>
+                        <Button Content="{x:Static lang:Strings.TrainingThrownNext}" Command="{Binding HitCommand}" IsEnabled="{Binding IsTrainingActive}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Spacing="10" MinWidth="200">
-                    <TextBlock Text="Statistiky" Margin="0,0,0,10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding TotalThrows, StringFormat='Celkem: {0}'}" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding Hits, StringFormat='Hozeno: {0}'}" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding Misses, StringFormat='Nehozeno: {0}'}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Static lang:Strings.StatsMenu}" Margin="0,0,0,10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Run Text="{x:Static lang:Strings.TrainingTotal}" />
+                        <Run Text=": " />
+                        <Run Text="{Binding TotalThrows}" />
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Run Text="{x:Static lang:Strings.TrainingThrown}" />
+                        <Run Text=": " />
+                        <Run Text="{Binding Hits}" />
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Run Text="{x:Static lang:Strings.TrainingNotThrown}" />
+                        <Run Text=": " />
+                        <Run Text="{Binding Misses}" />
+                    </TextBlock>
                 </StackPanel>
                 
             </Grid>

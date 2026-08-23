@@ -464,5 +464,101 @@ namespace DesktopUI {
                 return ResourceManager.GetString("DartboardMain", resourceCulture);
             }
         }
+        
+        public static string TrainingThrown {
+            get {
+                return ResourceManager.GetString("TrainingThrown", resourceCulture);
+            }
+        }
+        
+        public static string TrainingNotThrown {
+            get {
+                return ResourceManager.GetString("TrainingNotThrown", resourceCulture);
+            }
+        }
+        
+        public static string TrainingTotal {
+            get {
+                return ResourceManager.GetString("TrainingTotal", resourceCulture);
+            }
+        }
+        
+        public static string TrainingSingleThrows {
+            get {
+                return ResourceManager.GetString("TrainingSingleThrows", resourceCulture);
+            }
+        }
+        
+        public static string TrainingDoubleThrows {
+            get {
+                return ResourceManager.GetString("TrainingDoubleThrows", resourceCulture);
+            }
+        }
+        
+        public static string TrainingTrebleThrows {
+            get {
+                return ResourceManager.GetString("TrainingTrebleThrows", resourceCulture);
+            }
+        }
+        
+        public static string TrainingRandomThrows {
+            get {
+                return ResourceManager.GetString("TrainingRandomThrows", resourceCulture);
+            }
+        }
+        
+        public static string TrainingCheckoutThrows {
+            get {
+                return ResourceManager.GetString("TrainingCheckoutThrows", resourceCulture);
+            }
+        }
+        
+        public static string TrainingLevel {
+            get {
+                return ResourceManager.GetString("TrainingLevel", resourceCulture);
+            }
+        }
+        
+        public static string TrainingNotThrownNext {
+            get {
+                return ResourceManager.GetString("TrainingNotThrownNext", resourceCulture);
+            }
+        }
+        
+        public static string TrainingThrownNext {
+            get {
+                return ResourceManager.GetString("TrainingThrownNext", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsTypeName {
+            get {
+                return ResourceManager.GetString("StatisticsTypeName", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsDetails {
+            get {
+                return ResourceManager.GetString("StatisticsDetails", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsAverage {
+            get {
+                return ResourceManager.GetString("StatisticsAverage", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsHighestOut {
+            get {
+                return ResourceManager.GetString("StatisticsHighestOut", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsYearPlaceholder {
+            get {
+                return ResourceManager.GetString("StatisticsYearPlaceholder", resourceCulture);
+            }
+        }
     }
 }

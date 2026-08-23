@@ -221,4 +221,52 @@
     <data name="DartboardMain" xml:space="preserve">
         <value>Interaktivní terč</value>
     </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>Výběr obtížnosti a úrovně</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>Single hody</value>
+    </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>Double hody</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>Uzavření legu</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>Náhodně všechny</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>Triple hody</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>Celkem</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>Nehozeno</value>
+    </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>Hozeno</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>Nehozeno (další)</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>Nehozeno (další)</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>Zadejte jméno...</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>Detailní statistiky</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>Průměr:</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>Největší zavření:</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>Vyberte rok</value>
+    </data>
 </root>

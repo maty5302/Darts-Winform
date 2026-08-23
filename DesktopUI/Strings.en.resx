@@ -221,4 +221,52 @@
     <data name="DartboardMain" xml:space="preserve">
         <value>Interactive dartboard</value>
     </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>Double throws</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>Single throws</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>Randomly all</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>Not thrown</value>
+    </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>Thrown</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>Total</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>Treble throws</value>
+    </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>Selecting difficulty and level</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>Closing the leg</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>Not thrown (next)</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>Thrown (next)</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>Enter a name...</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>Detailed statistics</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>Average:</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>Highest out:</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>Choose a year</value>
+    </data>
 </root>

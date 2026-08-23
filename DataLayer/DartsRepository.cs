@@ -202,4 +202,14 @@ public class DartsRepository : IDartsRepository
             AllHundred80 = latestStats.AllHundred80
         };
     }
+    public async Task<List<int>> GetAvailableYearsAsync(long playerId)
+    {
+        await using var context = CreateContext();
+        return await context.YearlyStatistics
+            .Where(s => s.PlayerId == playerId)
+            .Select(s => s.Year)
+            .Distinct()
+            .OrderByDescending(y => y) 
+            .ToListAsync();
+    }
 }

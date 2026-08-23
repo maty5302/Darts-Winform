@@ -14,5 +14,6 @@ namespace Domain.Interfaces
     
        Task<PlayerStatsDto?> GetStatsForYearAsync(long playerId, int year);
        Task UpdateStatsAsync(PlayerStatsDto statsDto); 
+       Task<List<int>> GetAvailableYearsAsync(long playerId);
     }
 }
