@@ -21,9 +21,9 @@ jobs:
 
     - name: Restore dependencies
       # TADY UPRAV NÁZEV: Zadej cestu ke svému hlavnímu .sln souboru
-      run: dotnet restore šipky_Forms_DotNet.sln
+      run: dotnet restore DartsCounter.sln
 
     - name: Build Solution
       # Zkompilujeme celou aplikaci v Release módu (jako pro produkci)
       # TADY UPRAV NÁZEV: Zadej cestu ke svému hlavnímu .sln souboru
-      run: dotnet build šipky_Forms_DotNet.sln --configuration Release --no-restore
+      run: dotnet build DartsCounter.sln --configuration Release --no-restore
