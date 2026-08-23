@@ -18,6 +18,8 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private int _score = 501;
     [ObservableProperty] private DuelViewModel _duelVM;
     [ObservableProperty] private bool _isDuelMode;
+    [ObservableProperty] private bool _isTrainingMode;
+    [ObservableProperty] private TrainingViewModel _trainingVM;
     
     public SettingsManager Settings { get; }
     
@@ -29,6 +31,7 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel(IDartsRepository repo)
     {
         _repo = repo;
+        _trainingVM = new TrainingViewModel();
         Settings = new SettingsManager();
         _duelVM = new DuelViewModel(_repo);
         _ = Settings.CheckForUpdatesAsync();
@@ -58,8 +61,8 @@ public partial class MainViewModel : ViewModelBase
     private void StartGame()
     {
         IsDuelMode = false;
-        Players.Clear();
-        //AverageScore.ClearAverage();    
+        IsTrainingMode = false;
+        Players.Clear();  
         PlayerViewModel.ResetGlobalPlacement();
         for (int i = 0; i < PlayerCount; i++)
         {
@@ -185,6 +188,7 @@ public partial class MainViewModel : ViewModelBase
     {
         string team1Name;
         string team2Name;
+        IsTrainingMode = false; 
 
         DuelVM.Is2V2Mode = config.Is2v2;
 
@@ -222,5 +226,19 @@ public partial class MainViewModel : ViewModelBase
     public async Task<List<PlayerDto>> GetDatabasePlayersAsync()
     {
         return await _repo.GetAllPlayersAsync();
+    }
+
+    [RelayCommand]
+    private void OpenTraining()
+    {
+        IsDuelMode = false;
+        Players.Clear();
+
+        IsTrainingMode = true;
+
+        if (TrainingVM.ResetTrainingCommand.CanExecute(null))
+        {
+            TrainingVM.ResetTrainingCommand.Execute(null);
+        }
     }
 }
