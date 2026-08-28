@@ -87,8 +87,8 @@
                             <Button Content="{x:Static lang:Strings.ButtonGameOn}" Command="{Binding StartGameCommand}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                             <Button Content="Duel" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_OnClickDuel"/>
                             <Button Content="{x:Static lang:Strings.ButtonTraining}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="True" Command="{Binding OpenTrainingCommand}"/>
-                            <Button Content="{x:Static lang:Strings.ButtonTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="False"/>
-                            <Button Content="{x:Static lang:Strings.ButtonDetailOfTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="False"/>
+                            <Button Content="{x:Static lang:Strings.ButtonTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="True" Click="Button_OnClickTournament"/>
+                            <Button Content="{x:Static lang:Strings.ButtonDetailOfTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="True" Click="Button_OnClickTournamentDetail"/>
                             
                         </UniformGrid>
                     </StackPanel>

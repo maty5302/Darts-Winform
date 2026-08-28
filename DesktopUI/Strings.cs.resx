@@ -269,4 +269,16 @@
     <data name="StatisticsYearPlaceholder" xml:space="preserve">
         <value>Vyberte rok</value>
     </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>Turnaj</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>Počet hráčů</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>Příprava turnaje</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>Turnajová soupiska</value>
+    </data>
 </root>

@@ -560,5 +560,29 @@ namespace DesktopUI {
                 return ResourceManager.GetString("StatisticsYearPlaceholder", resourceCulture);
             }
         }
+        
+        public static string TournamentMain {
+            get {
+                return ResourceManager.GetString("TournamentMain", resourceCulture);
+            }
+        }
+        
+        public static string TournamentNumPlayers {
+            get {
+                return ResourceManager.GetString("TournamentNumPlayers", resourceCulture);
+            }
+        }
+        
+        public static string TournamentPrepare {
+            get {
+                return ResourceManager.GetString("TournamentPrepare", resourceCulture);
+            }
+        }
+        
+        public static string TournamentRoster {
+            get {
+                return ResourceManager.GetString("TournamentRoster", resourceCulture);
+            }
+        }
     }
 }

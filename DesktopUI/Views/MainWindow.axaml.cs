@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -7,9 +8,9 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using DesktopUI.Services;
 using DesktopUI.ViewModels;
-using Domain;
-using Domain.Interfaces;
+using DesktopUI.ViewModels.Tournament;
 using Microsoft.Extensions.DependencyInjection;
+using TournamentSetupViewModel = DesktopUI.ViewModels.Tournament.TournamentSetupViewModel;
 
 namespace DesktopUI.Views;
 
@@ -131,5 +132,36 @@ public partial class MainWindow : Window
     {
         DartboardWindow experiment = new DartboardWindow(_boundViewModel);
         experiment.Show();
+    }
+
+    private async void Button_OnClickTournament(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is MainViewModel vm)
+        {
+            var setupVm = new TournamentSetupViewModel(vm.Repo);
+            var setupWindow = new TournamentSetupWindow(setupVm);
+            
+            var players = await setupWindow.ShowDialog<List<Domain.Models.PlayerDto>>(this);
+            
+            if (players != null && players.Count > 0)
+            {
+                vm.StartTournament(players);
+            }
+        }
+    }
+    
+    private void Button_OnClickTournamentDetail(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is MainViewModel vm && vm.ActiveTournament != null)
+        {
+            var bracketVm = new TournamentBracketViewModel();
+            bracketVm.LoadTournament(vm.ActiveTournament);
+            
+            var bracketWindow = new TournamentBracketWindow 
+            { 
+                DataContext = bracketVm 
+            };
+            bracketWindow.Show(this); 
+        }
     }
 }

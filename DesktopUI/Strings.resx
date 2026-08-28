@@ -276,4 +276,16 @@
     <data name="StatisticsYearPlaceholder" xml:space="preserve">
         <value>_StatisticsYearPlaceholder</value>
     </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>_TournamentMain</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>_TournamentNumPlayers</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>_TournamentPrepare</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>_TournamentRoster</value>
+    </data>
 </root>

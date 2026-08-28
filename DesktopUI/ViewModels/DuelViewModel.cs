@@ -53,6 +53,8 @@ namespace DesktopUI.ViewModels
 
         private bool _soundEffects;
         
+        public Action<int>? OnDuelFinished { get; set; }
+        
         //sets winner name to View
         public string WinnerName
         {
@@ -316,6 +318,9 @@ namespace DesktopUI.ViewModels
             
             await UpdateTeamStatisticsAsync(Player1, team1Ids, isWinner: isTeam1Winner);
             await UpdateTeamStatisticsAsync(Player2, team2Ids, isWinner: !isTeam1Winner);
+            
+            int winnerId = isTeam1Winner ? Player1.PlayerId : Player2.PlayerId;
+            OnDuelFinished?.Invoke(winnerId);
         }
 
         /// <summary>
