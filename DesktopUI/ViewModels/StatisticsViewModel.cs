@@ -96,10 +96,13 @@ public partial class StatisticsViewModel : ObservableObject
         if (AvailableYears.Contains(currentYear))
         {
             SelectedYear = currentYear;
+            // Ensure stats load for the new player even if SelectedYear value equals previous player's year
+            await LoadStatsForSelectedYearAsync(playerId, SelectedYear.Value);
         }
         else if (AvailableYears.Count > 0)
         {
             SelectedYear = AvailableYears[0]; 
+            await LoadStatsForSelectedYearAsync(playerId, SelectedYear.Value);
         }
         else
         {
