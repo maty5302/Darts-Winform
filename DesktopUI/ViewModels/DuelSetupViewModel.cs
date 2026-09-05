@@ -4,8 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Domain.Models;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
 
 namespace DesktopUI.ViewModels
 {
