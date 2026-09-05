@@ -1,0 +1,90 @@
+name: Vydat novou verzi
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Instalace .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Kompilace pro Windows
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
+
+      - name: Instalace WiX Toolset
+        run: dotnet tool install --global wix
+
+      - name: Sestavení MSI instalátoru
+        run: |
+          wix extension add WixToolset.UI.wixext
+          wix build installer.wxs -o DartsCounter.msi
+
+      - name: Nahrát soubor do GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: DartsCounter.msi
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Instalace .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Kompilace pro macOS
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true -p:AssemblyName=DartsCounter -o DartsCounter.app/Contents/MacOS
+
+      - name: Vytvoření DMG obrazu
+        run: hdiutil create -volname "DartsCounter" -srcfolder DartsCounter.app -ov -format UDZO DartsCounter.dmg
+
+      - name: Nahrát soubor do GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: DartsCounter.dmg
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Instalace .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Kompilace pro Linux
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:AssemblyName=DartsCounter -o AppDir/usr/bin
+
+      - name: Příprava struktury pro AppImage
+        run: |
+          echo "[Desktop Entry]
+          Name=DartsCounter
+          Exec=DartsCounter
+          Icon=DartsCounter
+          Type=Application
+          Categories=Game;" > AppDir/DartsCounter.desktop
+          
+          # Uprav cestu k ikoně podle toho, jak se jmenuje ve tvém projektu
+          cp DesktopUI/Assets/IcoFiles/update.ico AppDir/DartsCounter.png 
+
+      - name: Vytvoření AppImage
+        run: |
+          wget -O appimagetool "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
+          chmod +x appimagetool
+          ./appimagetool --appimage-extract-and-run AppDir DartsCounter.AppImage
+
+      - name: Nahrát soubor do GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: DartsCounter.AppImage
