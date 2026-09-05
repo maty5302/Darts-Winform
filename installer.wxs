@@ -19,7 +19,17 @@
     <StandardDirectory Id="DesktopFolder" />
 
     <ComponentGroup Id="AppComponents" Directory="INSTALLFOLDER">
-      <Files Include="publish-win\**" />
+      
+      <Component>
+        <File Source="publish-win\DartsCounter.exe">
+          <Shortcut Name="DartsCounter" 
+                    Directory="DesktopFolder" 
+                    Icon="AppIcon" 
+                    WorkingDirectory="INSTALLFOLDER" />
+        </File>
+      </Component>
+      <Files Include="publish-win\**" Exclude="publish-win\DartsCounter.exe" />
+
     </ComponentGroup>
 
      <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
