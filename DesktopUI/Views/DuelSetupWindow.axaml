@@ -8,6 +8,7 @@
         Title="{x:Static lang:Strings.DuelSetMatch}" 
         Width="300" Height="550"
         CanResize="False"
+        CanMinimize="False"
         WindowStartupLocation="CenterScreen">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
@@ -17,7 +18,7 @@
         <TextBlock Text="{x:Static lang:Strings.DuelSetMainText}" 
                    FontSize="56" 
                    FontWeight="Black" 
-                   FontFamily="avares://DartsCounter/Assets/Fonts/#Showcard Gothic" 
+                   FontFamily="avares://DartsCounter/Assets/Fonts/#Sigmar One" 
                    HorizontalAlignment="Center" />
 
         <Border Background="#CCF5DEB3" Padding="20,15" CornerRadius="5">

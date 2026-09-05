@@ -8,6 +8,7 @@
         Height="400"
         x:Class="DesktopUI.Views.AboutApp"
         CanResize="False"
+        CanMinimize="False"
         Icon="/Assets/IcoFiles/about.ico" Title="{x:Static lang:Strings.AboutAppMenu }"
         xmlns:vm="using:DesktopUI.ViewModels"
         x:DataType="vm:AboutAppViewModel">
@@ -16,7 +17,7 @@
         <Border Background="{DynamicResource SystemRegionBrush}">
             <Grid Margin="12" RowDefinitions="Auto,Auto,Auto,Auto">
                 <Border>
-                    <TextBlock Text="{x:Static lang:Strings.ProgName}"  FontSize="36" FontWeight="Heavy" FontFamily="DesktopUI/Assets/Fonts/SHOWG.ttf" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{x:Static lang:Strings.ProgName}"  FontSize="36" FontWeight="Heavy" FontFamily="avares://DartsCounter/Assets/Fonts/#Sigmar One" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
                 <Image Grid.Row="1" Source="avares://DartsCounter/Assets/Icons/Darts2.png" Width="200" Height="200"></Image> 
                 <TextBox Grid.Row="2" Name="ChangeLogVersion" Text="{Binding ReleaseNotes}" Height="100" AcceptsReturn="False" TextWrapping="Wrap" IsReadOnly="True"/>

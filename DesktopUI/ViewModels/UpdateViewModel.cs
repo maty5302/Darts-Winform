@@ -2,25 +2,30 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Diagnostics;
-using System.Net;
+using System.IO;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Domain;
+using MsBox.Avalonia.Enums;
 
 namespace DesktopUI.ViewModels
 {
     public partial class UpdateViewModel : ViewModelBase
     {
-        [ObservableProperty] private string _version;
-        [ObservableProperty] private string _changelog;
+        [ObservableProperty] private string _version = "x.x.x.x";
+        [ObservableProperty] private string _changelog = "";
         
         [ObservableProperty] private bool _isDownloading;
-        [ObservableProperty] private int _downloadPercentage;
-        [ObservableProperty] private string _progressText;
+        [ObservableProperty] private double _downloadPercentage;
+        [ObservableProperty] private string _progressText = "";
 
         public Action? CloseAction { get; set; }
 
-        private WebClient? _webClient;
+        private static readonly HttpClient _httpClient = new HttpClient();
+        
+        private CancellationTokenSource? _cancellationTokenSource;
 
         public UpdateViewModel()
         {
@@ -40,49 +45,87 @@ namespace DesktopUI.ViewModels
             }
         }
 
-        private void C_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            DownloadPercentage = e.ProgressPercentage;
-            ProgressText = $"{e.BytesReceived / 1024 / 1024}MB / {e.TotalBytesToReceive / 1024 / 1024}MB";
-        }
-
         [RelayCommand]
         private async Task DownloadAsync()
         {
             IsDownloading = true;
+            _cancellationTokenSource = new CancellationTokenSource();
             
-            _webClient = new WebClient();
-            _webClient.DownloadProgressChanged += C_DownloadProgressChanged;
+            var progress = new Progress<(double Percentage, long BytesReceived, long TotalBytes)>(data =>
+            {
+                DownloadPercentage = data.Percentage;
+                ProgressText = $"{data.BytesReceived / 1024 / 1024}MB / {data.TotalBytes / 1024 / 1024}MB";
+            });
             
             try
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    await DownloadWindowsInstaller(_webClient, "DartsCounter.msi");
+                    await DownloadWindowsInstaller(Path.GetTempPath() + "DartsCounter.msi", progress, _cancellationTokenSource.Token);
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    await DownloadLinuxAppImage(_webClient, "DartsCounter.AppImage");
+                    await DownloadLinuxAppImage("DartsCounter.AppImage", progress, _cancellationTokenSource.Token);
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
-                    await DownloadMacOsInstaller(_webClient, "DartsCounter.dmg");
+                    await DownloadMacOsInstaller(Path.GetTempPath() + "DartsCounter.dmg", progress, _cancellationTokenSource.Token);
                 }
             }
-            catch (WebException)
+            catch (OperationCanceledException)
             {
+                
+            }
+            catch (HttpRequestException)
+            {
+                
             }
             finally
             {
                 CloseAction?.Invoke();
             }
         }
+        private async Task DownloadFileWithProgressAsync(string url, string destinationPath, IProgress<(double, long, long)> progress, CancellationToken cancellationToken)
+        {
+            using var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+            response.EnsureSuccessStatusCode();
 
-        private async Task DownloadWindowsInstaller(WebClient c, string filePath)
+            var totalBytes = response.Content.Headers.ContentLength ?? 0L;
+
+            await using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            await using var fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+
+            var buffer = new byte[8192];
+            var totalRead = 0L;
+            var isMoreToRead = true;
+
+            while (isMoreToRead)
+            {
+                var read = await contentStream.ReadAsync(buffer, cancellationToken);
+                if (read == 0)
+                {
+                    isMoreToRead = false;
+                }
+                else
+                {
+                    await fileStream.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
+                    totalRead += read;
+
+                    if (totalBytes > 0)
+                    {
+                        var percentage = Math.Round((double)totalRead / totalBytes * 100, 2);
+                        progress?.Report((percentage, totalRead, totalBytes)); 
+                    }
+                }
+            }
+        }
+
+        private async Task DownloadWindowsInstaller(string filePath, IProgress<(double, long, long)> progress, CancellationToken token)
         {
             try
             {
-                await c.DownloadFileTaskAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.msi",filePath);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.msi", filePath, progress, token);
+                
                 var processInfo = new ProcessStartInfo()
                 {
                     FileName = "msiexec.exe",
@@ -90,15 +133,21 @@ namespace DesktopUI.ViewModels
                     UseShellExecute = false,
                 };
                 Process.Start(processInfo);
+                Process.GetCurrentProcess().Kill();
             }
-            catch (Exception) { }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+               await MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard(
+                    "Error",
+                    ex.Message, ButtonEnum.Ok, Icon.Error).ShowAsync();
+            }
         }
 
-        private async Task DownloadLinuxAppImage(WebClient c, string filePath)
+        private async Task DownloadLinuxAppImage(string filePath, IProgress<(double, long, long)> progress, CancellationToken token)
         {
             try
             {
-                await c.DownloadFileTaskAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.AppImage", filePath);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.AppImage", filePath, progress, token);
                 
                 Process.Start(new ProcessStartInfo
                 {
@@ -113,23 +162,37 @@ namespace DesktopUI.ViewModels
                     FileName = filePath,
                     UseShellExecute = true
                 });
+                
+                Process.GetCurrentProcess().Kill();
             }
-            catch (Exception) { }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                await MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard(
+                    "Error",
+                    ex.Message, ButtonEnum.Ok, Icon.Error).ShowAsync();
+            }
         }
 
-        private async Task DownloadMacOsInstaller(WebClient c, string filePath)
+        private async Task DownloadMacOsInstaller(string filePath, IProgress<(double, long, long)> progress, CancellationToken token)
         {
             try
             {
-                await c.DownloadFileTaskAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.dmg", filePath);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.dmg", filePath, progress, token);
+                
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = "open",
                     Arguments = $"\"{filePath}\"",
                     UseShellExecute = true
                 });
+                Process.GetCurrentProcess().Kill();
             }
-            catch (Exception) { }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                await MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard(
+                    "Error",
+                    ex.Message, ButtonEnum.Ok, Icon.Error).ShowAsync();
+            }
         }
 
         [RelayCommand]
@@ -137,8 +200,7 @@ namespace DesktopUI.ViewModels
         {
             IsDownloading = false;
             
-            _webClient?.CancelAsync();
-            _webClient?.Dispose();
+            _cancellationTokenSource?.Cancel();
             
             CloseAction?.Invoke();
         }

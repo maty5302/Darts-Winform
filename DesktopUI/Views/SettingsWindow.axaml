@@ -11,6 +11,7 @@
         x:DataType="vm:SettingsViewModel"
         Title="{x:Static lang:Strings.SettingsMenu}"
         CanResize="False"
+        CanMinimize="False"
         Width="900"
         Height="600">
     <Grid>
@@ -18,7 +19,7 @@
 
         <Grid Margin="12" RowDefinitions="Auto,*">
             <Border Grid.Row="0" CornerRadius="10" Padding="8" Margin="0,0,0,8">
-                <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.AppSettingsMain}" FontSize="26" FontWeight="Bold" FontFamily="avares://DartsCounter/Assets/Fonts/#Showcard Gothic" />    
+                <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.AppSettingsMain}" FontSize="26" FontWeight="Bold" FontFamily="avares://DartsCounter/Assets/Fonts/#Sigmar One" />    
             </Border>
 
             <Grid Grid.Row="1" ColumnDefinitions="2*,2*" ColumnSpacing="14">

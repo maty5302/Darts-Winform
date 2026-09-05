@@ -12,7 +12,7 @@
         <Grid RowDefinitions="Auto, *">
             
             <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundBaseHighBrush}" Padding="20,10">
-                <TextBlock Text="{x:Static lang:Strings.ButtonTraining}" Foreground="{DynamicResource SystemControlForegroundAltHighBrush}" FontSize="36" FontFamily="avares://DartsCounter/Assets/Fonts/#Showcard Gothic" />
+                <TextBlock Text="{x:Static lang:Strings.ButtonTraining}" Foreground="{DynamicResource SystemControlForegroundAltHighBrush}" FontSize="36" FontFamily="avares://DartsCounter/Assets/Fonts/#Sigmar One" />
             </Border>
 
             <Grid Grid.Row="1" ColumnDefinitions="Auto, *, Auto" Margin="20">

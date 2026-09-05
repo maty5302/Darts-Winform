@@ -87,7 +87,7 @@ public partial class MainWindow : Window
                     "Error", 
                     Strings.DuelError, 
                     MsBox.Avalonia.Enums.ButtonEnum.Ok, 
-                    MsBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error, null, WindowStartupLocation.CenterOwner);
 
                 await box.ShowAsync();
                 return;
