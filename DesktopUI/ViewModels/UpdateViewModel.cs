@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Diagnostics;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Domain;
@@ -35,9 +34,9 @@ namespace DesktopUI.ViewModels
                 Version = await GithubIntegration.GetGitVersion();
                 Changelog = await GithubIntegration.GetReleaseNotes(Version);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Changelog = "Nepodařilo se načíst seznam změn.\nZkontrolujte připojení k internetu.";
+                Changelog = Strings.InternetNot;
             }
         }
 

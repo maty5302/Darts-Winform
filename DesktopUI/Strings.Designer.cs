@@ -141,6 +141,15 @@ namespace DesktopUI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _DartboardClear.
         /// </summary>
         public static string DartboardClear {
@@ -227,6 +236,15 @@ namespace DesktopUI {
         public static string DartboardUpNext {
             get {
                 return ResourceManager.GetString("DartboardUpNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Download.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
             }
         }
         
@@ -357,11 +375,38 @@ namespace DesktopUI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _InternetNot.
+        /// </summary>
+        public static string InternetNot {
+            get {
+                return ResourceManager.GetString("InternetNot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Later.
+        /// </summary>
+        public static string Later {
+            get {
+                return ResourceManager.GetString("Later", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _MainName.
         /// </summary>
         public static string MainName {
             get {
                 return ResourceManager.GetString("MainName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _ManualUpdate.
+        /// </summary>
+        public static string ManualUpdate {
+            get {
+                return ResourceManager.GetString("ManualUpdate", resourceCulture);
             }
         }
         
@@ -861,6 +906,15 @@ namespace DesktopUI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _UpdateApp.
+        /// </summary>
+        public static string UpdateApp {
+            get {
+                return ResourceManager.GetString("UpdateApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _UpdateAvailable.
         /// </summary>
         public static string UpdateAvailable {
@@ -884,6 +938,15 @@ namespace DesktopUI {
         public static string UpdateCheckFailed {
             get {
                 return ResourceManager.GetString("UpdateCheckFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _UpdateDownloading.
+        /// </summary>
+        public static string UpdateDownloading {
+            get {
+                return ResourceManager.GetString("UpdateDownloading", resourceCulture);
             }
         }
         

@@ -290,4 +290,25 @@
     <data name="TournamentPlayer" xml:space="preserve">
         <value>Player</value>
     </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>App update</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>Downloading update...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Download</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>Manual update</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>Later</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>Failed to load the list of changes. Check your internet connection.</value>
+    </data>
 </root>

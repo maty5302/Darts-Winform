@@ -297,4 +297,25 @@
     <data name="TournamentPlayer" xml:space="preserve">
         <value>_TournamentPlayer</value>
     </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>_UpdateApp</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>_UpdateDownloading</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>_Cancel</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>_Download</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>_ManualUpdate</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>_Later</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>_InternetNot</value>
+    </data>
 </root>

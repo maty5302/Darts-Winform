@@ -290,4 +290,25 @@
     <data name="TournamentPlayer" xml:space="preserve">
         <value>Hráč</value>
     </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>Aktualizace aplikace</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>Stahování aktualizace...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Zrušit</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Stáhnout</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>Ručně</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>Později</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>Nepodařilo se načíst seznam změn. Zkontrolujte připojení k internetu.</value>
+    </data>
 </root>
