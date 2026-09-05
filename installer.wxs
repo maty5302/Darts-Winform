@@ -13,7 +13,7 @@
 
   <Fragment>
     <Property Id="SHORTCUTNAME" Value="Darts Counter" />
-    <SetProperty Id="SHORTCUTNAME" Value="Počítadlo Šipky" After="AppSearch">SystemLanguageID = 1029</SetProperty>
+    <SetProperty Id="SHORTCUTNAME" Value="Počítadlo Šipky" After="AppSearch" Condition="SystemLanguageID = 1029"/>
 
 
     <StandardDirectory Id="ProgramFiles64Folder">
