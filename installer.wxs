@@ -39,6 +39,7 @@
                      Type="integer" 
                      Value="1" 
                      KeyPath="yes" />
+    </Component>
 
      <Component Id="StartMenuShortcutComp" Directory="ProgramMenuFolder">
       <Shortcut Id="AppStartMenuShortcut"
