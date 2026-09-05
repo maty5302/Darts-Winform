@@ -1,6 +1,7 @@
 name: Vydat novou verzi
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*'
@@ -80,7 +81,6 @@ jobs:
 
       - name: Vytvoření AppImage
         run: |
-          # OPRAVA ZDE: Nový a funkční odkaz na appimagetool z repozitáře AppImage/appimagetool
           wget -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
           chmod +x appimagetool
           ./appimagetool --appimage-extract-and-run AppDir DartsCounter.AppImage
