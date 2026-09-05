@@ -221,4 +221,73 @@
     <data name="DartboardMain" xml:space="preserve">
         <value>Interaktivní terč</value>
     </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>Výběr obtížnosti a úrovně</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>Single hody</value>
+    </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>Double hody</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>Uzavření legu</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>Náhodně všechny</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>Triple hody</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>Celkem</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>Nehozeno</value>
+    </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>Hozeno</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>Nehozeno (další)</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>Hozeno (další)</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>Zadejte jméno...</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>Detailní statistiky</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>Průměr:</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>Největší zavření:</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>Vyberte rok</value>
+    </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>Turnaj</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>Počet hráčů</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>Příprava turnaje</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>Turnajová soupiska</value>
+    </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>Každý hráč musí být vybrán a nesmí se opakovat!</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>Pro spuštění duelu musí být v databázi alespoň 2 hráči!</value>
+    </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>Hráč</value>
+    </data>
 </root>

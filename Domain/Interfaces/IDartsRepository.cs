@@ -9,10 +9,9 @@ namespace Domain.Interfaces
        Task<PlayerDto?> CreatePlayerAsync(string playerName);
        Task DeletePlayerAsync(long playerId);
        Task RenamePlayerAsync(long playerId, string newName);
-
-       Task<PlayerStatsDto?> GetAllYearsStatsAsync(long playerId);
-    
+       
        Task<PlayerStatsDto?> GetStatsForYearAsync(long playerId, int year);
        Task UpdateStatsAsync(PlayerStatsDto statsDto); 
+       Task<List<int>> GetAvailableYearsAsync(long playerId);
     }
 }

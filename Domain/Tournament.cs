@@ -5,11 +5,11 @@ namespace Domain
 	public class Tournament
 	{
 		public List<Match> matches { get; set; }
-		public List<Player> players { get; set; }
+		public List<PlayerDto> players { get; set; }
 		public List<List<Match>> allmatches { get; set; }
 		private int round { get; set; }
 
-		public Tournament(List<Player> players)
+		public Tournament(List<PlayerDto> players)
 		{
 			this.players = players;
 			this.matches = new List<Match>();
@@ -37,7 +37,7 @@ namespace Domain
 		//if all matches are played, generate next round (getNextMatch() returns null)
         public void generateNextRound()
 		{
-			List<Player> winners = new List<Player>();
+			List<PlayerDto> winners = new List<PlayerDto>();
 			foreach (Match match in matches)
 			{
 				if (match.WinnerId != 0)

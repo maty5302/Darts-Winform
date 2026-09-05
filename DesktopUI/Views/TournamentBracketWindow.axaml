@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:DesktopUI.Views"
+        x:Class="DesktopUI.Views.TournamentBracketWindow"
+        xmlns:lang="clr-namespace:DesktopUI"
+        Title="{x:Static lang:Strings.TournamentRoster}"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/IcoFiles/CupNoWin.ico"
+        SizeToContent="WidthAndHeight"
+        MinWidth="600" MinHeight="300"
+        MaxWidth="1400" MaxHeight="850"
+        CanMaximize="False"
+        >
+    
+    <Grid Margin="12" RowDefinitions="Auto,*">
+        <Border Grid.Row="0" CornerRadius="10" Padding="8" Margin="0,0,0,8">
+            <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.TournamentRoster}" FontSize="26" FontWeight="Bold" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" />    
+        </Border>
+        <Panel Grid.Row="1">
+            <views:TournamentBracketView />
+        </Panel>
+    </Grid>
+</Window>

@@ -13,17 +13,13 @@ public partial class StatisticsViewModel : ObservableObject
 {
     private readonly IDartsRepository _repository;
 
-    [ObservableProperty]
-    private ObservableCollection<PlayerDto> _players = new();
+    [ObservableProperty] private ObservableCollection<PlayerDto> _players = new();
 
-    [ObservableProperty]
-    private PlayerDto? _selectedPlayer;
+    [ObservableProperty] private PlayerDto? _selectedPlayer;
 
-    [ObservableProperty]
-    private string _newPlayerName = string.Empty;
+    [ObservableProperty] private string _newPlayerName = string.Empty;
 
-    [ObservableProperty]
-    private string _renamePlayerName = string.Empty;
+    [ObservableProperty] private string _renamePlayerName = string.Empty;
 
     [ObservableProperty] private int _wins;
     [ObservableProperty] private double _average;
@@ -39,6 +35,7 @@ public partial class StatisticsViewModel : ObservableObject
     [ObservableProperty] private int _allHundred;
     [ObservableProperty] private int _allHundred20;
     [ObservableProperty] private int _allHundred80;
+    [ObservableProperty] private ObservableCollection<int> _availableYears = new();
 
     public StatisticsViewModel(IDartsRepository repository)
     {
@@ -63,40 +60,54 @@ public partial class StatisticsViewModel : ObservableObject
         if (value != null)
         {
             RenamePlayerName = value.PlayerName;
-            _ = LoadPlayerStatsAsync(value.Id);
+            _ = LoadPlayerProfileAsync(value.Id);
         }
     }
 
-    private async Task LoadPlayerStatsAsync(long playerId)
+    private int? _selectedYear;
+    public int? SelectedYear
     {
-        int currentYear = DateTime.Now.Year;
-        
-        // Načtení dat pro aktuální rok
-        var stats = await _repository.GetStatsForYearAsync(playerId, currentYear);
-        if (stats != null)
+        get => _selectedYear;
+        set
         {
-            Wins = stats.Wins;
-            Average = stats.Average;
-            HighestOut = stats.HighestOut;
-            Sixty = stats.Sixty;
-            Hundred = stats.Hundred;
-            Hundred20 = stats.Hundred20;
-            Hundred80 = stats.Hundred80;
+            if (SetProperty(ref _selectedYear, value) && SelectedPlayer != null && value.HasValue && value.Value > 0)
+            {
+                _ = LoadStatsForSelectedYearAsync(SelectedPlayer.Id, value.Value);
+            }
+        }
+    }
+    
+    private async Task LoadStatsForSelectedYearAsync(long playerId, int year)
+    {
+        var stats = await _repository.GetStatsForYearAsync(playerId, year);
+        UpdateStatsUi(stats);
+    }
+    
+    private async Task LoadPlayerProfileAsync(long playerId)
+    {
+        var years = await _repository.GetAvailableYearsAsync(playerId);
+        AvailableYears.Clear();
+        foreach (var year in years)
+        {
+            AvailableYears.Add(year);
+        }
+
+        int currentYear = DateTime.Now.Year;
+        if (AvailableYears.Contains(currentYear))
+        {
+            SelectedYear = currentYear;
+            // Ensure stats load for the new player even if SelectedYear value equals previous player's year
+            await LoadStatsForSelectedYearAsync(playerId, SelectedYear.Value);
+        }
+        else if (AvailableYears.Count > 0)
+        {
+            SelectedYear = AvailableYears[0]; 
+            await LoadStatsForSelectedYearAsync(playerId, SelectedYear.Value);
         }
         else
         {
-            Wins = 0; Average = 0; HighestOut = 0; Sixty = 0; Hundred = 0; Hundred20 = 0; Hundred80 = 0;
-        }
-
-        var allStats = await _repository.GetAllYearsStatsAsync(playerId);
-        if (allStats != null)
-        {
-            AllWins = allStats.AllWins;
-            OldHighestOut = allStats.OldHighestOut;
-            AllSixty = allStats.AllSixty;
-            AllHundred = allStats.AllHundred;
-            AllHundred20 = allStats.AllHundred20;
-            AllHundred80 = allStats.AllHundred80;
+            SelectedYear = null;
+            UpdateStatsUi(null);
         }
     }
 
@@ -133,5 +144,23 @@ public partial class StatisticsViewModel : ObservableObject
         long currentId = SelectedPlayer.Id;
         await LoadDataAsync();
         SelectedPlayer = Players.FirstOrDefault(p => p.Id == currentId);
+    }
+    
+    private void UpdateStatsUi(PlayerStatsDto? stats)
+    {
+        if (stats != null)
+        {
+            Wins = stats.Wins;
+            Average = stats.Average;
+            HighestOut = stats.HighestOut;
+            Sixty = stats.Sixty;
+            Hundred = stats.Hundred;
+            Hundred20 = stats.Hundred20;
+            Hundred80 = stats.Hundred80;
+        }
+        else
+        {
+            Wins = 0; Average = 0; HighestOut = 0; Sixty = 0; Hundred = 0; Hundred20 = 0; Hundred80 = 0;
+        }
     }
 }

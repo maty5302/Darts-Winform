@@ -228,4 +228,73 @@
     <data name="DartboardMain" xml:space="preserve">
         <value>_DartboardMain</value>
     </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>_TrainingThrown</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>_TrainingNotThrown</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>_TrainingTotal</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>_TrainingSingleThrows</value>
+    </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>_TrainingDoubleThrows</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>_TrainingTrebleThrows</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>_TrainingRandomThrows</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>_TrainingCheckoutThrows</value>
+    </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>_TrainingLevel</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>_TrainingNotThrownNext</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>_TrainingThrownNext</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>_StatisticsTypeName</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>_StatisticsDetails</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>_StatisticsAverage</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>_StatisticsHighestOut</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>_StatisticsYearPlaceholder</value>
+    </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>_TournamentMain</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>_TournamentNumPlayers</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>_TournamentPrepare</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>_TournamentRoster</value>
+    </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>_TournamentSetupErrorPlayers</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>_DuelError</value>
+    </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>_TournamentPlayer</value>
+    </data>
 </root>

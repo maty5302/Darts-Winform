@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Services;
-using Domain;
 using Domain.Interfaces;
 using Domain.Models;
 
@@ -20,10 +20,14 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private bool _isDuelMode;
     [ObservableProperty] private bool _isTrainingMode;
     [ObservableProperty] private TrainingViewModel _trainingVM;
+    [ObservableProperty] private Domain.Tournament? _activeTournament;
+    [ObservableProperty] private bool _isTournamentMode;
     
     public SettingsManager Settings { get; }
     
     private readonly IDartsRepository _repo;
+    
+    public IDartsRepository Repo => _repo;
 
     private int _currentPlayerIndex;
     public ObservableCollection<PlayerViewModel> Players { get; } = new();
@@ -239,6 +243,58 @@ public partial class MainViewModel : ViewModelBase
         if (TrainingVM.ResetTrainingCommand.CanExecute(null))
         {
             TrainingVM.ResetTrainingCommand.Execute(null);
+        }
+    }
+    
+   public void StartTournament(List<PlayerDto> selectedPlayers)
+    {
+        ActiveTournament = new Domain.Tournament(selectedPlayers);
+        IsTournamentMode = true;
+        
+        DuelVM.OnDuelFinished = (winnerId) =>
+        {
+            if (IsTournamentMode && ActiveTournament != null)
+            {
+                var match = ActiveTournament.getNextMatch();
+                if (match != null)
+                {
+                    match.WinnerId = winnerId;
+                    if (Settings.SoundEffectsEnabled)
+                        SoundManagerDarts.SoundEffects.PlayWinnerSong();
+                    PlayNextTournamentMatch();
+                }
+            }
+        };
+        PlayNextTournamentMatch();
+    }
+
+    private void PlayNextTournamentMatch()
+    {
+        var nextMatch = ActiveTournament?.getNextMatch();
+        
+        if (nextMatch == null)
+        {
+            ActiveTournament?.generateNextRound();
+            nextMatch = ActiveTournament?.getNextMatch();
+        }
+
+        if (nextMatch != null)
+        {
+            var p1 = ActiveTournament!.players.FirstOrDefault(p => p.Id == nextMatch.Player1Id);
+            var p2 = ActiveTournament!.players.FirstOrDefault(p => p.Id == nextMatch.Player2Id);
+
+            DuelVM.Is2V2Mode = false;
+            DuelVM.Player1.PlayerId = nextMatch.Player1Id;
+            DuelVM.Player2.PlayerId = nextMatch.Player2Id;
+            
+            DuelVM.InitializeDuel(p1?.PlayerName ?? "Hráč 1", p2?.PlayerName ?? "Hráč 2", Score, 3, false, Settings.SoundEffectsEnabled);
+            
+            IsDuelMode = true;
+            IsTrainingMode = false;
+        }
+        else
+        {
+            IsTournamentMode = false;
         }
     }
 }

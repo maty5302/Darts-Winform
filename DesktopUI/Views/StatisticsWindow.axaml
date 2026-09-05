@@ -50,12 +50,11 @@
                            FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic"
                            Margin="0,0,0,24"/>
 
-                <!-- VYTVOŘENÍ HRÁČE -->
                 <Border Classes="Card">
                     <StackPanel>
                         <TextBlock Text= "{x:Static lang:Strings.StatisticsCreatePlayer}" Classes="SectionHeader"/>
                         <Grid ColumnDefinitions="*, Auto">
-                            <TextBox Grid.Column="0" Text="{Binding NewPlayerName}" PlaceholderText="Zadejte jméno..." Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="0" Text="{Binding NewPlayerName}" PlaceholderText="{x:Static lang:Strings.StatisticsTypeName}" Margin="0,0,12,0" VerticalAlignment="Center"/>
                             <Button Grid.Column="1" Content="{x:Static lang:Strings.StatisticsCreateButton}" Command="{Binding CreatePlayerCommand}" VerticalAlignment="Center" Padding="16,6"/>
                         </Grid>
                     </StackPanel>
@@ -82,64 +81,45 @@
                             <Button Grid.Column="1" Content="{x:Static lang:Strings.StatisticsRemove}" Command="{Binding DeletePlayerCommand}" Background="#33FF0000" Foreground="#FF5555"/>
                         </Grid>
 
-                        <!-- Přejmenování -->
                         <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,20">
                             <TextBox Grid.Column="0" Text="{Binding RenamePlayerName}" Margin="0,0,12,0"/>
                             <Button Grid.Column="1" Content="{x:Static lang:Strings.StatisticsRename}" Command="{Binding RenamePlayerCommand}"/>
                         </Grid>
+                        
+                        <Grid ColumnDefinitions="*, Auto" Margin="0,16,0,16">
+                            <TextBlock Grid.Column="0" Text="{x:Static lang:Strings.StatisticsDetails}" Classes="SectionHeader" VerticalAlignment="Center" Margin="0"/>
+                            <ComboBox Grid.Column="1" 
+                                      ItemsSource="{Binding AvailableYears}" 
+                                      SelectedItem="{Binding SelectedYear}"
+                                      PlaceholderText="{x:Static lang:Strings.StatisticsYearPlaceholder}"
+                                      Width="120"
+                                      HorizontalAlignment="Right"/>
+                        </Grid>
 
-                        <!-- STATISTIKY (ZÁLOŽKY) -->
-                        <TabControl>
-                            <!-- TENTO ROK -->
-                            <TabItem Header="Tento rok" FontSize="14">
-                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,16,0,0" HorizontalAlignment="Center">
+                        <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Center">
                                     
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsVictoryCount}" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Wins}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsVictoryCount}" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Wins}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Největší zavření:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding HighestOut}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsHighestOut}" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding HighestOut}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Poslední průměr:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Average}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsAverage}" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Average}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="60+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Sixty}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="60+:" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Sixty}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="100+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Hundred}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="100+:" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Hundred}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="120+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Hundred20}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="120+:" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Hundred20}" Classes="StatValue"/>
 
-                                    <TextBlock Grid.Row="7" Grid.Column="0" Text="180:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Hundred80}" Classes="StatValue" Foreground="#FF8C00"/>
-                                </Grid>
-                            </TabItem>
-                            
-                            <!-- PŘEDCHOZÍ ROKY (Historie) -->
-                            <TabItem Header="Předchozí roky" FontSize="14">
-                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,16,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsVictoryCount}" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AllWins}" Classes="StatValue"/>
-
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Max zavření (historie):" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding OldHighestOut}" Classes="StatValue"/>
-
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Celkem 60+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding AllSixty}" Classes="StatValue"/>
-
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Celkem 100+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AllHundred}" Classes="StatValue"/>
-
-                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Celkem 120+:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding AllHundred20}" Classes="StatValue"/>
-
-                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Celkem 180:" Classes="StatLabel"/>
-                                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding AllHundred80}" Classes="StatValue" Foreground="#FF8C00"/>
-                                </Grid>
-                            </TabItem>
-                        </TabControl>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="180:" Classes="StatLabel"/>
+                            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Hundred80}" Classes="StatValue" Foreground="#FF8C00"/>
+                        </Grid>
+                        
                     </StackPanel>
                 </Border>
 
