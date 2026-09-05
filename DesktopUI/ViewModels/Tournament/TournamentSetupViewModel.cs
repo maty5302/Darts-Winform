@@ -57,17 +57,19 @@ namespace DesktopUI.ViewModels.Tournament
         [RelayCommand]
         private void StartTournament()
         {
-            var selectedPlayers = Enumerable.Select<TournamentSlot, PlayerDto?>(Slots, s => s.SelectedPlayer).Where(p => p != null).ToList();
+            var selectedPlayers = Slots
+                .Select(s => s.SelectedPlayer)
+                .OfType<PlayerDto>()
+                .ToList();
 
-            if (selectedPlayers.Count != PlayerCount || selectedPlayers.DistinctBy(p => p!.Id).Count() != PlayerCount)
+            if (selectedPlayers.Count != PlayerCount || selectedPlayers.DistinctBy(p => p.Id).Count() != PlayerCount)
             {
                 ErrorMessage = Strings.TournamentSetupErrorPlayers;
                 HasError = true;
                 return;
             }
             HasError = false;
-            OnTournamentStart?.Invoke(selectedPlayers!);
-        }
+            OnTournamentStart?.Invoke(selectedPlayers);
     }
 
     public partial class TournamentSlot : ObservableObject
