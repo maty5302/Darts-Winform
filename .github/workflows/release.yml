@@ -75,7 +75,8 @@ jobs:
           chmod +x AppDir/AppRun
           
           echo "[Desktop Entry]
-          Name=DartsCounter
+          Name=Darts Counter
+          Name[cs]=Šipky
           Exec=DartsCounter
           Icon=DartsCounter
           Type=Application
