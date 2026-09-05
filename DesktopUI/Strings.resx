@@ -288,4 +288,10 @@
     <data name="TournamentRoster" xml:space="preserve">
         <value>_TournamentRoster</value>
     </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>_TournamentSetupErrorPlayers</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>_DuelError</value>
+    </data>
 </root>

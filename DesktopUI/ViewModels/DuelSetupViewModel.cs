@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Domain.Models;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace DesktopUI.ViewModels
 {
@@ -11,6 +13,8 @@ namespace DesktopUI.ViewModels
     {
         [ObservableProperty] private int _score = 301;
         [ObservableProperty] private int _legs = 1;
+        [ObservableProperty] private string _errorMessage = string.Empty;
+        [ObservableProperty] private bool _hasError;
 
         private bool _is2v2;
         public bool Is2v2
@@ -39,25 +43,29 @@ namespace DesktopUI.ViewModels
         {
             _onStartGameRequested = onStartGameRequested;
             AvailablePlayers = new ObservableCollection<PlayerDto>(players);
-
-            if (AvailablePlayers.Count >= 2)
-            {
-                Player1 = AvailablePlayers[0];
-                Player2 = AvailablePlayers[1];
-            }
-
         }
+        
 
         [RelayCommand]
         public void StartGame()
         {
             if (Is2v2)
             {
-                if (Player1 == null || Player2 == null || Player3 == null || Player4 == null) return;
+                if (Player1 == null || Player2 == null || Player3 == null || Player4 == null)
+                {
+                    ErrorMessage = Strings.TournamentSetupErrorPlayers;
+                    HasError = true;
+                    return;
+                }
             }
             else
             {
-                if (Player1 == null || Player2 == null) return;
+                if (Player1 == null || Player2 == null)
+                {
+                    ErrorMessage = Strings.TournamentSetupErrorPlayers;
+                    HasError = true;
+                    return;
+                }
             }
 
             _onStartGameRequested?.Invoke(this);

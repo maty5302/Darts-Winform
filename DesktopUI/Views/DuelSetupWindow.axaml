@@ -67,6 +67,25 @@
 
             </StackPanel>
         </Border>
+        
+        <Border Background="#22FF0000" 
+                BorderBrush="#AAFF5555" 
+                BorderThickness="1" 
+                CornerRadius="6" 
+                Padding="16,8" 
+                Margin="0,10,0,0"
+                MaxWidth="300"
+                IsVisible="{Binding HasError}"
+                HorizontalAlignment="Center">
+        
+            <TextBlock Text="{Binding ErrorMessage}" 
+                       Foreground="#FF5555" 
+                       FontWeight="SemiBold"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+        </Border>
 
         <Button Content="{x:Static lang:Strings.ButtonGameOn}" 
                 Command="{Binding StartGameCommand}" 

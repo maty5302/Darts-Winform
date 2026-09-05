@@ -19,6 +19,8 @@ namespace DesktopUI.ViewModels.Tournament
         [ObservableProperty] private int _playerCount = 4;
         [ObservableProperty] private ObservableCollection<PlayerDto> _availablePlayers = new();
         [ObservableProperty] private ObservableCollection<TournamentSlot> _slots = new();
+        [ObservableProperty] private string _errorMessage = string.Empty;
+        [ObservableProperty] private bool _hasError;
 
         public Action<List<PlayerDto>>? OnTournamentStart { get; set; }
 
@@ -59,10 +61,11 @@ namespace DesktopUI.ViewModels.Tournament
 
             if (selectedPlayers.Count != PlayerCount || selectedPlayers.DistinctBy(p => p!.Id).Count() != PlayerCount)
             {
-                // Tady ideálně zobrazit chybovou hlášku
+                ErrorMessage = Strings.TournamentSetupErrorPlayers;
+                HasError = true;
                 return;
             }
-
+            HasError = false;
             OnTournamentStart?.Invoke(selectedPlayers!);
         }
     }

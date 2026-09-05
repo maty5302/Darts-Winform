@@ -584,5 +584,17 @@ namespace DesktopUI {
                 return ResourceManager.GetString("TournamentRoster", resourceCulture);
             }
         }
+        
+        public static string TournamentSetupErrorPlayers {
+            get {
+                return ResourceManager.GetString("TournamentSetupErrorPlayers", resourceCulture);
+            }
+        }
+        
+        public static string DuelError {
+            get {
+                return ResourceManager.GetString("DuelError", resourceCulture);
+            }
+        }
     }
 }

@@ -80,11 +80,20 @@ public partial class MainWindow : Window
     {
         if (_boundViewModel != null)
         {
-            
             var dbPlayers = await _boundViewModel.GetDatabasePlayersAsync();
+            if (dbPlayers == null || dbPlayers.Count < 2)
+            {
+                var box = MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard(
+                    "Error", 
+                    Strings.DuelError, 
+                    MsBox.Avalonia.Enums.ButtonEnum.Ok, 
+                    MsBox.Avalonia.Enums.Icon.Error);
+
+                await box.ShowAsync();
+                return;
+            }
 
             DuelSetupWindow setup = new DuelSetupWindow(_boundViewModel, dbPlayers);
-        
             await setup.ShowDialog(this);
         }
     }

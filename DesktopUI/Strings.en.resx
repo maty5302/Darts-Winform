@@ -281,4 +281,10 @@
     <data name="TournamentRoster" xml:space="preserve">
         <value>Tournament roster</value>
     </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>Each player must be selected, and no player may be repeated!</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>There must be at least 2 players in the database to start a duel!</value>
+    </data>
 </root>

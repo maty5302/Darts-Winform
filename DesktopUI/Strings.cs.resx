@@ -281,4 +281,10 @@
     <data name="TournamentRoster" xml:space="preserve">
         <value>Turnajová soupiska</value>
     </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>Každý hráč musí být vybrán a nesmí se opakovat!</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>Pro spuštění duelu musí být v databázi alespoň 2 hráči!</value>
+    </data>
 </root>

@@ -16,7 +16,6 @@ namespace DesktopUI.ViewModels.Tournament
             int totalPlayers = tournament.players.Count;
             int totalRounds = (int)Math.Log2(totalPlayers);
 
-            // ZDE JE OPRAVA: Ignorujeme prázdná kola, která tvá doména vygeneruje po skončení finále
             var validMatches = tournament.allmatches.Where(m => m != null && m.Count > 0).ToList();
 
             for (int roundIndex = 0; roundIndex < totalRounds; roundIndex++)
@@ -69,19 +68,15 @@ namespace DesktopUI.ViewModels.Tournament
                 Rounds.Add(roundVm);
             }
 
-            // --- OPRAVA PRO ABSOLUTNÍHO VÍTĚZE ---
             var winnerRound = new RoundViewModel();
             
-            // Najdeme skutečné finále (poslední zápas z platných kol)
             var finalMatch = validMatches.LastOrDefault()?.FirstOrDefault();
             
-            // Finále je kompletně dohráno, pokud máme všechna kola a finálový zápas zná vítěze
             bool isFinished = validMatches.Count == totalRounds && finalMatch?.WinnerId != 0;
 
             winnerRound.Matches.Add(new MatchViewModel
             {
-                // Pokud je hotovo, vypíšeme reálné jméno, jinak defaultní "Vítěz"
-                Player1Name = isFinished ? GetPlayerName(tournament, finalMatch!.WinnerId) : "Vítěz",
+                Player1Name = isFinished ? GetPlayerName(tournament, finalMatch!.WinnerId) : "",
                 IsPlayer1Winner = isFinished,
                 IsFinalWinnerBox = true,
                 HasNextRound = false,
