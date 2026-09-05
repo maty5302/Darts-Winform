@@ -6,7 +6,6 @@
         xmlns:lang="clr-namespace:DesktopUI"
         Icon="/Assets/IcoFiles/dartboard.ico" 
         >
-
     <Grid ColumnDefinitions="300,*" RowDefinitions="*">
         
         <StackPanel Grid.Column="0" Margin="20" Spacing="15" VerticalAlignment="Center">
@@ -70,7 +69,7 @@
         </StackPanel>
 
         <Image Name="DartboardImage" Grid.Column="1"
-               Source="avares://DesktopUI/Assets/dartboard.png"
+               Source="avares://DartsCounter/Assets/dartboard.png"
                PointerPressed="OnDartboardPointerPressed"
                Width="450" Height="450"
                Stretch="Uniform" />

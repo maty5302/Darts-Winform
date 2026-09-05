@@ -174,5 +174,11 @@ namespace DesktopUI.Views
             return this.FindControl<T>(name)
                    ?? throw new InvalidOperationException($"Control '{name}' was not found in SettingsWindow.");
         }
+
+        private void UpdateButton_OnClick(object? sender, RoutedEventArgs e)
+        {
+            var window = new UpdateWindow();
+            window.ShowDialog(this);
+        }
     }
 }

@@ -18,7 +18,7 @@
 
         <Grid Margin="12" RowDefinitions="Auto,*">
             <Border Grid.Row="0" CornerRadius="10" Padding="8" Margin="0,0,0,8">
-                <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.AppSettingsMain}" FontSize="26" FontWeight="Bold" FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" />    
+                <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Strings.AppSettingsMain}" FontSize="26" FontWeight="Bold" FontFamily="avares://DartsCounter/Assets/Fonts/#Showcard Gothic" />    
             </Border>
 
             <Grid Grid.Row="1" ColumnDefinitions="2*,2*" ColumnSpacing="14">
@@ -105,9 +105,9 @@
                             
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static lang:Strings.SettingsWallpaper}"  VerticalAlignment="Center"/>
                             <ComboBox x:Name="WallpaperComboBox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="180">
-                                <ComboBoxItem Content="Darts Development" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg" HorizontalContentAlignment="Right"/>
-                                <ComboBoxItem Content="Darts Classic" Tag="avares://DesktopUI/Assets/Backgrounds/darts-3.jpg" HorizontalContentAlignment="Right"/>
-                                <ComboBoxItem Content="Darts 2.0 Reborn" Tag="avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="Darts Development" Tag="avares://DartsCounter/Assets/Backgrounds/darts-3-develop.jpg" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="Darts Classic" Tag="avares://DartsCounter/Assets/Backgrounds/darts-3.jpg" HorizontalContentAlignment="Right"/>
+                                <ComboBoxItem Content="Darts 2.0 Reborn" Tag="avares://DartsCounter/Assets/Backgrounds/dartsBackground.jpg" HorizontalContentAlignment="Right"/>
                             </ComboBox>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static lang:Strings.SettingsStartupMusic}"  VerticalAlignment="Center"/>
@@ -132,10 +132,10 @@
                            
                             
                             <TextBlock Grid.Row="7" Grid.Column="0" Text="{x:Static lang:Strings.SettingsUpdate}" VerticalAlignment="Center"/>
-                            <Button IsEnabled="{Binding Settings.IsUpdateAvailable}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button IsEnabled="{Binding Settings.IsUpdateAvailable}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="UpdateButton_OnClick">
                                 <StackPanel Orientation="Horizontal" Spacing="8">                                   
                                     <TextBlock Name="StatusText" Text="{Binding Settings.UpdateStatus}"/>
-                                    <Image Name="StatusImage" Source="avares://DesktopUI/Assets/Icons/update.png" Width="16" Height="16" />
+                                    <Image Name="StatusImage" Source="avares://DartsCounter/Assets/Icons/update.png" Width="16" Height="16" />
                                 </StackPanel> 
                             </Button>
                         </Grid>

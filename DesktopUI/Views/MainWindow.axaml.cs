@@ -55,11 +55,11 @@ public partial class MainWindow : Window
     {
         var uri = Uri.TryCreate(wallpaperUri, UriKind.Absolute, out var parsedUri)
             ? parsedUri
-            : new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+            : new Uri("avares://DartsCounter/Assets/Backgrounds/darts-3-develop.jpg");
 
         if (!AssetLoader.Exists(uri))
         {
-            uri = new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+            uri = new Uri("avares://DartsCounter/Assets/Backgrounds/darts-3-develop.jpg");
         }
 
         using var stream = AssetLoader.Open(uri);
@@ -172,5 +172,11 @@ public partial class MainWindow : Window
             };
             bracketWindow.Show(this); 
         }
+    }
+
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var window = new UpdateWindow();
+        window.ShowDialog(this);
     }
 }

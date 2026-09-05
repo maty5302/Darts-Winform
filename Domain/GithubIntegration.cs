@@ -88,6 +88,5 @@ namespace Domain
             }
             return false;
         }
-
 	}
 }
