@@ -12,8 +12,6 @@
   </Package>
 
   <Fragment>
-    <Property Id="SHORTCUTNAME" Value="Darts Counter" />
-    <SetProperty Id="SHORTCUTNAME" Value="Počítadlo Šipky" After="AppSearch" Condition="SystemLanguageID = 1029"/>
 
 
     <StandardDirectory Id="ProgramFiles64Folder">
@@ -28,7 +26,7 @@
 
     <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
       <Shortcut Id="AppDesktopShortcut"
-                Name="[SHORTCUTNAME]"
+                Name="Darts Counter"
                 Target="[INSTALLFOLDER]DartsCounter.exe"
                 WorkingDirectory="INSTALLFOLDER"
                 Icon="AppIcon" />
