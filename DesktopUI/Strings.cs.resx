@@ -287,4 +287,7 @@
     <data name="DuelError" xml:space="preserve">
         <value>Pro spuštění duelu musí být v databázi alespoň 2 hráči!</value>
     </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>Hráč</value>
+    </data>
 </root>

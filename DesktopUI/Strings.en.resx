@@ -287,4 +287,7 @@
     <data name="DuelError" xml:space="preserve">
         <value>There must be at least 2 players in the database to start a duel!</value>
     </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>Player</value>
+    </data>
 </root>

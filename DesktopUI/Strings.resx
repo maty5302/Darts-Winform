@@ -294,4 +294,7 @@
     <data name="DuelError" xml:space="preserve">
         <value>_DuelError</value>
     </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>_TournamentPlayer</value>
+    </data>
 </root>

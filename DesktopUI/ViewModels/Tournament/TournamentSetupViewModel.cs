@@ -49,7 +49,7 @@ namespace DesktopUI.ViewModels.Tournament
             {
                 Slots.Add(new TournamentSlot
                 {
-                    Label = $"Hráč {i}:",
+                    Label = $"{Strings.TournamentPlayer} {i}:",
                     AvailablePlayers = this.AvailablePlayers
                 });
             }
