@@ -14,18 +14,16 @@ jobs:
       - name: Instalace .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Kompilace pro Windows
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish-win
 
-      - name: Instalace WiX Toolset
-        run: dotnet tool install --global wix
+      - name: Instalace WiX Toolset v4
+        run: dotnet tool install --global wix --version 4.0.5
 
       - name: Sestavení MSI instalátoru
-        run: |
-          wix extension add WixToolset.UI.wixext
-          wix build installer.wxs -o DartsCounter.msi
+        run: wix build installer.wxs -o DartsCounter.msi
 
       - name: Nahrát soubor do GitHub Releases
         uses: softprops/action-gh-release@v2
@@ -40,10 +38,10 @@ jobs:
       - name: Instalace .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Kompilace pro macOS
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true -p:AssemblyName=DartsCounter -o DartsCounter.app/Contents/MacOS
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true -o DartsCounter.app/Contents/MacOS
 
       - name: Vytvoření DMG obrazu
         run: hdiutil create -volname "DartsCounter" -srcfolder DartsCounter.app -ov -format UDZO DartsCounter.dmg
@@ -61,10 +59,10 @@ jobs:
       - name: Instalace .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Kompilace pro Linux
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:AssemblyName=DartsCounter -o AppDir/usr/bin
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o AppDir/usr/bin
 
       - name: Příprava struktury pro AppImage
         run: |
@@ -75,7 +73,6 @@ jobs:
           Type=Application
           Categories=Game;" > AppDir/DartsCounter.desktop
           
-          # Uprav cestu k ikoně podle toho, jak se jmenuje ve tvém projektu
           cp DesktopUI/Assets/IcoFiles/update.ico AppDir/DartsCounter.png 
 
       - name: Vytvoření AppImage
