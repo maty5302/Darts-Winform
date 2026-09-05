@@ -18,21 +18,18 @@ jobs:
       - name: Instalace .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
-      - name: Kompilace pro Windows
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish-win
-
-      - name: Instalace WiX Toolset v4
-        run: dotnet tool install --global wix --version 4.0.5
+      - name: Kompilace pro Windows (více souborů)
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
 
       - name: Sestavení MSI instalátoru
-        run: wix build installer.wxs -o DartsCounter.msi
+        run: dotnet build installer.wixproj -c Release
 
       - name: Nahrát soubor do GitHub Releases
         uses: softprops/action-gh-release@v2
         with:
-          files: DartsCounter.msi
+          files: "**/DartsCounter.msi"
 
   build-mac:
     runs-on: macos-latest
@@ -66,10 +63,22 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Kompilace pro Linux
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o AppDir/usr/bin
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
 
       - name: Příprava struktury pro AppImage
         run: |
+          ls -la AppDir/usr/bin
+          
+          BIN_FILE=$(find AppDir/usr/bin -maxdepth 1 -type f ! -name "*.pdb" ! -name "*.dbg" | head -n 1)
+          mv "$BIN_FILE" AppDir/usr/bin/DartsCounter
+          
+          chmod +x AppDir/usr/bin/DartsCounter
+          
+          echo '#!/bin/sh' > AppDir/AppRun
+          echo 'HERE="$(dirname "$(readlink -f "${0}")")"' >> AppDir/AppRun
+          echo 'exec "${HERE}/usr/bin/DartsCounter" "$@"' >> AppDir/AppRun
+          chmod +x AppDir/AppRun
+          
           echo "[Desktop Entry]
           Name=DartsCounter
           Exec=DartsCounter
@@ -77,7 +86,7 @@ jobs:
           Type=Application
           Categories=Game;" > AppDir/DartsCounter.desktop
           
-          cp DesktopUI/Assets/IcoFiles/update.ico AppDir/DartsCounter.png 
+          cp DesktopUI/Assets/IcoFiles/Darts.ico AppDir/DartsCounter.png
 
       - name: Vytvoření AppImage
         run: |
