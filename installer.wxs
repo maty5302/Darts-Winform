@@ -1,10 +1,13 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Name="DartsCounter" Manufacturer="Matěj Prudil" Version="2.0.0.0" UpgradeCode="a1b2c3d4-e5f6-4789-b8c9-d0e1f2a3b4c5">
+  <Package Name="DartsCounter" Manufacturer="Matěj Prudil" Version="2.0.0.0" UpgradeCode="1B0C8A1E-4A91-4F4E-82CD-133F1F3C71B9"  Scope="perMachine">
     <MajorUpgrade DowngradeErrorMessage="Novější verze aplikace DartsCounter je již nainstalována." />
     <MediaTemplate EmbedCab="yes" />
 
+    <Icon Id="AppIcon" SourceFile="DesktopUI\Assets\IcoFiles\Darts.ico" />
+
     <Feature Id="Main">
       <ComponentGroupRef Id="AppComponents" />
+      <ComponentRef Id="DesktopShortcutComp" />
     </Feature>
   </Package>
 
@@ -12,9 +15,25 @@
     <StandardDirectory Id="ProgramFiles64Folder">
       <Directory Id="INSTALLFOLDER" Name="DartsCounter" />
     </StandardDirectory>
+    
+    <StandardDirectory Id="DesktopFolder" />
 
     <ComponentGroup Id="AppComponents" Directory="INSTALLFOLDER">
       <Files Include="publish-win\**" />
     </ComponentGroup>
+
+     <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
+      <Shortcut Id="AppDesktopShortcut"
+                Name="DartsCounter"
+                Target="[INSTALLFOLDER]DartsCounter.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Icon="AppIcon" />
+      <RegistryValue Root="HKCU" 
+                     Key="Software\MatejPrudil\DartsCounter" 
+                     Name="DesktopShortcut" 
+                     Type="integer" 
+                     Value="1" 
+                     KeyPath="yes" />
+    </Component>    
   </Fragment>
 </Wix>

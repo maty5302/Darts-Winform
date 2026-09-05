@@ -124,28 +124,28 @@
                     </StackPanel>
                 </Border>
 
-                <!-- ODZNAKY / ÚSPĚCHY -->
-                <Border Classes="Card" Margin="0">
-                    <StackPanel>
-                        <WrapPanel HorizontalAlignment="Center" ItemWidth="50" ItemHeight="50" Margin="0,8,0,0">
-                            <Border Background="#22FFD700" CornerRadius="25" Margin="4">
-                                <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-                            </Border>
-                            <Border Background="#22808080" CornerRadius="25" Margin="4">
-                                <TextBlock Text="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                            </Border>
-                            <Border Background="#22808080" CornerRadius="25" Margin="4">
-                                <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Opacity="0.5"/>
-                            </Border>
-                            <Border Background="#2200FF00" CornerRadius="25" Margin="4">
-                                <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-                            </Border>
-                            <Border Background="#2200FF00" CornerRadius="25" Margin="4">
-                                <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-                            </Border>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
+                <!-- ~1~ ODZNAKY / ÚSPĚCHY @1@ -->
+                <!-- <Border Classes="Card" Margin="0"> -->
+                <!--     <StackPanel> -->
+                <!--         <WrapPanel HorizontalAlignment="Center" ItemWidth="50" ItemHeight="50" Margin="0,8,0,0"> -->
+                <!--             <Border Background="#22FFD700" CornerRadius="25" Margin="4"> -->
+                <!--                 <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
+                <!--             </Border> -->
+                <!--             <Border Background="#22808080" CornerRadius="25" Margin="4"> -->
+                <!--                 <TextBlock Text="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/> -->
+                <!--             </Border> -->
+                <!--             <Border Background="#22808080" CornerRadius="25" Margin="4"> -->
+                <!--                 <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Opacity="0.5"/> -->
+                <!--             </Border> -->
+                <!--             <Border Background="#2200FF00" CornerRadius="25" Margin="4"> -->
+                <!--                 <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
+                <!--             </Border> -->
+                <!--             <Border Background="#2200FF00" CornerRadius="25" Margin="4"> -->
+                <!--                 <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
+                <!--             </Border> -->
+                <!--         </WrapPanel> -->
+                <!--     </StackPanel> -->
+                <!-- </Border> -->
 
             </StackPanel>
         </ScrollViewer>
