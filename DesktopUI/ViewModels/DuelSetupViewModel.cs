@@ -42,11 +42,12 @@ namespace DesktopUI.ViewModels
             _onStartGameRequested = onStartGameRequested;
             AvailablePlayers = new ObservableCollection<PlayerDto>(players);
         }
-        
 
         [RelayCommand]
         public void StartGame()
         {
+            HasError = false;
+            ErrorMessage = string.Empty;
             if (Is2v2)
             {
                 if (Player1 == null || Player2 == null || Player3 == null || Player4 == null)

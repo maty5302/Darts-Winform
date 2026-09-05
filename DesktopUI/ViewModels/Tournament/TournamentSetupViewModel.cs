@@ -15,7 +15,7 @@ namespace DesktopUI.ViewModels.Tournament
         private readonly IDartsRepository _repo;
 
         public List<int> AllowedPlayerCounts { get; } = new() { 4, 8, 16 };
-        
+
         [ObservableProperty] private int _playerCount = 4;
         [ObservableProperty] private ObservableCollection<PlayerDto> _availablePlayers = new();
         [ObservableProperty] private ObservableCollection<TournamentSlot> _slots = new();
@@ -36,6 +36,7 @@ namespace DesktopUI.ViewModels.Tournament
             AvailablePlayers = new ObservableCollection<PlayerDto>(players);
             GenerateSlots();
         }
+
         partial void OnPlayerCountChanged(int value)
         {
             GenerateSlots();
@@ -46,10 +47,10 @@ namespace DesktopUI.ViewModels.Tournament
             Slots.Clear();
             for (int i = 1; i <= PlayerCount; i++)
             {
-                Slots.Add(new TournamentSlot 
-                { 
+                Slots.Add(new TournamentSlot
+                {
                     Label = $"Hráč {i}:",
-                    AvailablePlayers = this.AvailablePlayers 
+                    AvailablePlayers = this.AvailablePlayers
                 });
             }
         }
@@ -68,14 +69,16 @@ namespace DesktopUI.ViewModels.Tournament
                 HasError = true;
                 return;
             }
+
             HasError = false;
             OnTournamentStart?.Invoke(selectedPlayers);
-    }
+        }
 
-    public partial class TournamentSlot : ObservableObject
-    {
-        [ObservableProperty] private string _label = "";
-        [ObservableProperty] private PlayerDto? _selectedPlayer;
-        public ObservableCollection<PlayerDto> AvailablePlayers { get; set; } = new();
+        public partial class TournamentSlot : ObservableObject
+        {
+            [ObservableProperty] private string _label = "";
+            [ObservableProperty] private PlayerDto? _selectedPlayer;
+            public ObservableCollection<PlayerDto> AvailablePlayers { get; set; } = new();
+        }
     }
 }
