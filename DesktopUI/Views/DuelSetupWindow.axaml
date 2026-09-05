@@ -12,12 +12,12 @@
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
         <StackPanel.Background>
-            <ImageBrush Source="avares://DesktopUI/Assets/Icons/duel.png"></ImageBrush>
+            <ImageBrush Source="avares://DartsCounter/Assets/Icons/duel.png"></ImageBrush>
         </StackPanel.Background>
         <TextBlock Text="{x:Static lang:Strings.DuelSetMainText}" 
                    FontSize="56" 
                    FontWeight="Black" 
-                   FontFamily="avares://DesktopUI/Assets/Fonts/#Showcard Gothic" 
+                   FontFamily="avares://DartsCounter/Assets/Fonts/#Showcard Gothic" 
                    HorizontalAlignment="Center" />
 
         <Border Background="#CCF5DEB3" Padding="20,15" CornerRadius="5">
