@@ -16,12 +16,5 @@ namespace DataLayer.Models
         public int Hundred { get; set; }
         public int Hundred20 { get; set; }
         public int Hundred80 { get; set; }
-        
-        public int AllWins { get; set; }
-        public int OldHighestOut { get; set; }
-        public int AllSixty { get; set; }
-        public int AllHundred { get; set; }
-        public int AllHundred20 { get; set; }
-        public int AllHundred80 { get; set; }
     }
 }

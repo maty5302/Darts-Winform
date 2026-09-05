@@ -109,16 +109,6 @@ public partial class StatisticsViewModel : ObservableObject
             SelectedYear = null;
             UpdateStatsUi(null);
         }
-        var allStats = await _repository.GetAllYearsStatsAsync(playerId);
-        if (allStats != null)
-        {
-            AllWins = allStats.AllWins;
-            OldHighestOut = allStats.OldHighestOut;
-            AllSixty = allStats.AllSixty;
-            AllHundred = allStats.AllHundred;
-            AllHundred20 = allStats.AllHundred20;
-            AllHundred80 = allStats.AllHundred80;
-        }
     }
 
     [RelayCommand]

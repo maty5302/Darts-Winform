@@ -167,23 +167,6 @@ namespace DataLayer.Tests
         }
 
         [Fact]
-        public async Task GetAllYearsStatsAsync_ShouldReturnLatestYearStats()
-        {
-            var options = GetInMemoryOptions();
-            var repository = new DartsRepository(options);
-            var player = await repository.CreatePlayerAsync("Hráč s Historií");
-            Assert.NotNull(player);
-
-            await repository.UpdateStatsAsync(new PlayerStatsDto { PlayerId = player.Id, Year = 2023, AllWins = 10 });
-            await repository.UpdateStatsAsync(new PlayerStatsDto { PlayerId = player.Id, Year = 2024, AllWins = 25 });
-
-            var latestStats = await repository.GetAllYearsStatsAsync(player.Id);
-
-            Assert.NotNull(latestStats);
-            Assert.Equal(25, latestStats.AllWins);
-        }
-
-        [Fact]
         public async Task GetStatsForYearAsync_ShouldReturnNull_WhenStatsDoNotExist()
         {
             var options = GetInMemoryOptions();
