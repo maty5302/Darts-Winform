@@ -24,7 +24,7 @@ jobs:
         run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
 
       - name: Sestavení MSI instalátoru
-        run: dotnet build installer.wixproj -c Release
+        run: dotnet build installer.wixproj -c Release -p:Platform=x64
 
       - name: Nahrát soubor do GitHub Releases
         uses: softprops/action-gh-release@v2
