@@ -18,7 +18,7 @@ jobs:
       - name: Instalace .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       - name: Kompilace pro Windows (více souborů)
         run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
@@ -63,15 +63,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Kompilace pro Linux
-        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r win-x64 --self-contained true -o publish-win
+        run: dotnet publish DesktopUI/DesktopUI.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o AppDir/usr/bin
 
       - name: Příprava struktury pro AppImage
         run: |
-          ls -la AppDir/usr/bin
-          
-          BIN_FILE=$(find AppDir/usr/bin -maxdepth 1 -type f ! -name "*.pdb" ! -name "*.dbg" | head -n 1)
-          mv "$BIN_FILE" AppDir/usr/bin/DartsCounter
-          
           chmod +x AppDir/usr/bin/DartsCounter
           
           echo '#!/bin/sh' > AppDir/AppRun
@@ -86,7 +81,7 @@ jobs:
           Type=Application
           Categories=Game;" > AppDir/DartsCounter.desktop
           
-          cp DesktopUI/Assets/IcoFiles/Darts.ico AppDir/DartsCounter.png
+          cp DesktopUI/Assets/IcoFiles/Darts.ico AppDir/DartsCounter.png 
 
       - name: Vytvoření AppImage
         run: |
