@@ -1,4 +1,4 @@
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wix">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package Name="DartsCounter" Manufacturer="Matěj Prudil" Version="2.0.0.0" UpgradeCode="a1b2c3d4-e5f6-4789-b8c9-d0e1f2a3b4c5">
     <MajorUpgrade DowngradeErrorMessage="Novější verze aplikace DartsCounter je již nainstalována." />
 
