@@ -22,18 +22,19 @@
       <Files Include="publish-win\**" />
     </ComponentGroup>
 
-     <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
+    <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
       <Shortcut Id="AppDesktopShortcut"
                 Name="DartsCounter"
                 Target="[INSTALLFOLDER]DartsCounter.exe"
                 WorkingDirectory="INSTALLFOLDER"
                 Icon="AppIcon" />
+                
       <RegistryValue Root="HKCU" 
                      Key="Software\MatejPrudil\DartsCounter" 
                      Name="DesktopShortcut" 
                      Type="integer" 
                      Value="1" 
                      KeyPath="yes" />
-    </Component>    
+    </Component>
   </Fragment>
 </Wix>
