@@ -1,15 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using DesktopUI.ViewModels;
+﻿using DesktopUI.ViewModels;
 using DataLayer;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
 
 namespace Integration.Tests
 {
     public class GameFlowIntegrationTests
     {
-        // Pomocná metoda, abychom nemuseli v každém testu psát to samé dokola
         private DartsRepository CreateInMemoryRepo()
         {
             var options = new DbContextOptionsBuilder<DartsDbContext>()
@@ -23,16 +19,13 @@ namespace Integration.Tests
         {
             var repo = CreateInMemoryRepo();
             
-            // PŘIDÁNO: Předání repozitáře do konstruktoru
             var playerVm = new PlayerViewModel(repo)
             {
                 Score = 501,
                 CurrentThrow = "60" 
             };
-            
-            // Poznámka: SubmitThrow je nyní async, takže musíme buď změnit test na async Task,
-            // nebo pro účely tohoto jednoduchého testu zavolat .Wait()
-            playerVm.SubmitThrow().Wait();
+
+            playerVm.SubmitThrow();
 
             Assert.Equal(441, playerVm.Score); 
             Assert.Equal(60.0, playerVm.Average); 
@@ -63,10 +56,9 @@ namespace Integration.Tests
         {
             var repo = CreateInMemoryRepo();
             
-            // PŘIDÁNO: Předání repozitáře
             var playerVm = new PlayerViewModel(repo) { Score = 100 };
             playerVm.CurrentThrow = "40";
-            playerVm.SubmitThrow().Wait();
+            playerVm.SubmitThrow();
             
             Assert.Equal(60, playerVm.Score);
             Assert.Equal(40.0, playerVm.Average);
@@ -83,11 +75,10 @@ namespace Integration.Tests
         {
             var repo = CreateInMemoryRepo();
             
-            // PŘIDÁNO: Předání repozitáře
             var playerVm = new PlayerViewModel(repo) { Score = 40 };
 
             playerVm.CurrentThrow = "40";
-            playerVm.SubmitThrow().Wait();
+            playerVm.SubmitThrow();
 
             Assert.Equal(0, playerVm.Score); 
             Assert.True(playerVm.HasFinished);
