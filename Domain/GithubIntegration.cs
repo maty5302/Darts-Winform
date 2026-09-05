@@ -1,15 +1,9 @@
-﻿ using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
+﻿using Newtonsoft.Json;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
-	public class GithubIntegration
+	public static class GithubIntegration
 	{
 		public static async Task<string> GetLatestRelease()
 		{
@@ -25,9 +19,9 @@ namespace Domain
 				response.EnsureSuccessStatusCode();
 
 				string responseJson = await response.Content.ReadAsStringAsync();
-				dynamic responseObject = JsonConvert.DeserializeObject(responseJson);
+				dynamic? responseObject = JsonConvert.DeserializeObject(responseJson);
 
-				string latestRelease = responseObject.tag_name+"\n"+responseObject.body;
+				string latestRelease = responseObject?.tag_name + "\n" + responseObject?.body ?? "";
 
 				return latestRelease;
 			}
@@ -47,9 +41,9 @@ namespace Domain
 				response.EnsureSuccessStatusCode();
 
 				string responseJson = await response.Content.ReadAsStringAsync();
-				dynamic responseObject = JsonConvert.DeserializeObject(responseJson);
+				dynamic? responseObject = JsonConvert.DeserializeObject(responseJson);
 
-				string latestRelease = responseObject.tag_name;
+				string latestRelease = responseObject?.tag_name ?? "";
 
 				return latestRelease;
 			}
@@ -69,9 +63,9 @@ namespace Domain
                 response.EnsureSuccessStatusCode();
 
                 string responseJson = await response.Content.ReadAsStringAsync();
-                dynamic responseObject = JsonConvert.DeserializeObject(responseJson);
+                dynamic? responseObject = JsonConvert.DeserializeObject(responseJson);
 
-                string releaseNotes = responseObject.body;
+                string releaseNotes = responseObject?.body ?? "";
 
                 return releaseNotes;
             }
@@ -88,11 +82,10 @@ namespace Domain
             if (indexof != -1)
                 appVersion = appVersion.Remove(indexof);
 
-            if (String.Compare(gitVersion, appVersion) > 0)
+            if (String.CompareOrdinal(gitVersion, appVersion) > 0)
             {
                 return true;
             }
-
             return false;
         }
 

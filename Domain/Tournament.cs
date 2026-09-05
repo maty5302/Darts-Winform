@@ -41,8 +41,12 @@ namespace Domain
 			foreach (Match match in matches)
 			{
 				if (match.WinnerId != 0)
-				{
-					winners.Add(this.players.Find(x => x.Id == match.WinnerId));
+                {
+                    var player = players.Find(x => x.Id == match.WinnerId);
+                    if (player != null)
+                    {
+                        winners.Add(player);
+                    }
 				}
 			}
 			if (winners.Count == matches.Count && winners.Count>=2)
