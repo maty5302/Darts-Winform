@@ -64,15 +64,15 @@ public partial class StatisticsViewModel : ObservableObject
         }
     }
 
-    private int _selectedYear;
-    public int SelectedYear
+    private int? _selectedYear;
+    public int? SelectedYear
     {
         get => _selectedYear;
         set
         {
-            if (SetProperty(ref _selectedYear, value) && SelectedPlayer != null && value > 0) 
+            if (SetProperty(ref _selectedYear, value) && SelectedPlayer != null && value.HasValue && value.Value > 0)
             {
-                _ = LoadStatsForSelectedYearAsync(SelectedPlayer.Id, value);
+                _ = LoadStatsForSelectedYearAsync(SelectedPlayer.Id, value.Value);
             }
         }
     }
@@ -103,6 +103,7 @@ public partial class StatisticsViewModel : ObservableObject
         }
         else
         {
+            SelectedYear = null;
             UpdateStatsUi(null);
         }
         var allStats = await _repository.GetAllYearsStatsAsync(playerId);
