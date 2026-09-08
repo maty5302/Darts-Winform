@@ -332,4 +332,7 @@
     <data name="ToolTipToggleTimer" xml:space="preserve">
         <value>Hide/Show timer</value>
     </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>Author:</value>
+    </data>
 </root>

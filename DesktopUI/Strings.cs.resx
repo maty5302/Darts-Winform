@@ -332,4 +332,7 @@
     <data name="ToolTipToggleTimer" xml:space="preserve">
         <value>Skrýt/Zobrazit časovač</value>
     </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>Autor:</value>
+    </data>
 </root>

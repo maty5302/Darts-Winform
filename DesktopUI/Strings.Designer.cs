@@ -686,5 +686,11 @@ namespace DesktopUI {
                 return ResourceManager.GetString("ToolTipToggleTimer", resourceCulture);
             }
         }
+        
+        public static string AuthorLabel {
+            get {
+                return ResourceManager.GetString("AuthorLabel", resourceCulture);
+            }
+        }
     }
 }
