@@ -18,7 +18,7 @@
                         <KeyBinding Gesture="Enter" Command="{Binding SubmitThrowCommand}" />
                     </TextBox.KeyBindings>
                 </TextBox>
-                <!-- <Button Grid.Column="1" Content="=" Background="Black" Width="30" HorizontalContentAlignment="Center" Command="{Binding SubmitThrowCommand}"/> -->
+                
             </Grid>
             
             <Grid Grid.Row="3" ColumnDefinitions="*, Auto">

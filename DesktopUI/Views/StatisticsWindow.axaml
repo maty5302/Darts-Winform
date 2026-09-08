@@ -4,8 +4,7 @@
         xmlns:lang="clr-namespace:DesktopUI"
         x:Class="DesktopUI.Views.StatisticsWindow"
         x:DataType="vm:StatisticsViewModel"
-        Title="{x:Static lang:Strings.StatsMenu}" Width="380" Height="750"
-        WindowStartupLocation="CenterScreen"
+        Title="{x:Static lang:Strings.StatsMenu}" Width="380" Height="780"
         Icon="/Assets/IcoFiles/stats.ico"
         CanResize="False"
         CanMinimize="False"
@@ -61,12 +60,10 @@
                     </StackPanel>
                 </Border>
 
-                <!-- SPRÁVA HRÁČE -->
                 <Border Classes="Card">
                     <StackPanel>
                         <TextBlock Text="{x:Static lang:Strings.StatisticsManage}" Classes="SectionHeader"/>
                         
-                        <!-- Výběr a Smazání -->
                         <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,12">
                             <ComboBox Grid.Column="0" 
                                       ItemsSource="{Binding Players}" 
@@ -106,7 +103,7 @@
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding HighestOut}" Classes="StatValue"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static lang:Strings.StatisticsAverage}" Classes="StatLabel"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Average}" Classes="StatValue"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Average, StringFormat=\{0:F2\}}" Classes="StatValue"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="60+:" Classes="StatLabel"/>
                             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Sixty}" Classes="StatValue"/>
@@ -124,28 +121,20 @@
                     </StackPanel>
                 </Border>
 
-                <!-- ~1~ ODZNAKY / ÚSPĚCHY @1@ -->
-                <!-- <Border Classes="Card" Margin="0"> -->
-                <!--     <StackPanel> -->
-                <!--         <WrapPanel HorizontalAlignment="Center" ItemWidth="50" ItemHeight="50" Margin="0,8,0,0"> -->
-                <!--             <Border Background="#22FFD700" CornerRadius="25" Margin="4"> -->
-                <!--                 <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
-                <!--             </Border> -->
-                <!--             <Border Background="#22808080" CornerRadius="25" Margin="4"> -->
-                <!--                 <TextBlock Text="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/> -->
-                <!--             </Border> -->
-                <!--             <Border Background="#22808080" CornerRadius="25" Margin="4"> -->
-                <!--                 <TextBlock Text="🏆" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Opacity="0.5"/> -->
-                <!--             </Border> -->
-                <!--             <Border Background="#2200FF00" CornerRadius="25" Margin="4"> -->
-                <!--                 <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
-                <!--             </Border> -->
-                <!--             <Border Background="#2200FF00" CornerRadius="25" Margin="4"> -->
-                <!--                 <TextBlock Text="🎯" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/> -->
-                <!--             </Border> -->
-                <!--         </WrapPanel> -->
-                <!--     </StackPanel> -->
-                <!-- </Border> -->
+                <Border Classes="Card" Margin="0">
+                    <StackPanel>
+                        <TextBlock Text="{x:Static lang:Strings.StatisticsAchievements}" Classes="SectionHeader"/>
+                        <WrapPanel HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Image Source="{Binding AchCupImage}" Width="45" Height="45" Margin="4" ToolTip.Tip="{x:Static lang:Strings.AchCupImage}" />
+                            <Image Source="{Binding AchCup20Image}" Width="45" Height="45" Margin="4" ToolTip.Tip="{x:Static lang:Strings.AchCup20Image}" />
+                            <Image Source="{Binding AchCup100Image}" Width="45" Height="45" Margin="4" ToolTip.Tip="{x:Static lang:Strings.AchCup100Image}" />
+            
+                            
+                            <Image Source="{Binding AchMore100Image}" Width="45" Height="45" Margin="4" ToolTip.Tip="{x:Static lang:Strings.AchMore100Image}" />
+                            <Image Source="{Binding Ach180Image}" Width="45" Height="45" Margin="4" ToolTip.Tip="{x:Static lang:Strings.Ach180Image}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
 
             </StackPanel>
         </ScrollViewer>

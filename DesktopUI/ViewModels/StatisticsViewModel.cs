@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Domain.Interfaces;
@@ -29,12 +31,11 @@ public partial class StatisticsViewModel : ObservableObject
     [ObservableProperty] private int _hundred20;
     [ObservableProperty] private int _hundred80;
     
-    [ObservableProperty] private int _allWins;
-    [ObservableProperty] private int _oldHighestOut;
-    [ObservableProperty] private int _allSixty;
-    [ObservableProperty] private int _allHundred;
-    [ObservableProperty] private int _allHundred20;
-    [ObservableProperty] private int _allHundred80;
+    [ObservableProperty] private Bitmap? _achCupImage;
+    [ObservableProperty] private Bitmap? _achCup20Image;
+    [ObservableProperty] private Bitmap? _achCup100Image;
+    [ObservableProperty] private Bitmap? _ach180Image;
+    [ObservableProperty] private Bitmap? _achMore100Image;
     [ObservableProperty] private ObservableCollection<int> _availableYears = new();
 
     public StatisticsViewModel(IDartsRepository repository)
@@ -162,5 +163,42 @@ public partial class StatisticsViewModel : ObservableObject
         {
             Wins = 0; Average = 0; HighestOut = 0; Sixty = 0; Hundred = 0; Hundred20 = 0; Hundred80 = 0;
         }
+        
+        UpdateAchievements();
+    }
+    private Bitmap? LoadImage(string uriString)
+    {
+        try
+        {
+            using var stream = AssetLoader.Open(new Uri(uriString));
+            return new Bitmap(stream);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private void UpdateAchievements()
+    {
+        AchCupImage = LoadImage(Wins >= 1 
+            ? "avares://DartsCounter/Assets/Achievements/a_cup.jpg" 
+            : "avares://DartsCounter/Assets/Achievements/a_cup_no.jpg");
+            
+        AchCup20Image = LoadImage(Wins >= 20 
+            ? "avares://DartsCounter/Assets/Achievements/a_cup_20.jpg" 
+            : "avares://DartsCounter/Assets/Achievements/a_cup_20_no.jpg");
+            
+        AchCup100Image = LoadImage(Wins >= 100 
+            ? "avares://DartsCounter/Assets/Achievements/a_cup_100.jpg" 
+            : "avares://DartsCounter/Assets/Achievements/a_cup_100_no.jpg");
+            
+        Ach180Image = LoadImage(Hundred80 >= 1 
+            ? "avares://DartsCounter/Assets/Achievements/a_180.png" 
+            : "avares://DartsCounter/Assets/Achievements/a_180_no.png");
+            
+        AchMore100Image = LoadImage(Hundred >= 1 
+            ? "avares://DartsCounter/Assets/Achievements/a_more100.png" 
+            : "avares://DartsCounter/Assets/Achievements/a_more100_no.png");
     }
 }
