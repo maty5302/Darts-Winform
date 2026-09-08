@@ -73,20 +73,33 @@ namespace Domain
 
         public static async Task<bool> CheckForUpdates()
         {
-            var gitVersion = await GetGitVersion();
-            var appVersion = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "0.0.0.0";
-            gitVersion = gitVersion.Replace(".", "").Replace("v", "").Replace("beta", "");
-            appVersion = appVersion.Replace(".", "");
-            
-            int indexof = appVersion.IndexOf('+');
-            if (indexof != -1)
-                appVersion = appVersion.Remove(indexof);
-
-            if (String.CompareOrdinal(gitVersion, appVersion) > 0)
+            try
             {
-                return true;
+                var gitVersionString = await GetGitVersion();
+                var appVersionString = Assembly.GetEntryAssembly()?.GetName().Version?.ToString();
+
+                if (string.IsNullOrEmpty(gitVersionString) || string.IsNullOrEmpty(appVersionString))
+                    return false;
+
+                gitVersionString = gitVersionString.Replace("v", "", StringComparison.OrdinalIgnoreCase)
+                    .Replace("beta", "", StringComparison.OrdinalIgnoreCase);
+
+                int indexof = appVersionString.IndexOf('+');
+                if (indexof != -1)
+                    appVersionString = appVersionString.Remove(indexof);
+
+                if (Version.TryParse(gitVersionString, out var gitVersion) && 
+                    Version.TryParse(appVersionString, out var appVersion))
+                {
+                    return gitVersion > appVersion;
+                }
+
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 	}
 }
