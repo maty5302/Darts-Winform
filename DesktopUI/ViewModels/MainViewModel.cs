@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,6 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 using DesktopUI.Services;
 using Domain.Interfaces;
 using Domain.Models;
+using Avalonia.Threading;
 
 namespace DesktopUI.ViewModels;
 
@@ -22,6 +24,14 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private TrainingViewModel _trainingVM;
     [ObservableProperty] private Domain.Tournament? _activeTournament;
     [ObservableProperty] private bool _isTournamentMode;
+    [ObservableProperty] private TimeSpan _elapsedGameTime;
+    [ObservableProperty] private bool _isTimerVisible = false;
+    [ObservableProperty] private bool _isTimerRunning;
+    [ObservableProperty] private bool _isGameActive = false;
+    
+    public string FormattedTime => ElapsedGameTime.ToString(@"hh\:mm\:ss");
+
+    private DispatcherTimer _gameTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
     
     public SettingsManager Settings { get; }
     
@@ -41,10 +51,16 @@ public partial class MainViewModel : ViewModelBase
         _ = Settings.CheckForUpdatesAsync();
         ApplyTheme(Settings.ThemePreference);
 
-        Settings.PropertyChanged += (s, e) => 
+        Settings.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName == nameof(SettingsManager.ThemePreference))
                 ApplyTheme(Settings.ThemePreference);
+        };
+        
+        _gameTimer.Tick += (s, e) => 
+        {
+            ElapsedGameTime = ElapsedGameTime.Add(TimeSpan.FromSeconds(1));
+            OnPropertyChanged(nameof(FormattedTime));
         };
     }
 
@@ -94,6 +110,8 @@ public partial class MainViewModel : ViewModelBase
         
         if (Settings.SoundEffectsEnabled)
             _ = SoundManagerDarts.SoundEffects.PlayGameOn();
+        
+        StartNewGameTimer();
     }
     
     private string GetPlayerName(int playerId)
@@ -133,6 +151,8 @@ public partial class MainViewModel : ViewModelBase
                 return;
             }
         }
+        
+        StopGameTimer();
     }
 
     private void SetActivePlayer(PlayerViewModel player)
@@ -161,6 +181,40 @@ public partial class MainViewModel : ViewModelBase
             player.OpacityValue = Settings.OpacityValue;
             player.SoundEffectsEnabled = Settings.SoundEffectsEnabled;
         }
+    }
+    
+    [RelayCommand]
+    private void ToggleTimer()
+    {
+        if (!IsGameActive) return;
+
+        if (IsTimerRunning)
+            _gameTimer.Stop();
+        else
+            _gameTimer.Start();
+            
+        IsTimerRunning = !IsTimerRunning;
+    }
+
+    [RelayCommand]
+    private void ToggleTimerVisibility() => IsTimerVisible = !IsTimerVisible;
+
+    private void StartNewGameTimer()
+    {
+        ElapsedGameTime = TimeSpan.Zero;
+        IsGameActive = true;     
+        IsTimerVisible = true;   
+        
+        _gameTimer.Start();
+        IsTimerRunning = true;
+        OnPropertyChanged(nameof(FormattedTime));
+    }
+    
+    public void StopGameTimer()
+    {
+        _gameTimer.Stop();
+        IsTimerRunning = false;
+        IsGameActive = false; 
     }
 
     [RelayCommand]
@@ -219,12 +273,17 @@ public partial class MainViewModel : ViewModelBase
         }
         DuelVM.InitializeDuel(team1Name, team2Name, config.Score, config.Legs, config.IsSets, Settings.SoundEffectsEnabled);
 
+        DuelVM.OnDuelFinished = (winnerId) =>
+        {
+            StopGameTimer();
+        };
         IsDuelMode = true;
     
         if (Settings.SoundEffectsEnabled)
         {
             _ = SoundManagerDarts.SoundEffects.PlayGameOn();
         }
+        StartNewGameTimer();
     }
     
     public async Task<List<PlayerDto>> GetDatabasePlayersAsync()
@@ -266,6 +325,7 @@ public partial class MainViewModel : ViewModelBase
             }
         };
         PlayNextTournamentMatch();
+        StartNewGameTimer();
     }
 
     private void PlayNextTournamentMatch()
@@ -295,6 +355,7 @@ public partial class MainViewModel : ViewModelBase
         else
         {
             IsTournamentMode = false;
+            StopGameTimer();
         }
     }
 }

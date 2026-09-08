@@ -21,6 +21,11 @@ namespace DesktopUI.ViewModels
         [ObservableProperty] private double _downloadPercentage;
         [ObservableProperty] private string _progressText = "";
 
+        private readonly string _cacheFilePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+            "DartsCounter", 
+            "update_cache.txt");
+        
         public Action? CloseAction { get; set; }
 
         private static readonly HttpClient _httpClient = new HttpClient();
@@ -36,6 +41,23 @@ namespace DesktopUI.ViewModels
         {
             try 
             {
+                // Načíst data z cache, pokud je soubor mladší než 1 hodina
+                if (File.Exists(_cacheFilePath))
+                {
+                    var fileInfo = new FileInfo(_cacheFilePath);
+                    if ((DateTime.Now - fileInfo.LastWriteTime).TotalHours < 1 || await GithubIntegration.CheckForUpdates())
+                    {
+                        var cachedLines = await File.ReadAllLinesAsync(_cacheFilePath);
+                        if (cachedLines.Length >= 2)
+                        {
+                            Version = cachedLines[0];
+                            Changelog = string.Join(Environment.NewLine, cachedLines[1..]);
+                    
+                            return; 
+                        }
+                    }
+                }
+
                 Version = await GithubIntegration.GetGitVersion();
                 Changelog = await GithubIntegration.GetReleaseNotes(Version);
             }
