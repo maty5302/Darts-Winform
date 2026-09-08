@@ -111,7 +111,8 @@ public partial class MainViewModel : ViewModelBase
         if (Settings.SoundEffectsEnabled)
             _ = SoundManagerDarts.SoundEffects.PlayGameOn();
         
-        StartNewGameTimer();
+        if (IsTimerVisible)
+            StartNewGameTimer();
     }
     
     private string GetPlayerName(int playerId)
@@ -283,7 +284,10 @@ public partial class MainViewModel : ViewModelBase
         {
             _ = SoundManagerDarts.SoundEffects.PlayGameOn();
         }
-        StartNewGameTimer();
+        if (IsTimerVisible)
+        {
+            StartNewGameTimer();
+        }
     }
     
     public async Task<List<PlayerDto>> GetDatabasePlayersAsync()
@@ -325,7 +329,11 @@ public partial class MainViewModel : ViewModelBase
             }
         };
         PlayNextTournamentMatch();
-        StartNewGameTimer();
+        
+        if (IsTimerVisible)
+        {
+            StartNewGameTimer();
+        }
     }
 
     private void PlayNextTournamentMatch()

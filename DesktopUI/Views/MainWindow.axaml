@@ -88,15 +88,15 @@
                             <Button Command="{Binding ToggleTimerCommand}" Width="110" IsEnabled="{Binding IsGameActive}">
                                 <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center">
                                     <Image Source="avares://DartsCounter/Assets/Icons/pause.png" Width="18" Height="18" IsVisible="{Binding IsTimerRunning}"/>
-                                    <TextBlock Text="Pozastavit" IsVisible="{Binding IsTimerRunning}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{x:Static lang:Strings.PauseMenu}" IsVisible="{Binding IsTimerRunning}" VerticalAlignment="Center"/>
                                     
                                     <Image Source="avares://DartsCounter/Assets/Icons/play.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}"/>
-                                    <TextBlock Text="Spustit" IsVisible="{Binding !IsTimerRunning}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{x:Static lang:Strings.PlayMenu}" IsVisible="{Binding !IsTimerRunning}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
 
-                        <Button Background="Transparent" Command="{Binding ToggleTimerVisibilityCommand}" VerticalAlignment="Center" ToolTip.Tip="Skrýt/Zobrazit časovač">
+                        <Button Background="Transparent" Command="{Binding ToggleTimerVisibilityCommand}" VerticalAlignment="Center" ToolTip.Tip="{x:Static lang:Strings.ToolTipToggleTimer}">
                             <TextBlock Text="👁" FontSize="18" VerticalAlignment="Center"/>
                         </Button>
                     </StackPanel>
