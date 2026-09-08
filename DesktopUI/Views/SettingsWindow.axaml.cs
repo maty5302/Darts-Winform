@@ -11,7 +11,7 @@ namespace DesktopUI.Views
 {
     public partial class SettingsWindow : Window
     {
-        private readonly SettingsViewModel _viewModel;
+        private SettingsViewModel _viewModel = null!;
         
         public bool RequiresMainWindowReload { get; private set; }
         

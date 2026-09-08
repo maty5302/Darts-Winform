@@ -16,7 +16,7 @@
         <StackPanel Spacing="16">
             
             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                <Image Source="/Assets/IcoFiles/update.ico" Width="24" Height="24"/>
+                <Image Source="/Assets/IcoFiles/update.ico" Width="24" Height="24" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                 <TextBlock Text="{x:Static lang:Strings.UpdateAvailable}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
             </StackPanel>
             

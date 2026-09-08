@@ -15,35 +15,35 @@
         <Border Grid.Row="0">
             <StackPanel Orientation="Horizontal" Spacing="5" Background="{DynamicResource SystemRegionBrush}" Opacity="0.8" >
                 <Button Background="Transparent" Command="{Binding RedoLastCommand}">
-                    <Image Source="avares://DartsCounter/Assets/Icons/back.png" Width="22" Height="22" />
+                    <Image Source="avares://DartsCounter/Assets/Icons/back.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                 </Button>
                 <Button Background="Transparent" Click="Button_OnClickDartBoard">
                     <StackPanel Orientation="Horizontal" Spacing="5">
-                        <Image Source="avares://DartsCounter/Assets/Icons/dartboard.png" Width="22" Height="22" />
+                        <Image Source="avares://DartsCounter/Assets/Icons/dartboard.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                         <TextBlock Text="{x:Static lang:Strings.MenuDartboard}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button Background="Transparent" Click="PlayMenuItem_OnClick">
                     <StackPanel Orientation="Horizontal" Spacing="5">
-                        <Image Source="avares://DartsCounter/Assets/Icons/music.png" Width="22" Height="22" />
+                        <Image Source="avares://DartsCounter/Assets/Icons/music.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality" />
                         <TextBlock Text="{x:Static lang:Strings.MusicMMenu}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button Background="Transparent" Click="Button_OnClickStatistics">
                     <StackPanel Orientation="Horizontal" Spacing="5">
-                        <Image Source="avares://DartsCounter/Assets/Icons/stats.png" Width="22" Height="22" />
+                        <Image Source="avares://DartsCounter/Assets/Icons/stats.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                         <TextBlock Text="{x:Static lang:Strings.StatsMenu }" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button Background="Transparent" Click="Button_OnClickSettings">
                     <StackPanel Orientation="Horizontal" Spacing="5">
-                        <Image Source="avares://DartsCounter/Assets/Icons/settings.png" Width="22" Height="22" />
+                        <Image Source="avares://DartsCounter/Assets/Icons/settings.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                         <TextBlock Text="{x:Static lang:Strings.SettingsMenu }" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>                     
                 <Button Background="Transparent" Click="Button_OnClickAbout">
                     <StackPanel Orientation="Horizontal" Spacing="5">
-                        <Image Source="avares://DartsCounter/Assets/Icons/about.png" Width="22" Height="22" />
+                        <Image Source="avares://DartsCounter/Assets/Icons/about.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality" />
                         <TextBlock Text="{x:Static lang:Strings.AboutAppMenu }" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -87,17 +87,17 @@
                             
                             <Button Command="{Binding ToggleTimerCommand}" Width="110" IsEnabled="{Binding IsGameActive}">
                                 <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center">
-                                    <Image Source="avares://DartsCounter/Assets/Icons/pause.png" Width="18" Height="18" IsVisible="{Binding IsTimerRunning}"/>
+                                    <Image Source="avares://DartsCounter/Assets/Icons/pause.png" Width="18" Height="18" IsVisible="{Binding IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                                     <TextBlock Text="{x:Static lang:Strings.PauseMenu}" IsVisible="{Binding IsTimerRunning}" VerticalAlignment="Center"/>
                                     
-                                    <Image Source="avares://DartsCounter/Assets/Icons/play.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}"/>
+                                    <Image Source="avares://DartsCounter/Assets/Icons/play.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                                     <TextBlock Text="{x:Static lang:Strings.PlayMenu}" IsVisible="{Binding !IsTimerRunning}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
 
                         <Button Background="Transparent" Command="{Binding ToggleTimerVisibilityCommand}" VerticalAlignment="Center" ToolTip.Tip="{x:Static lang:Strings.ToolTipToggleTimer}">
-                            <TextBlock Text="👁" FontSize="18" VerticalAlignment="Center"/>
+                            <Image Source="avares://DartsCounter/Assets/Icons/hide_show.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                         </Button>
                     </StackPanel>
                 </Border>

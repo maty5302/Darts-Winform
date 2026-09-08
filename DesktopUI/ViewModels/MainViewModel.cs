@@ -51,6 +51,8 @@ public partial class MainViewModel : ViewModelBase
         _ = Settings.CheckForUpdatesAsync();
         ApplyTheme(Settings.ThemePreference);
 
+        SoundManagerDarts.SoundEffects.IsMusicPlaying = Settings.PlayMusicOnStartup;
+        
         Settings.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName == nameof(SettingsManager.ThemePreference))

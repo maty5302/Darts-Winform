@@ -26,6 +26,15 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+    protected override async void OnClosing(WindowClosingEventArgs e)
+    {
+        base.OnClosing(e);
+        if (_boundViewModel != null)
+        {
+            await SoundManagerDarts.SoundEffects.StopPlayer();
+        }
+    }
+    
     protected override async void OnOpened(EventArgs e)
     {
         base.OnOpened(e);
@@ -111,9 +120,19 @@ public partial class MainWindow : Window
         }
     }
 
-    private void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    private async void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
-        _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
+        if (SoundManagerDarts.SoundEffects.IsMusicPlaying)
+        {
+            await SoundManagerDarts.SoundEffects.StopPlayer();
+            SoundManagerDarts.SoundEffects.IsMusicPlaying = false;
+        }
+        else
+        {
+            
+            await SoundManagerDarts.SoundEffects.PlayDartsSong();
+            SoundManagerDarts.SoundEffects.IsMusicPlaying = true;
+        }
     }
 
     private async void Button_OnClickSettings(object? sender, RoutedEventArgs e)
@@ -185,11 +204,5 @@ public partial class MainWindow : Window
             };
             bracketWindow.Show(this); 
         }
-    }
-
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
-    {
-        var window = new UpdateWindow();
-        window.ShowDialog(this);
     }
 }

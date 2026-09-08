@@ -23,7 +23,12 @@
                 <TextBox Grid.Row="2" Name="ChangeLogVersion" Text="{Binding ReleaseNotes}" Height="100" AcceptsReturn="False" TextWrapping="Wrap" IsReadOnly="True"/>
 
                 <Grid Grid.Row="3" ColumnDefinitions="Auto, *">
-                    <TextBlock Grid.Column="0" Text="Autor: Matěj Prudil" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+    
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <TextBlock Text="{x:Static lang:Strings.AuthorLabel}" />
+                        <TextBlock Text="Matěj Prudil" FontWeight="Bold" />
+                    </StackPanel>
+
                     <TextBlock Grid.Column="1" Text="{Binding AppVersion}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 </Grid>
                 
