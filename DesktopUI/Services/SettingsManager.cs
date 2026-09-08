@@ -13,7 +13,7 @@ namespace DesktopUI.Services
 {
     public partial class SettingsManager : ObservableObject
     {
-        [ObservableProperty] private string _mainBackgroundUri = "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
+        [ObservableProperty] private string _mainBackgroundUri = "avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg";
         [ObservableProperty] private string _currentLanguageCode = "cs";
         [ObservableProperty] private bool _playMusicOnStartup;
         [ObservableProperty] private bool _soundEffectsEnabled;
