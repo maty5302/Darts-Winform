@@ -335,4 +335,16 @@
     <data name="AuthorLabel" xml:space="preserve">
         <value>Author:</value>
     </data>
+    <data name="StatisticsImport" xml:space="preserve">
+        <value>Import from an older version (up to 1.16.1.2)</value>
+    </data>
+    <data name="StatisticsImportSelect" xml:space="preserve">
+        <value>Select the old database (mydb.db)</value>
+    </data>
+    <data name="SqliteDb" xml:space="preserve">
+        <value>SQLite Database</value>
+    </data>
+    <data name="Allfiles" xml:space="preserve">
+        <value>All files</value>
+    </data>
 </root>

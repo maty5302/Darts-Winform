@@ -2,6 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
+using System.IO;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -200,5 +205,85 @@ public partial class StatisticsViewModel : ObservableObject
         AchMore100Image = LoadImage(Hundred >= 1 
             ? "avares://DartsCounter/Assets/Achievements/a_more100.png" 
             : "avares://DartsCounter/Assets/Achievements/a_more100_no.png");
+    }
+    
+    [RelayCommand]
+    private async Task ImportOldDatabaseAsync()
+    {
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop &&
+            desktop.MainWindow?.StorageProvider is { } storageProvider)
+        {
+            string initialPath;
+            
+            if (OperatingSystem.IsWindows())
+            {
+                initialPath = @"C:\Program Files (x86)\Šipky"; 
+            }
+            else
+            {
+                initialPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            }
+
+            IStorageFolder? startFolder = null;
+            if (Directory.Exists(initialPath))
+            {
+                startFolder = await storageProvider.TryGetFolderFromPathAsync(initialPath);
+            }
+
+            var options = new FilePickerOpenOptions
+            {
+                Title = Strings.StatisticsImportSelect,
+                AllowMultiple = false,
+                SuggestedStartLocation = startFolder,
+                FileTypeFilter = new[]
+                {
+                    new FilePickerFileType(Strings.SqliteDb) { Patterns = new[] { "*.db", "*.sqlite", "*.sqlite3" } },
+                    new FilePickerFileType(Strings.Allfiles) { Patterns = new[] { "*.*" } }
+                }
+            };
+
+            var result = await storageProvider.OpenFilePickerAsync(options);
+
+            if (result.Count > 0)
+            {
+                string oldDbPath = result[0].Path.LocalPath;
+
+                if (!File.Exists(oldDbPath))
+                    return;
+
+                string connectionString = $"Data Source={oldDbPath}";
+
+                using var connection = new SqliteConnection(connectionString);
+                await connection.OpenAsync();
+
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT Name, Wins, Average, highestOut, sixty, hundred, hundred20, hundred80 FROM PlayerSettings";
+
+                using var reader = await command.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    string name = reader.GetString(0);
+                    
+                    var newPlayer = await _repository.CreatePlayerAsync(name);
+                    if (newPlayer == null) continue;
+                    
+                    var playerStats = new PlayerStatsDto
+                    {
+                        PlayerId = newPlayer.Id,
+                        Wins = reader.GetInt32(1),
+                        Average = reader.GetDouble(2),
+                        HighestOut = reader.GetInt32(3),
+                        Sixty = reader.GetInt32(4),
+                        Hundred = reader.GetInt32(5),
+                        Hundred20 = reader.GetInt32(6),
+                        Hundred80 = reader.GetInt32(7)
+                    };
+                    await _repository.UpdateStatsAsync(playerStats);
+                }
+
+                await LoadDataAsync();
+            }
+        }
     }
 }
