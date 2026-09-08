@@ -11,7 +11,7 @@ namespace DesktopUI.Views
 {
     public partial class SettingsWindow : Window
     {
-        private readonly SettingsViewModel _viewModel;
+        private SettingsViewModel _viewModel = null!;
         
         public bool RequiresMainWindowReload { get; private set; }
         
@@ -63,7 +63,7 @@ namespace DesktopUI.Views
             }
 
             SelectByTag("ThemePreferenceComboBox", "System"); 
-            SelectByTag("WallpaperComboBox", "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg"); 
+            SelectByTag("WallpaperComboBox", "avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg"); 
 
             RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked = true; 
             RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked = true;  
@@ -77,7 +77,7 @@ namespace DesktopUI.Views
             var colors = GetPlayerColorPickers().Select(cp => ToHexColor(cp.Color)).ToList();
             var language = GetSelectedTag(RequireControl<ComboBox>("LanguageComboBox")) ?? "cs";
             var wallpaper = GetSelectedTag(RequireControl<ComboBox>("WallpaperComboBox"))
-                            ?? "avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg";
+                            ?? "avares://DesktopUI/Assets/Backgrounds/dartsBackground.jpg";
             var themePreference = GetSelectedTag(RequireControl<ComboBox>("ThemePreferenceComboBox")) ?? "System";
             var playMusicOnStartup = RequireControl<ToggleSwitch>("StartupMusicToggle").IsChecked == true;
             var soundEffects = RequireControl<ToggleSwitch>("SoundEffectsToggle").IsChecked == true;
@@ -173,6 +173,12 @@ namespace DesktopUI.Views
         {
             return this.FindControl<T>(name)
                    ?? throw new InvalidOperationException($"Control '{name}' was not found in SettingsWindow.");
+        }
+
+        private void UpdateButton_OnClick(object? sender, RoutedEventArgs e)
+        {
+            var window = new UpdateWindow();
+            window.ShowDialog(this);
         }
     }
 }

@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-    # Aplikaci můžeme kompilovat na Ubuntu, Avalonia je multiplatformní
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +19,7 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      # TADY UPRAV NÁZEV: Zadej cestu ke svému hlavnímu .sln souboru
       run: dotnet restore DartsCounter.sln
 
     - name: Build Solution
-      # Zkompilujeme celou aplikaci v Release módu (jako pro produkci)
-      # TADY UPRAV NÁZEV: Zadej cestu ke svému hlavnímu .sln souboru
       run: dotnet build DartsCounter.sln --configuration Release --no-restore

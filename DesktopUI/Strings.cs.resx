@@ -35,8 +35,8 @@
     <data name="PlayMenu" xml:space="preserve">
         <value>Přehrát</value>
     </data>
-    <data name="StopMenu" xml:space="preserve">
-        <value>Zastavit</value>
+    <data name="PauseMenu" xml:space="preserve">
+        <value>Pozastavit</value>
     </data>
     <data name="MusicMMenu" xml:space="preserve">
         <value>Hudba</value>
@@ -289,5 +289,50 @@
     </data>
     <data name="TournamentPlayer" xml:space="preserve">
         <value>Hráč</value>
+    </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>Aktualizace aplikace</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>Stahování aktualizace...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Zrušit</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Stáhnout</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>Ručně</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>Později</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>Nepodařilo se načíst seznam změn. Zkontrolujte připojení k internetu.</value>
+    </data>
+    <data name="StatisticsAchievements" xml:space="preserve">
+        <value>Úspěchy</value>
+    </data>
+    <data name="AchCupImage" xml:space="preserve">
+        <value>Vyhraj aspoň jeden zápas</value>
+    </data>
+    <data name="AchCup20Image" xml:space="preserve">
+        <value>Vyhraj 20 zápasů</value>
+    </data>
+    <data name="AchCup100Image" xml:space="preserve">
+        <value>Vyhraj 100 zápasů</value>
+    </data>
+    <data name="AchMore100Image" xml:space="preserve">
+        <value>Zavři aspoň sto a více body</value>
+    </data>
+    <data name="Ach180Image" xml:space="preserve">
+        <value>Hod' maximum (180)</value>
+    </data>
+    <data name="ToolTipToggleTimer" xml:space="preserve">
+        <value>Skrýt/Zobrazit časovač</value>
+    </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>Autor:</value>
     </data>
 </root>

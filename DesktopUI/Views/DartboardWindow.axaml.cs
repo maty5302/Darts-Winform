@@ -18,6 +18,11 @@ public partial class DartboardWindow : Window
     private MainViewModel? _mainViewModel;
     private bool _isUpdatingUi = false; 
 
+    public DartboardWindow()
+    {
+        InitializeComponent();
+    }
+    
     public DartboardWindow(MainViewModel? mainViewModel = null)
     {
         InitializeComponent();
@@ -149,9 +154,16 @@ public partial class DartboardWindow : Window
 
         if (index >= 0 && index < _currentThrows.Count)
         {
-            _currentThrows[index].Multiplier = combo.SelectedIndex;
-            
-            if (_currentThrows[index].BaseScore == 0 && combo.SelectedIndex > 0)
+            int newMultiplier = combo.SelectedIndex;
+
+            if (_currentThrows[index].BaseScore == 25 && newMultiplier == 3)
+            {
+                newMultiplier = 2; 
+            }
+
+            _currentThrows[index].Multiplier = newMultiplier;
+        
+            if (_currentThrows[index].BaseScore == 0 && newMultiplier > 0)
             {
                 _currentThrows[index].BaseScore = 20;
             }
@@ -177,7 +189,7 @@ public partial class DartboardWindow : Window
             if (activePlayer != null)
             {
                 activePlayer.CurrentThrow = totalRoundScore.ToString();
-                activePlayer.SubmitThrow(); 
+                _ = activePlayer.SubmitThrow(); 
             }
         }
         

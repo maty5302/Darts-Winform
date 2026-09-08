@@ -42,7 +42,7 @@
     <data name="PlayMenu" xml:space="preserve">
         <value>_MenuPlay</value>
     </data>
-    <data name="StopMenu" xml:space="preserve">
+    <data name="PauseMenu" xml:space="preserve">
         <value>_MenuStop</value>
     </data>
     <data name="MusicMMenu" xml:space="preserve">
@@ -296,5 +296,50 @@
     </data>
     <data name="TournamentPlayer" xml:space="preserve">
         <value>_TournamentPlayer</value>
+    </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>_UpdateApp</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>_UpdateDownloading</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>_Cancel</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>_Download</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>_ManualUpdate</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>_Later</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>_InternetNot</value>
+    </data>
+    <data name="StatisticsAchievements" xml:space="preserve">
+        <value>_StatisticsAchievements</value>
+    </data>
+    <data name="AchCupImage" xml:space="preserve">
+        <value>_AchCupImage</value>
+    </data>
+    <data name="AchCup20Image" xml:space="preserve">
+        <value>_AchCup20Image</value>
+    </data>
+    <data name="AchCup100Image" xml:space="preserve">
+        <value>_AchCup100Image</value>
+    </data>
+    <data name="AchMore100Image" xml:space="preserve">
+        <value>_AchMore100Image</value>
+    </data>
+    <data name="Ach180Image" xml:space="preserve">
+        <value>_Ach180Image</value>
+    </data>
+    <data name="ToolTipToggleTimer" xml:space="preserve">
+        <value>_ToolTipToggleTimer</value>
+    </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>_AuthorLabel</value>
     </data>
 </root>

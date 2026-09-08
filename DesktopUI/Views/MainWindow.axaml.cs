@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -9,6 +11,7 @@ using Avalonia.Platform;
 using DesktopUI.Services;
 using DesktopUI.ViewModels;
 using DesktopUI.ViewModels.Tournament;
+using Domain;
 using Microsoft.Extensions.DependencyInjection;
 using TournamentSetupViewModel = DesktopUI.ViewModels.Tournament.TournamentSetupViewModel;
 
@@ -21,6 +24,25 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    protected override async void OnClosing(WindowClosingEventArgs e)
+    {
+        base.OnClosing(e);
+        if (_boundViewModel != null)
+        {
+            await SoundManagerDarts.SoundEffects.StopPlayer();
+        }
+    }
+    
+    protected override async void OnOpened(EventArgs e)
+    {
+        base.OnOpened(e);
+        if (await GithubIntegration.CheckForUpdates())
+        {
+            var updateWindow = new UpdateWindow();
+            await updateWindow.ShowDialog(this);
+        }
     }
 
     protected override void OnDataContextChanged(EventArgs e)
@@ -55,11 +77,11 @@ public partial class MainWindow : Window
     {
         var uri = Uri.TryCreate(wallpaperUri, UriKind.Absolute, out var parsedUri)
             ? parsedUri
-            : new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+            : new Uri("avares://DartsCounter/Assets/Backgrounds/darts-3-develop.jpg");
 
         if (!AssetLoader.Exists(uri))
         {
-            uri = new Uri("avares://DesktopUI/Assets/Backgrounds/darts-3-develop.jpg");
+            uri = new Uri("avares://DartsCounter/Assets/Backgrounds/darts-3-develop.jpg");
         }
 
         using var stream = AssetLoader.Open(uri);
@@ -87,7 +109,7 @@ public partial class MainWindow : Window
                     "Error", 
                     Strings.DuelError, 
                     MsBox.Avalonia.Enums.ButtonEnum.Ok, 
-                    MsBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error, null, WindowStartupLocation.CenterOwner);
 
                 await box.ShowAsync();
                 return;
@@ -98,9 +120,19 @@ public partial class MainWindow : Window
         }
     }
 
-    private void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    private async void PlayMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
-        _ = SoundManagerDarts.SoundEffects.PlayDartsSong();
+        if (SoundManagerDarts.SoundEffects.IsMusicPlaying)
+        {
+            await SoundManagerDarts.SoundEffects.StopPlayer();
+            SoundManagerDarts.SoundEffects.IsMusicPlaying = false;
+        }
+        else
+        {
+            
+            await SoundManagerDarts.SoundEffects.PlayDartsSong();
+            SoundManagerDarts.SoundEffects.IsMusicPlaying = true;
+        }
     }
 
     private async void Button_OnClickSettings(object? sender, RoutedEventArgs e)

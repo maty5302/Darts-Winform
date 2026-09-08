@@ -7,6 +7,11 @@ namespace DesktopUI.Views
 {
     public partial class DuelSetupWindow : Window
     {
+        public DuelSetupWindow()
+        {
+            InitializeComponent();
+        }
+        
         public DuelSetupWindow(MainViewModel mainViewModel ,IEnumerable<PlayerDto> dbPlayers)
         {
             InitializeComponent();
