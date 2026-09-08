@@ -271,6 +271,7 @@ public partial class StatisticsViewModel : ObservableObject
                     var playerStats = new PlayerStatsDto
                     {
                         PlayerId = newPlayer.Id,
+                        Year = DateTime.Now.Year,
                         Wins = reader.GetInt32(1),
                         Average = reader.GetDouble(2),
                         HighestOut = reader.GetInt32(3),
