@@ -60,8 +60,15 @@ public class DartsRepository : IDartsRepository
     {
         await using var context = CreateContext();
         
-        if (await context.Players.AnyAsync(p => p.PlayerName == playerName))
-            return null;
+        var existingPlayer = await context.Players.FirstOrDefaultAsync(p => p.PlayerName == playerName);
+        if (existingPlayer != null)
+        {
+            return new PlayerDto 
+            { 
+                Id = existingPlayer.Id, 
+                PlayerName = existingPlayer.PlayerName 
+            };
+        }
             
         var player = new Player { PlayerName = playerName };
         context.Players.Add(player);
