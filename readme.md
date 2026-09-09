@@ -59,8 +59,6 @@ Tournament mode supports 4, 8, or 16 players with bracket progression and match 
 
 ![TournamentSet](assets_md/GetReadyTournament.jpg)
 
-![TournamentGame](assets_md/TournamentGame.jpg)
-
 ![TournamentGameProgress](assets_md/Tournament_progress.jpg)
 
 ### Other features
@@ -76,16 +74,12 @@ Player statistics are stored in the database and displayed for the current year 
 Manage player names and colors, background images, transparency, and saved profiles.
 
 ![Settings](assets_md/SettingsMain.jpg)
-![Settings_Loading](assets_md/SettingsLoad.jpg)
-![Settings_Saving](assets_md/SettingsSave.jpg)
 
 #### Music and updates
 
 Control sound effects across the app and check for new versions with changelog support.
 
-![Update_Notify](assets_md/UpdateWarning.jpg)
 ![Update_ChangeLog](assets_md/UpdateLog.jpg)
-![Update_Progress_Download](assets_md/UpdateProgress.jpg)
 
 ### Main features
 

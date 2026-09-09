@@ -1,4 +1,4 @@
-# Darts Counter
+# Počítadlo šipky
 
 [![Unit Tests Domain](https://github.com/maty5302/Darts-Winform/actions/workflows/test.yml/badge.svg)](https://github.com/maty5302/Darts-Winform/actions/workflows/test.yml)
 [![Unit Tests DataLayer](https://github.com/maty5302/Darts-Winform/actions/workflows/unit_tests_datalayer.yml/badge.svg)](https://github.com/maty5302/Darts-Winform/actions/workflows/unit_tests_datalayer.yml)
@@ -25,42 +25,41 @@ Aplikace je navržena pro hraní šipek v různých režimech a pro ukládání 
 
 Začíná se od stanoveného bodového limitu a hra pokračuje až do nuly. Podpora pro vícero hráčů, statistiky hodů a doporučení při uzavírání na double.
 
-![MainGame](assets_md/Main_gamepic.jpg)
+![MainGame](assets_md/cs/Main_gamepic.jpg)
 
 #### Duel
 
 Podpora duelů 1v1, 2v2 a duelů na sety.
 
-![DuelSet1](assets_md/GetReadyDuel.jpg)
-![DuelSet2](assets_md/GetReadyDuel2.jpg)
+![DuelSet1](assets_md/cs/GetReadyDuel.jpg)
+![DuelSet2](assets_md/cs/GetReadyDuel2.jpg)
 
 ##### Duel 1v1
 
-![DuelGame1](assets_md/DuelGame.jpg)
+![DuelGame1](assets_md/cs/DuelGame.jpg)
 
 ##### Duel 2v2
 
-![DuelGame2](assets_md/Duel2.jpg)
+![DuelGame2](assets_md/cs/Duel2.jpg)
 
 ##### Duel sety 1v1
 
-![DuelGame3](assets_md/DuelGameSets.jpg)
+![DuelGame3](assets_md/cs/DuelGameSets.jpg)
 
 #### Trénink
 
 Trénink nabízí single hody, double hody, triple hody, checkout a kombinované hody.
 
-![Training](assets_md/TrainingMain.jpg)
+![Training](assets_md/cs/TrainingMain.jpg)
 
 #### Turnaj
 
 Turnaj pro 4, 8 nebo 16 hráčů s náhodným rozlosováním a přehledem postupu soutěže.
 
-![TournamentSet](assets_md/GetReadyTournament.jpg)
+![TournamentSet](assets_md/cs/GetReadyTournament.jpg)
 
-![TournamentGame](assets_md/TournamentGame.jpg)
 
-![TournamentGameProgress](assets_md/Tournament_progress.jpg)
+![TournamentGameProgress](assets_md/cs/Tournament_progress.jpg)
 
 ### Ostatní funkce
 
@@ -68,23 +67,19 @@ Turnaj pro 4, 8 nebo 16 hráčů s náhodným rozlosováním a přehledem postup
 
 Statistiky jednotlivých hráčů se ukládají do databáze a zobrazují se pro aktuální rok i celou historii.
 
-![Statistics](assets_md/Statistics.jpg)
+![Statistics](assets_md/cs/Statistics.jpg) 
 
 #### Nastavení
 
 Možnost upravovat jména a barvy hráčů, pozadí, průhlednost a profily nastavení.
 
-![Settings](assets_md/SettingsMain.jpg)
-![Settings_Loading](assets_md/SettingsLoad.jpg)
-![Settings_Saving](assets_md/SettingsSave.jpg)
+![Settings](assets_md/cs/SettingsMain.jpg)
 
 #### Hudba a aktualizace
 
 Správa zvuku napříč aplikací a automatická kontrola dostupných aktualizací.
 
-![Update_Notify](assets_md/UpdateWarning.jpg)
-![Update_ChangeLog](assets_md/UpdateLog.jpg)
-![Update_Progress_Download](assets_md/UpdateProgress.jpg)
+![Update_ChangeLog](assets_md/cs/UpdateLog.jpg)
 
 ### Hlavní funkce
 
