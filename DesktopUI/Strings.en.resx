@@ -1,0 +1,350 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ProgName" xml:space="preserve">
+        <value>Darts counter</value>
+    </data>
+    <data name="AboutAppMenu" xml:space="preserve">
+        <value>About</value>
+    </data>
+    <data name="SettingsMenu" xml:space="preserve">
+        <value>Settings</value>
+    </data>
+    <data name="StatsMenu" xml:space="preserve">
+        <value>Statistics</value>
+    </data>
+    <data name="MainName" xml:space="preserve">
+        <value>Darts</value>
+    </data>
+    <data name="NumPlayers" xml:space="preserve">
+        <value>Players</value>
+    </data>
+    <data name="NumScore" xml:space="preserve">
+        <value>Score</value>
+    </data>
+    <data name="PlayMenu" xml:space="preserve">
+        <value>Play</value>
+    </data>
+    <data name="PauseMenu" xml:space="preserve">
+        <value>Pause</value>
+    </data>
+    <data name="MusicMMenu" xml:space="preserve">
+        <value>Music</value>
+    </data>
+    <data name="ButtonGameOn" xml:space="preserve">
+        <value>Game On</value>
+    </data>
+    <data name="ButtonTraining" xml:space="preserve">
+        <value>Training</value>
+    </data>
+    <data name="ButtonTournament" xml:space="preserve">
+        <value>Tournament</value>
+    </data>
+    <data name="ButtonDetailOfTournament" xml:space="preserve">
+        <value>Detail of tournament</value>
+    </data>
+    <data name="AppSettingsMain" xml:space="preserve">
+        <value>Application settings</value>
+    </data>
+    <data name="SettingsNameAndColors" xml:space="preserve">
+        <value>Player names and colors</value>
+    </data>
+    <data name="SettingsPlayerName" xml:space="preserve">
+        <value>Player name</value>
+    </data>
+    <data name="SettingsPlayerColor" xml:space="preserve">
+        <value>Color</value>
+    </data>
+    <data name="SettingsOthers" xml:space="preserve">
+        <value>Other settings</value>
+    </data>
+    <data name="SettingsLang" xml:space="preserve">
+        <value>Language</value>
+    </data>
+    <data name="SettingsWallpaper" xml:space="preserve">
+        <value>Wallpaper</value>
+    </data>
+    <data name="SettingsStartupMusic" xml:space="preserve">
+        <value>Music on startup</value>
+    </data>
+    <data name="SettingsSave" xml:space="preserve">
+        <value>Save</value>
+    </data>
+    <data name="SettingsCancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="SettingsDefault" xml:space="preserve">
+        <value>Default</value>
+    </data>
+    <data name="SettingsTransparency" xml:space="preserve">
+        <value>Transparency</value>
+    </data>
+    <data name="SettingsSoundEffects" xml:space="preserve">
+        <value>Sound effects</value>
+    </data>
+    <data name="SettingsTheme" xml:space="preserve">
+        <value>App theme</value>
+    </data>
+    <data name="SettingsThemeSystem" xml:space="preserve">
+        <value>System</value>
+    </data>
+    <data name="SettingsThemeDark" xml:space="preserve">
+        <value>Dark</value>
+    </data>
+    <data name="SettingsThemeLight" xml:space="preserve">
+        <value>Light</value>
+    </data>
+    <data name="SettingsUpdate" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="MenuDartboard" xml:space="preserve">
+        <value>Dartboard</value>
+    </data>
+    <data name="SettingsTransparencyIntensity" xml:space="preserve">
+        <value>Transparency level</value>
+    </data>
+    <data name="AppReleaseNotesErr" xml:space="preserve">
+        <value>Failed to load release notes.</value>
+    </data>
+    <data name="AppReleaseNotesLoad" xml:space="preserve">
+        <value>Loading version information...</value>
+    </data>
+    <data name="AppVersion" xml:space="preserve">
+        <value>Version: </value>
+    </data>
+    <data name="UpdateCheck" xml:space="preserve">
+        <value>Checking for updates...</value>
+    </data>
+    <data name="UpdateCheckFailed" xml:space="preserve">
+        <value>Unable to verify updates.</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>Update is available!</value>
+    </data>
+    <data name="UpdateUpToDate" xml:space="preserve">
+        <value>App is up to date.</value>
+    </data>
+    <data name="DartboardThrown" xml:space="preserve">
+        <value>Thrown</value>
+    </data>
+    <data name="DartboardClear" xml:space="preserve">
+        <value>Clear</value>
+    </data>
+    <data name="DartboardConfirm" xml:space="preserve">
+        <value>Confirm</value>
+    </data>
+    <data name="DartboardCurrentRound" xml:space="preserve">
+        <value>Current round</value>
+    </data>
+    <data name="DartboardOutside" xml:space="preserve">
+        <value>Outside (0x)</value>
+    </data>
+    <data name="DartboardDouble" xml:space="preserve">
+        <value>Double (2x)</value>
+    </data>
+    <data name="DartboardSingle" xml:space="preserve">
+        <value>Single (1x)</value>
+    </data>
+    <data name="DartboardTreble" xml:space="preserve">
+        <value>Treble (3x)</value>
+    </data>
+    <data name="DartboardUpNext" xml:space="preserve">
+        <value>Up next</value>
+    </data>
+    <data name="StatisticsCreatePlayer" xml:space="preserve">
+        <value>Create player</value>
+    </data>
+    <data name="StatisticsCreateButton" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="StatisticsManage" xml:space="preserve">
+        <value>Manage player</value>
+    </data>
+    <data name="StatisticsRemove" xml:space="preserve">
+        <value>Delete</value>
+    </data>
+    <data name="StatisticsRename" xml:space="preserve">
+        <value>Rename</value>
+    </data>
+    <data name="StatisticsVictoryCount" xml:space="preserve">
+        <value>Number of victories:</value>
+    </data>
+    <data name="DuelSetMatch" xml:space="preserve">
+        <value>Preparing for the Match</value>
+    </data>
+    <data name="DuelSetMainText" xml:space="preserve">
+        <value>Duel</value>
+    </data>
+    <data name="DuelFirstTeam" xml:space="preserve">
+        <value>First team</value>
+    </data>
+    <data name="DuelSecondTeam" xml:space="preserve">
+        <value>Second team</value>
+    </data>
+    <data name="DuelPlayerOne" xml:space="preserve">
+        <value>Player one</value>
+    </data>
+    <data name="DuelPlayerTwo" xml:space="preserve">
+        <value>Player two</value>
+    </data>
+    <data name="DuelPlayerThree" xml:space="preserve">
+        <value>Player three</value>
+    </data>
+    <data name="DuelPlayerFour" xml:space="preserve">
+        <value>Player four</value>
+    </data>
+    <data name="DuelSetSets" xml:space="preserve">
+        <value>Sets</value>
+    </data>
+    <data name="DuelFirstTo" xml:space="preserve">
+        <value>First to</value>
+    </data>
+    <data name="DuelWins" xml:space="preserve">
+        <value>wins</value>
+    </data>
+    <data name="DuelSetNumberOfLegs" xml:space="preserve">
+        <value>Number of legs</value>
+    </data>
+    <data name="DuelSetNumberOfSets" xml:space="preserve">
+        <value>Number of sets</value>
+    </data>
+    <data name="DartboardMain" xml:space="preserve">
+        <value>Interactive dartboard</value>
+    </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>Double throws</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>Single throws</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>Randomly all</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>Not thrown</value>
+    </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>Thrown</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>Total</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>Treble throws</value>
+    </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>Selecting difficulty and level</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>Closing the leg</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>Not thrown (next)</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>Thrown (next)</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>Enter a name...</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>Detailed statistics</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>Average:</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>Highest out:</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>Choose a year</value>
+    </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>Tournament</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>Number of players</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>Tournament preparation</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>Tournament roster</value>
+    </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>Each player must be selected, and no player may be repeated!</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>There must be at least 2 players in the database to start a duel!</value>
+    </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>Player</value>
+    </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>App update</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>Downloading update...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Download</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>Manual update</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>Later</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>Failed to load the list of changes. Check your internet connection.</value>
+    </data>
+    <data name="StatisticsAchievements" xml:space="preserve">
+        <value>Achievements</value>
+    </data>
+    <data name="AchCupImage" xml:space="preserve">
+        <value>Win at least one match</value>
+    </data>
+    <data name="AchCup20Image" xml:space="preserve">
+        <value>Win 20 matches</value>
+    </data>
+    <data name="AchCup100Image" xml:space="preserve">
+        <value>Win 100 matches</value>
+    </data>
+    <data name="AchMore100Image" xml:space="preserve">
+        <value>Close out with at least a hundred points or more</value>
+    </data>
+    <data name="Ach180Image" xml:space="preserve">
+        <value>Throw a maximum (180)</value>
+    </data>
+    <data name="ToolTipToggleTimer" xml:space="preserve">
+        <value>Hide/Show timer</value>
+    </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>Author:</value>
+    </data>
+    <data name="StatisticsImport" xml:space="preserve">
+        <value>Import from an older version (up to 1.16.1.2)</value>
+    </data>
+    <data name="StatisticsImportSelect" xml:space="preserve">
+        <value>Select the old database (mydb.db)</value>
+    </data>
+    <data name="SqliteDb" xml:space="preserve">
+        <value>SQLite Database</value>
+    </data>
+    <data name="Allfiles" xml:space="preserve">
+        <value>All files</value>
+    </data>
+</root>

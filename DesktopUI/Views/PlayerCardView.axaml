@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:DesktopUI.ViewModels"
+             x:Class="DesktopUI.Views.PlayerCardView"
+             x:DataType="vm:PlayerViewModel">
+    
+    <Border Background="{Binding CardBackground}" CornerRadius="2" Margin="10" Padding="10" 
+            BorderBrush="DarkGreen" BorderThickness="1" Opacity="{Binding OpacityPlayerCard}">
+        <Grid RowDefinitions="Auto,*,Auto,Auto">
+            <TextBlock Grid.Row="0" Text="{Binding Name}" FontStyle="Italic" FontSize="16" Foreground="Black"/>
+            
+            <TextBlock Grid.Row="1" Text="{Binding DisplayText}" FontSize="{Binding DisplayFontSize}" FontWeight="Bold" Foreground="Black" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            
+            <Grid Grid.Row="2" ColumnDefinitions="*, Auto">
+                <TextBox x:Name="InputBox" Grid.Column="0" Background="Transparent" Margin="0,0,5,0" Text="{Binding CurrentThrow}" HorizontalContentAlignment="Center" IsEnabled="{Binding IsEnabled}" GotFocus="InputBox_OnGotFocus">
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Enter" Command="{Binding SubmitThrowCommand}" />
+                    </TextBox.KeyBindings>
+                </TextBox>
+                
+            </Grid>
+            
+            <Grid Grid.Row="3" ColumnDefinitions="*, Auto">
+                <TextBlock Text="{Binding AverageText}" FontSize="12" Foreground="Black" Margin="0,5,0,0"/>
+                <TextBlock Text="{Binding Checkout}" FontSize="12" Foreground="Black" Margin="0,5,0,0" HorizontalAlignment="Right"/>
+            </Grid>
+        </Grid>
+    </Border>
+    
+</UserControl>

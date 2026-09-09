@@ -1,0 +1,78 @@
+﻿using Domain.Models;
+
+namespace Domain
+{
+	public class Tournament
+	{
+		public List<Match> matches { get; set; }
+		public List<PlayerDto> players { get; set; }
+		public List<List<Match>> allmatches { get; set; }
+		private int round { get; set; }
+
+		public Tournament(List<PlayerDto> players)
+		{
+			this.players = players;
+			this.matches = new List<Match>();
+			this.allmatches = new List<List<Match>>();
+			this.generateMatches();
+		}
+
+		private void generateMatches()
+		{
+			int matchesPerRound = this.players.Count / 2;
+			if (round == 0)
+				round = 1;
+
+			for (int i = 0; i < matchesPerRound; i++)
+			{
+				this.matches.Add(new Match(Convert.ToInt32(this.players[i].Id), Convert.ToInt32(this.players[this.players.Count - 1 - i].Id), round));
+			}
+			allmatches.Add(this.matches);
+		}
+
+		public Match? getNextMatch()
+		{			
+			return this.matches.Find(x => x.WinnerId == 0);
+		}
+		//if all matches are played, generate next round (getNextMatch() returns null)
+        public void generateNextRound()
+		{
+			List<PlayerDto> winners = new List<PlayerDto>();
+			foreach (Match match in matches)
+			{
+				if (match.WinnerId != 0)
+                {
+                    var player = players.Find(x => x.Id == match.WinnerId);
+                    if (player != null)
+                    {
+                        winners.Add(player);
+                    }
+				}
+			}
+			if (winners.Count == matches.Count && winners.Count>=2)
+			{
+
+				matches = new List<Match>();
+				int matchesPerRound = winners.Count / 2;
+				round++;
+
+				//musi to byt winners po sobe
+				for (int i = 0; i < matchesPerRound; i++)
+				{
+					matches.Add(new Match(Convert.ToInt32(winners[i*2].Id), Convert.ToInt32(winners[i*2+1].Id), round));
+				}
+
+				allmatches.Add(matches);
+
+			}
+			else
+			{
+				matches = new List<Match>();
+				int matchesPerRound = winners.Count / 2;
+				round++;
+				allmatches.Add(matches);
+			}
+		}
+
+	}
+}

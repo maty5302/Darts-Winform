@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ProgName" xml:space="preserve">
+        <value>_ProgName</value>
+    </data>
+    <data name="AboutAppMenu" xml:space="preserve">
+        <value>_MenuAboutApp</value>
+    </data>
+    <data name="SettingsMenu" xml:space="preserve">
+        <value>_MenuSettings</value>
+    </data>
+    <data name="StatsMenu" xml:space="preserve">
+        <value>_MenuStats</value>
+    </data>
+    <data name="MainName" xml:space="preserve">
+        <value>_MainName</value>
+    </data>
+    <data name="NumPlayers" xml:space="preserve">
+        <value>_NumPlayers</value>
+    </data>
+    <data name="NumScore" xml:space="preserve">
+        <value>_NumScore</value>
+    </data>
+    <data name="PlayMenu" xml:space="preserve">
+        <value>_MenuPlay</value>
+    </data>
+    <data name="PauseMenu" xml:space="preserve">
+        <value>_MenuStop</value>
+    </data>
+    <data name="MusicMMenu" xml:space="preserve">
+        <value>_MenuMusic</value>
+    </data>
+    <data name="ButtonGameOn" xml:space="preserve">
+        <value>_ButtonGameOn</value>
+    </data>
+    <data name="ButtonTraining" xml:space="preserve">
+        <value>_ButtonTraining</value>
+    </data>
+    <data name="ButtonTournament" xml:space="preserve">
+        <value>_ButtonTournament</value>
+    </data>
+    <data name="ButtonDetailOfTournament" xml:space="preserve">
+        <value>_ButtonDetailOfTournament</value>
+    </data>
+    <data name="AppSettingsMain" xml:space="preserve">
+        <value>_SettingsAppMain</value>
+    </data>
+    <data name="SettingsNameAndColors" xml:space="preserve">
+        <value>_SettingsNameColors</value>
+    </data>
+    <data name="SettingsPlayerName" xml:space="preserve">
+        <value>_SettingsPlayerName</value>
+    </data>
+    <data name="SettingsPlayerColor" xml:space="preserve">
+        <value>_SettingsPlayerColor</value>
+    </data>
+    <data name="SettingsOthers" xml:space="preserve">
+        <value>_SettingsOther</value>
+    </data>
+    <data name="SettingsLang" xml:space="preserve">
+        <value>_SettingsLang</value>
+    </data>
+    <data name="SettingsWallpaper" xml:space="preserve">
+        <value>_SettingsWallpaper</value>
+    </data>
+    <data name="SettingsStartupMusic" xml:space="preserve">
+        <value>_SettingsStartupMusic</value>
+    </data>
+    <data name="SettingsSave" xml:space="preserve">
+        <value>_SettingsSave</value>
+    </data>
+    <data name="SettingsCancel" xml:space="preserve">
+        <value>_SettingsCancel</value>
+    </data>
+    <data name="SettingsDefault" xml:space="preserve">
+        <value>_SettingsDefault</value>
+    </data>
+    <data name="SettingsTransparency" xml:space="preserve">
+        <value>_SettingsTransparency</value>
+    </data>
+    <data name="SettingsSoundEffects" xml:space="preserve">
+        <value>_SettingsSoundEffects</value>
+    </data>
+    <data name="SettingsTheme" xml:space="preserve">
+        <value>_SettingsTheme</value>
+    </data>
+    <data name="SettingsThemeSystem" xml:space="preserve">
+        <value>_SettingsThemeSystem</value>
+    </data>
+    <data name="SettingsThemeDark" xml:space="preserve">
+        <value>_SettingsThemeDark</value>
+    </data>
+    <data name="SettingsThemeLight" xml:space="preserve">
+        <value>_SettingsThemeLight</value>
+    </data>
+    <data name="SettingsUpdate" xml:space="preserve">
+        <value>_SettingsUpdate</value>
+    </data>
+    <data name="MenuDartboard" xml:space="preserve">
+        <value>_MenuDartboard</value>
+    </data>
+    <data name="SettingsTransparencyIntensity" xml:space="preserve">
+        <value>_SettingsTransparencyIntensity</value>
+    </data>
+    <data name="AppReleaseNotesErr" xml:space="preserve">
+        <value>_AppReleaseNotesErr</value>
+    </data>
+    <data name="AppReleaseNotesLoad" xml:space="preserve">
+        <value>_AppReleaseNotesLoad</value>
+    </data>
+    <data name="AppVersion" xml:space="preserve">
+        <value>_AppVersion</value>
+    </data>
+    <data name="UpdateCheck" xml:space="preserve">
+        <value>_UpdateCheck</value>
+    </data>
+    <data name="UpdateCheckFailed" xml:space="preserve">
+        <value>_UpdateCheckFailed</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>_UpdateAvailable</value>
+    </data>
+    <data name="UpdateUpToDate" xml:space="preserve">
+        <value>_UpdateUpToDate</value>
+    </data>
+    <data name="DartboardThrown" xml:space="preserve">
+        <value>_DartboardThrown</value>
+    </data>
+    <data name="DartboardClear" xml:space="preserve">
+        <value>_DartboardClear</value>
+    </data>
+    <data name="DartboardConfirm" xml:space="preserve">
+        <value>_DartboardConfirm</value>
+    </data>
+    <data name="DartboardCurrentRound" xml:space="preserve">
+        <value>_DartboardCurrentRound</value>
+    </data>
+    <data name="DartboardOutside" xml:space="preserve">
+        <value>_DartboardOutside</value>
+    </data>
+    <data name="DartboardSingle" xml:space="preserve">
+        <value>_DartboardSingle</value>
+    </data>
+    <data name="DartboardDouble" xml:space="preserve">
+        <value>_DartboardDouble</value>
+    </data>
+    <data name="DartboardTreble" xml:space="preserve">
+        <value>_DartboardTreble</value>
+    </data>
+    <data name="DartboardUpNext" xml:space="preserve">
+        <value>_DartboardUpNext</value>
+    </data>
+    <data name="StatisticsCreatePlayer" xml:space="preserve">
+        <value>_StatisticsCreatePlayer</value>
+    </data>
+    <data name="StatisticsCreateButton" xml:space="preserve">
+        <value>_StatisticsCreateButton</value>
+    </data>
+    <data name="StatisticsManage" xml:space="preserve">
+        <value>_StatisticsManage</value>
+    </data>
+    <data name="StatisticsRemove" xml:space="preserve">
+        <value>_StatisticsRemove</value>
+    </data>
+    <data name="StatisticsRename" xml:space="preserve">
+        <value>_StatisticsRename</value>
+    </data>
+    <data name="StatisticsVictoryCount" xml:space="preserve">
+        <value>_StatisticsVictoryCount</value>
+    </data>
+    <data name="DuelSetMatch" xml:space="preserve">
+        <value>_DuelSetMatch</value>
+    </data>
+    <data name="DuelSetMainText" xml:space="preserve">
+        <value>_DuelSetMainText</value>
+    </data>
+    <data name="DuelFirstTeam" xml:space="preserve">
+        <value>_DuelFirstTeam</value>
+    </data>
+    <data name="DuelSecondTeam" xml:space="preserve">
+        <value>_DuelSecondTeam</value>
+    </data>
+    <data name="DuelPlayerOne" xml:space="preserve">
+        <value>_DuelPlayerOne</value>
+    </data>
+    <data name="DuelPlayerTwo" xml:space="preserve">
+        <value>_DuelPlayerTwo</value>
+    </data>
+    <data name="DuelPlayerThree" xml:space="preserve">
+        <value>_DuelPlayerThree</value>
+    </data>
+    <data name="DuelPlayerFour" xml:space="preserve">
+        <value>_DuelPlayerFour</value>
+    </data>
+    <data name="DuelSetSets" xml:space="preserve">
+        <value>_DuelSetSets</value>
+    </data>
+    <data name="DuelFirstTo" xml:space="preserve">
+        <value>_DuelFirstTo</value>
+    </data>
+    <data name="DuelWins" xml:space="preserve">
+        <value>_DuelWins</value>
+    </data>
+    <data name="DuelSetNumberOfLegs" xml:space="preserve">
+        <value>_DuelSetNumberOfLegs</value>
+    </data>
+    <data name="DuelSetNumberOfSets" xml:space="preserve">
+        <value>_DuelSetNumberOfSets</value>
+    </data>
+    <data name="DartboardMain" xml:space="preserve">
+        <value>_DartboardMain</value>
+    </data>
+    <data name="TrainingThrown" xml:space="preserve">
+        <value>_TrainingThrown</value>
+    </data>
+    <data name="TrainingNotThrown" xml:space="preserve">
+        <value>_TrainingNotThrown</value>
+    </data>
+    <data name="TrainingTotal" xml:space="preserve">
+        <value>_TrainingTotal</value>
+    </data>
+    <data name="TrainingSingleThrows" xml:space="preserve">
+        <value>_TrainingSingleThrows</value>
+    </data>
+    <data name="TrainingDoubleThrows" xml:space="preserve">
+        <value>_TrainingDoubleThrows</value>
+    </data>
+    <data name="TrainingTrebleThrows" xml:space="preserve">
+        <value>_TrainingTrebleThrows</value>
+    </data>
+    <data name="TrainingRandomThrows" xml:space="preserve">
+        <value>_TrainingRandomThrows</value>
+    </data>
+    <data name="TrainingCheckoutThrows" xml:space="preserve">
+        <value>_TrainingCheckoutThrows</value>
+    </data>
+    <data name="TrainingLevel" xml:space="preserve">
+        <value>_TrainingLevel</value>
+    </data>
+    <data name="TrainingNotThrownNext" xml:space="preserve">
+        <value>_TrainingNotThrownNext</value>
+    </data>
+    <data name="TrainingThrownNext" xml:space="preserve">
+        <value>_TrainingThrownNext</value>
+    </data>
+    <data name="StatisticsTypeName" xml:space="preserve">
+        <value>_StatisticsTypeName</value>
+    </data>
+    <data name="StatisticsDetails" xml:space="preserve">
+        <value>_StatisticsDetails</value>
+    </data>
+    <data name="StatisticsAverage" xml:space="preserve">
+        <value>_StatisticsAverage</value>
+    </data>
+    <data name="StatisticsHighestOut" xml:space="preserve">
+        <value>_StatisticsHighestOut</value>
+    </data>
+    <data name="StatisticsYearPlaceholder" xml:space="preserve">
+        <value>_StatisticsYearPlaceholder</value>
+    </data>
+    <data name="TournamentMain" xml:space="preserve">
+        <value>_TournamentMain</value>
+    </data>
+    <data name="TournamentNumPlayers" xml:space="preserve">
+        <value>_TournamentNumPlayers</value>
+    </data>
+    <data name="TournamentPrepare" xml:space="preserve">
+        <value>_TournamentPrepare</value>
+    </data>
+    <data name="TournamentRoster" xml:space="preserve">
+        <value>_TournamentRoster</value>
+    </data>
+    <data name="TournamentSetupErrorPlayers" xml:space="preserve">
+        <value>_TournamentSetupErrorPlayers</value>
+    </data>
+    <data name="DuelError" xml:space="preserve">
+        <value>_DuelError</value>
+    </data>
+    <data name="TournamentPlayer" xml:space="preserve">
+        <value>_TournamentPlayer</value>
+    </data>
+    <data name="UpdateApp" xml:space="preserve">
+        <value>_UpdateApp</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>_UpdateDownloading</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>_Cancel</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>_Download</value>
+    </data>
+    <data name="ManualUpdate" xml:space="preserve">
+        <value>_ManualUpdate</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>_Later</value>
+    </data>
+    <data name="InternetNot" xml:space="preserve">
+        <value>_InternetNot</value>
+    </data>
+    <data name="StatisticsAchievements" xml:space="preserve">
+        <value>_StatisticsAchievements</value>
+    </data>
+    <data name="AchCupImage" xml:space="preserve">
+        <value>_AchCupImage</value>
+    </data>
+    <data name="AchCup20Image" xml:space="preserve">
+        <value>_AchCup20Image</value>
+    </data>
+    <data name="AchCup100Image" xml:space="preserve">
+        <value>_AchCup100Image</value>
+    </data>
+    <data name="AchMore100Image" xml:space="preserve">
+        <value>_AchMore100Image</value>
+    </data>
+    <data name="Ach180Image" xml:space="preserve">
+        <value>_Ach180Image</value>
+    </data>
+    <data name="ToolTipToggleTimer" xml:space="preserve">
+        <value>_ToolTipToggleTimer</value>
+    </data>
+    <data name="AuthorLabel" xml:space="preserve">
+        <value>_AuthorLabel</value>
+    </data>
+    <data name="StatisticsImport" xml:space="preserve">
+        <value>_StatisticsImport</value>
+    </data>
+    <data name="StatisticsImportSelect" xml:space="preserve">
+        <value>_StatisticsImportSelect</value>
+    </data>
+    <data name="SqliteDb" xml:space="preserve">
+        <value>_SqliteDb</value>
+    </data>
+    <data name="Allfiles" xml:space="preserve">
+        <value>_AllFiles</value>
+    </data>
+</root>

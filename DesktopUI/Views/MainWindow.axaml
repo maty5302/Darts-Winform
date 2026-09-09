@@ -1,0 +1,130 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lang="clr-namespace:DesktopUI"
+        xmlns:vm="using:DesktopUI.ViewModels"
+        xmlns:views="clr-namespace:DesktopUI.Views"
+        x:Class="DesktopUI.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/IcoFiles/Darts.ico" Title="{x:Static lang:Strings.ProgName}" 
+        MinWidth="600"
+        MinHeight="400"
+        Width="1000" Height="700">
+    
+   <Grid RowDefinitions="Auto, *">
+        
+        <Border Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Spacing="5" Background="{DynamicResource SystemRegionBrush}" Opacity="0.8" >
+                <Button Background="Transparent" Command="{Binding RedoLastCommand}">
+                    <Image Source="avares://DartsCounter/Assets/Icons/back.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                </Button>
+                <Button Background="Transparent" Click="Button_OnClickDartBoard">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="avares://DartsCounter/Assets/Icons/dartboard.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                        <TextBlock Text="{x:Static lang:Strings.MenuDartboard}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="Transparent" Click="PlayMenuItem_OnClick">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="avares://DartsCounter/Assets/Icons/music.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality" />
+                        <TextBlock Text="{x:Static lang:Strings.MusicMMenu}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="Transparent" Click="Button_OnClickStatistics">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="avares://DartsCounter/Assets/Icons/stats.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                        <TextBlock Text="{x:Static lang:Strings.StatsMenu }" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="Transparent" Click="Button_OnClickSettings">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="avares://DartsCounter/Assets/Icons/settings.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                        <TextBlock Text="{x:Static lang:Strings.SettingsMenu }" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>                     
+                <Button Background="Transparent" Click="Button_OnClickAbout">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="avares://DartsCounter/Assets/Icons/about.png" Width="22" Height="22" RenderOptions.BitmapInterpolationMode="HighQuality" />
+                        <TextBlock Text="{x:Static lang:Strings.AboutAppMenu }" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform">
+            <Grid Width="1000" Height="650">
+                
+                <Border Background="{DynamicResource SystemRegionBrush}" CornerRadius="5" Padding="5" Opacity="0.8" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        Margin="20">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="{x:Static lang:Strings.MainName}" FontSize="38" FontFamily="avares://DartsCounter/Assets/Fonts/#Sigmar One" HorizontalAlignment="Center" />
+                        
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Margin="0,10">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static lang:Strings.NumPlayers}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lang:Strings.NumScore}" HorizontalAlignment="Center"/>
+                            
+                            <NumericUpDown Grid.Row="1" Grid.Column="0"  Value="{Binding PlayerCount}" Minimum="1" Maximum="10" Width="40" Margin="5" ShowButtonSpinner="False" HorizontalContentAlignment="Center" />
+                            <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Score}" Increment="200" Minimum="301" Maximum="901" Width="40" Margin="5" ShowButtonSpinner="False"  HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <UniformGrid Columns="3" Rows="2">
+                            <Button Content="{x:Static lang:Strings.ButtonGameOn}" Command="{Binding StartGameCommand}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                            <Button Content="Duel" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_OnClickDuel"/>
+                            <Button Content="{x:Static lang:Strings.ButtonTraining}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="True" Command="{Binding OpenTrainingCommand}"/>
+                            <Button Content="{x:Static lang:Strings.ButtonTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="True" Click="Button_OnClickTournament"/>
+                            <Button Content="{x:Static lang:Strings.ButtonDetailOfTournament}" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" IsEnabled="True" Click="Button_OnClickTournamentDetail"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource SystemRegionBrush}" CornerRadius="5" Padding="10" Opacity="0.8" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="20">
+                    <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="10" IsVisible="{Binding IsTimerVisible}" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding FormattedTime}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" Width="120" TextAlignment="Center"/>
+                            
+                            <Button Command="{Binding ToggleTimerCommand}" Width="110" IsEnabled="{Binding IsGameActive}">
+                                <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center">
+                                    <Image Source="avares://DartsCounter/Assets/Icons/pause.png" Width="18" Height="18" IsVisible="{Binding IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                                    <TextBlock Text="{x:Static lang:Strings.PauseMenu}" IsVisible="{Binding IsTimerRunning}" VerticalAlignment="Center"/>
+                                    
+                                    <Image Source="avares://DartsCounter/Assets/Icons/play.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                                    <TextBlock Text="{x:Static lang:Strings.PlayMenu}" IsVisible="{Binding !IsTimerRunning}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <Button Background="Transparent" Command="{Binding ToggleTimerVisibilityCommand}" VerticalAlignment="Center" ToolTip.Tip="{x:Static lang:Strings.ToolTipToggleTimer}">
+                            <Image Source="avares://DartsCounter/Assets/Icons/hide_show.png" Width="18" Height="18" IsVisible="{Binding !IsTimerRunning}" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <ItemsControl ItemsSource="{Binding Players}" Margin="20,250,20,20" IsVisible="{Binding !IsDuelMode}"> 
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5" Rows="2" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <views:PlayerCardView/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+                <Panel IsVisible="{Binding IsDuelMode}" Margin="20,250,20,20" >
+                    <views:DuelCardView DataContext="{Binding DuelVM}" />
+                </Panel>
+                
+                <Panel IsVisible="{Binding IsTrainingMode}" Margin="20,250,20,20">
+                    <views:TrainingCardView DataContext="{Binding TrainingVM}" />
+                </Panel>
+                
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

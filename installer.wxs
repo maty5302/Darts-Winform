@@ -1,0 +1,61 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="DartsCounter" Manufacturer="Matěj Prudil" Version="2.0.0.0" UpgradeCode="1B0C8A1E-4A91-4F4E-82CD-133F1F3C71B9"  Scope="perMachine">
+    <MajorUpgrade DowngradeErrorMessage="Novější verze aplikace DartsCounter je již nainstalována." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AppIcon" SourceFile="DesktopUI\Assets\IcoFiles\Darts.ico" />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="AppComponents" />
+      <ComponentRef Id="DesktopShortcutComp" />
+      <ComponentRef Id="StartMenuShortcutComp" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="DartsCounter" />
+    </StandardDirectory>
+    
+    <StandardDirectory Id="DesktopFolder" />
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <ComponentGroup Id="AppComponents" Directory="INSTALLFOLDER">
+      <Files Include="publish-win\**" />
+    </ComponentGroup>
+
+    <Component Id="DesktopShortcutComp" Directory="DesktopFolder">
+      <Shortcut Id="AppDesktopShortcut"
+                Name="Darts Counter"
+                Target="[INSTALLFOLDER]DartsCounter.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Icon="AppIcon" />
+                
+      <RegistryValue Root="HKCU" 
+                     Key="Software\MatejPrudil\DartsCounter" 
+                     Name="DesktopShortcut" 
+                     Type="integer" 
+                     Value="1" 
+                     KeyPath="yes" />
+    </Component>
+
+     <Component Id="StartMenuShortcutComp" Directory="ProgramMenuFolder">
+      <Shortcut Id="AppStartMenuShortcut"
+                Name="Darts Counter"
+                Target="[INSTALLFOLDER]DartsCounter.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Icon="AppIcon" />
+                
+      <RegistryValue Root="HKCU" 
+                     Key="Software\MatejPrudil\DartsCounter" 
+                     Name="StartMenuShortcut" 
+                     Type="integer" 
+                     Value="1" 
+                     KeyPath="yes" />
+
+
+    </Component>
+  </Fragment>
+</Wix>

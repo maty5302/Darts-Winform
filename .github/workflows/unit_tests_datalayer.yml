@@ -1,0 +1,28 @@
+name: .NET Core Unit Tests DataLayer
+
+on:
+  push:
+    branches: [ master , dev , dev_*]
+  pull_request:
+    branches: [ master , dev ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore Tests/DataLayer.Tests/DataLayer.Tests.csproj
+
+    - name: Build
+      run: dotnet build Tests/DataLayer.Tests/DataLayer.Tests.csproj --no-restore
+
+    - name: Run DataLayer.Tests
+      run: dotnet test Tests/DataLayer.Tests/DataLayer.Tests.csproj --no-build --verbosity normal

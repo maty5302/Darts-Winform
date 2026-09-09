@@ -1,0 +1,93 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tournament="clr-namespace:DesktopUI.ViewModels.Tournament"
+             x:DataType="tournament:TournamentBracketViewModel"
+             x:Class="DesktopUI.Views.TournamentBracketView">
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.winner">
+            <Setter Property="Foreground" Value="#22B14C"/> 
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Border Background="{DynamicResource SystemRegionBrush}" Padding="20">
+            
+            <ItemsControl ItemsSource="{Binding Rounds}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="0"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding Matches}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="20, 135, 20" VerticalAlignment="Stretch" Margin="0">
+                                        
+                                        <Border Grid.Column="0" Height="1" 
+                                                Background="{DynamicResource SystemControlForegroundBaseHighBrush}" 
+                                                VerticalAlignment="Center" IsVisible="{Binding !IsFirstRound}" />
+
+                                        <Grid Grid.Column="1" VerticalAlignment="Center" ColumnDefinitions="120, 15">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.Row="0" Grid.Column="0" 
+                                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}" 
+                                                    BorderBrush="{DynamicResource SystemControlForegroundBaseHighBrush}" BorderThickness="1"
+                                                    Height="30" Margin="0,0,0,2">
+                                                
+                                                <TextBlock Text="{Binding Player1Name}" 
+                                                           FontWeight="{Binding Player1FontWeight}"
+                                                           Classes.winner="{Binding IsPlayer1Winner}"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+
+                                            <Border Grid.Row="1" Grid.Column="0" 
+                                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}" 
+                                                    BorderBrush="{DynamicResource SystemControlForegroundBaseHighBrush}" BorderThickness="1"
+                                                    Height="30" Margin="0,2,0,0"
+                                                    IsVisible="{Binding !IsFinalWinnerBox}">
+                                                
+                                                <TextBlock Text="{Binding Player2Name}" 
+                                                           FontWeight="{Binding Player2FontWeight}"
+                                                           Classes.winner="{Binding IsPlayer2Winner}"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+
+                                            <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                                                    BorderBrush="{DynamicResource SystemControlForegroundBaseHighBrush}" 
+                                                    BorderThickness="0,1,1,1"
+                                                    Margin="0,15,0,15"
+                                                    IsVisible="{Binding !IsFinalWinnerBox}" />
+                                        </Grid>
+                                        <Grid Grid.Column="2" VerticalAlignment="Stretch" IsVisible="{Binding HasNextRound}">
+                                            <Border Height="1" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" VerticalAlignment="Center" />
+                                            
+                                            <Grid RowDefinitions="*,*" HorizontalAlignment="Right" Width="1">
+                                                <Border Grid.Row="1" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" IsVisible="{Binding IsTopMatch}" />
+                                                <Border Grid.Row="0" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" IsVisible="{Binding IsBottomMatch}" />
+                                            </Grid>
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+        </Border>
+    </ScrollViewer>
+</UserControl>
