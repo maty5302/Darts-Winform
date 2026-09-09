@@ -692,5 +692,29 @@ namespace DesktopUI {
                 return ResourceManager.GetString("AuthorLabel", resourceCulture);
             }
         }
+        
+        public static string StatisticsImport {
+            get {
+                return ResourceManager.GetString("StatisticsImport", resourceCulture);
+            }
+        }
+        
+        public static string StatisticsImportSelect {
+            get {
+                return ResourceManager.GetString("StatisticsImportSelect", resourceCulture);
+            }
+        }
+        
+        public static string SqliteDb {
+            get {
+                return ResourceManager.GetString("SqliteDb", resourceCulture);
+            }
+        }
+        
+        public static string Allfiles {
+            get {
+                return ResourceManager.GetString("Allfiles", resourceCulture);
+            }
+        }
     }
 }

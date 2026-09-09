@@ -335,4 +335,16 @@
     <data name="AuthorLabel" xml:space="preserve">
         <value>Autor:</value>
     </data>
+    <data name="StatisticsImport" xml:space="preserve">
+        <value>Importovat ze staré verze (do 1.16.1.2)</value>
+    </data>
+    <data name="StatisticsImportSelect" xml:space="preserve">
+        <value>Vyberte starou databázi (mydb.db)</value>
+    </data>
+    <data name="SqliteDb" xml:space="preserve">
+        <value>SQLite Databáze</value>
+    </data>
+    <data name="Allfiles" xml:space="preserve">
+        <value>Všechny soubory</value>
+    </data>
 </root>

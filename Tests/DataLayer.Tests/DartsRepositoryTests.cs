@@ -37,15 +37,20 @@ namespace DataLayer.Tests
         }
 
         [Fact]
-        public async Task CreatePlayerAsync_ShouldReturnNull_WhenNameAlreadyExists()
+        public async Task CreatePlayerAsync_ShouldReturnExistingPlayer_WhenNameAlreadyExists()
         {
             var options = GetInMemoryOptions();
             var repository = new DartsRepository(options);
             string playerName = "Duplikát";
-            await repository.CreatePlayerAsync(playerName); 
+    
+            var firstResult = await repository.CreatePlayerAsync(playerName); 
 
             var duplicateResult = await repository.CreatePlayerAsync(playerName);
-            Assert.Null(duplicateResult);
+
+            Assert.NotNull(firstResult);
+            Assert.NotNull(duplicateResult);
+            Assert.Equal(firstResult.Id, duplicateResult.Id);
+            Assert.Equal(playerName, duplicateResult.PlayerName);
         }
 
         [Fact]

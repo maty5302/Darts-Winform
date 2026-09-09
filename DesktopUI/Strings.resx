@@ -342,4 +342,16 @@
     <data name="AuthorLabel" xml:space="preserve">
         <value>_AuthorLabel</value>
     </data>
+    <data name="StatisticsImport" xml:space="preserve">
+        <value>_StatisticsImport</value>
+    </data>
+    <data name="StatisticsImportSelect" xml:space="preserve">
+        <value>_StatisticsImportSelect</value>
+    </data>
+    <data name="SqliteDb" xml:space="preserve">
+        <value>_SqliteDb</value>
+    </data>
+    <data name="Allfiles" xml:space="preserve">
+        <value>_AllFiles</value>
+    </data>
 </root>
