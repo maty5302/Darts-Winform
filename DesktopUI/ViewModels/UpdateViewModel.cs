@@ -165,23 +165,43 @@ namespace DesktopUI.ViewModels
             }
         }
 
-        private async Task DownloadLinuxAppImage(string filePath, IProgress<(double, long, long)> progress, CancellationToken token)
+        private async Task DownloadLinuxAppImage(string defaultFilePath, IProgress<(double, long, long)> progress, CancellationToken token)
         {
             try
             {
-                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.AppImage", filePath, progress, token);
+                string? currentAppImagePath = Environment.GetEnvironmentVariable("APPIMAGE");
+                string targetPath;
+
+                if (!string.IsNullOrEmpty(currentAppImagePath))
+                {
+                    targetPath = currentAppImagePath;
+                }
+                else
+                {
+                    targetPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", defaultFilePath);
+                }
+
+                string tempPath = targetPath + ".temp";
+
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.AppImage", tempPath, progress, token);
                 
+                if (File.Exists(targetPath))
+                {
+                    File.Delete(targetPath);
+                }
+                File.Move(tempPath, targetPath);
+
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = "bash",
-                    Arguments = $"-c \"chmod +x '{filePath}'\"",
+                    Arguments = $"-c \"chmod +x '{targetPath}'\"",
                     UseShellExecute = false,
                     CreateNoWindow = true
                 })?.WaitForExit();
                 
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = filePath,
+                    FileName = targetPath,
                     UseShellExecute = true
                 });
                 
