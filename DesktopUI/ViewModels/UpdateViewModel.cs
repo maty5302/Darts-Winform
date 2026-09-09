@@ -146,7 +146,7 @@ namespace DesktopUI.ViewModels
         {
             try
             {
-                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.msi", filePath, progress, token);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/DartsCounter/releases/latest/download/DartsCounter.msi", filePath, progress, token);
                 
                 var processInfo = new ProcessStartInfo()
                 {
@@ -183,7 +183,7 @@ namespace DesktopUI.ViewModels
 
                 string tempPath = targetPath + ".temp";
 
-                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.AppImage", tempPath, progress, token);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/DartsCounter/releases/latest/download/DartsCounter.AppImage", tempPath, progress, token);
                 
                 if (File.Exists(targetPath))
                 {
@@ -219,7 +219,7 @@ namespace DesktopUI.ViewModels
         {
             try
             {
-                await DownloadFileWithProgressAsync("https://github.com/maty5302/Darts-Winform/releases/latest/download/DartsCounter.dmg", filePath, progress, token);
+                await DownloadFileWithProgressAsync("https://github.com/maty5302/DartsCounter/releases/latest/download/DartsCounter.dmg", filePath, progress, token);
                 
                 Process.Start(new ProcessStartInfo
                 {
@@ -252,7 +252,7 @@ namespace DesktopUI.ViewModels
         {
             var psi = new ProcessStartInfo
             {
-                FileName = "https://github.com/maty5302/Darts-Winform/releases/latest",
+                FileName = "https://github.com/maty5302/DartsCounter/releases/latest",
                 UseShellExecute = true
             };
             Process.Start(psi);

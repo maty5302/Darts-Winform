@@ -9,7 +9,7 @@ namespace Domain
 		{
 			using (HttpClient client = new HttpClient())
 			{
-				string apiUrl = $"https://api.github.com/repos/maty5302/Darts-Winform/releases/latest";
+				string apiUrl = $"https://api.github.com/repos/maty5302/DartsCounter/releases/latest";
 
 				client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -31,7 +31,7 @@ namespace Domain
 		{
 			using (HttpClient client = new HttpClient())
 			{
-				string apiUrl = $"https://api.github.com/repos/maty5302/Darts-Winform/releases/latest";
+				string apiUrl = $"https://api.github.com/repos/maty5302/DartsCounter/releases/latest";
 
 				client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -53,7 +53,7 @@ namespace Domain
         {
             using (HttpClient client = new HttpClient())
             {
-                string apiUrl = $"https://api.github.com/repos/maty5302/Darts-Winform/releases/tags/{version}";
+                string apiUrl = $"https://api.github.com/repos/maty5302/DartsCounter/releases/tags/{version}";
 
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
