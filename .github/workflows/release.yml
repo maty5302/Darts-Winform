@@ -1,4 +1,4 @@
-name: Vydat novou verzi
+name: Create new release files for DartsCounter
 
 on:
   workflow_dispatch:
